@@ -1,36 +1,40 @@
 #include <iostream>
+#include "MenuCompra.h"
+#include "MenuProducto.h"
+#include "MenuProveedores.h"
 
 using namespace std;
 
 int main()
 {
-    int opc = -1;
-    while(opc != 0)
+    int opcion = -1;
+    while(opcion != 0)
     {
         system("cls");
-        cout << "========== COMPRAS MAXIQUIOSCO ==========" << endl;
-        cout << "1. AGREGAR PROVEEDOR " << endl;
-        cout << "2. AGREGAR PRODUCTO" << endl;
-        cout << "3. AGREGAR COMPRA" << endl;
-        cout << "4. GENERAR REPORTES" << endl;
-        cout << "0. CERRAR PROGRAMA" << endl;
-        cout << "==============================" << endl;
-        cout << "Seleccionar una opcion " << endl;
-        cin>>opc;
+        cout << "|===========  MENU MAXIQUIOSCO  ===========|" << endl;
+        cout << "| 1. MENU COMPRA" <<"                           |" << endl;
+        cout << "| 2. MENU PRODUCTO" <<"                         |" << endl;
+        cout << "| 3. MENU PROVEEDOR" <<"                        |" << endl;
+        //cout << "| 4. MENU REPORTES" <<"                         |" << endl;
+        cout << "| 0. CERRAR PROGRAMA" <<"                       |" << endl;
+        cout << "|==========================================|" << endl;
+        cout << " \nSelecciona una opcion: ";
+        cin>>opcion;
         system("cls");
-        switch(opc)
+        switch(opcion)
         {
         case 1:
-            ///Logica Agregar Proveedor();
+            MenuCompra();
             break;
         case 2:
-            ///Logica Agregar Producto();
+            MenuProducto();
             break;
         case 3:
-            ///Logica Agregar Compra();
+            MenuProveedores();
             break;
         case 4:
             ///Logica Generar Reportes();
+            //TODO: Tenemos que pensar si incluir los reportes en cada seccion y replicarlos aca.
             break;
         case 0:
             return 0;
