@@ -67,3 +67,61 @@
 
 1747940474 c:\users\estebanr\documents\github\maxiquioscoprograii\maxiquiosco\menuproveedores.h
 
+1747940474 source:c:\users\estebanr\desktop\utn\cuatri 2\programacion 2\proyecto maxikiosco esteban\projectv1\maxikiosco\fecha.cpp
+	"Fecha.h"
+
+1747940474 c:\users\estebanr\desktop\utn\cuatri 2\programacion 2\proyecto maxikiosco esteban\projectv1\maxikiosco\fecha.h
+
+1747963566 source:c:\users\estebanr\desktop\utn\cuatri 2\programacion 2\proyecto maxikiosco esteban\projectv1\maxikiosco\main.cpp
+	<iostream>
+	"MenuCompra.h"
+	"MenuProducto.h"
+	"MenuProveedores.h"
+
+1747940474 c:\users\estebanr\desktop\utn\cuatri 2\programacion 2\proyecto maxikiosco esteban\projectv1\maxikiosco\menucompra.h
+
+1747963238 c:\users\estebanr\desktop\utn\cuatri 2\programacion 2\proyecto maxikiosco esteban\projectv1\maxikiosco\menuproducto.h
+
+1747940474 c:\users\estebanr\desktop\utn\cuatri 2\programacion 2\proyecto maxikiosco esteban\projectv1\maxikiosco\menuproveedores.h
+
+1747940474 source:c:\users\estebanr\desktop\utn\cuatri 2\programacion 2\proyecto maxikiosco esteban\projectv1\maxikiosco\menucompra.cpp
+	<iostream>
+	"MenuCompra.h"
+
+1748048254 source:c:\users\estebanr\desktop\utn\cuatri 2\programacion 2\proyecto maxikiosco esteban\projectv1\maxikiosco\menuproducto.cpp
+	<iostream>
+	"MenuProducto.h"
+	"FuncionesProducto.h"
+
+1748048254 c:\users\estebanr\desktop\utn\cuatri 2\programacion 2\proyecto maxikiosco esteban\projectv1\maxikiosco\funcionesproducto.h
+
+1747940474 source:c:\users\estebanr\desktop\utn\cuatri 2\programacion 2\proyecto maxikiosco esteban\projectv1\maxikiosco\menuproveedores.cpp
+	<iostream>
+	"MenuProveedores.h"
+
+1747965967 source:c:\users\estebanr\desktop\utn\cuatri 2\programacion 2\proyecto maxikiosco esteban\projectv1\maxikiosco\tipoproducto.cpp
+	<iostream>
+	<string>
+	<cstring>
+	"TipoProducto.h"
+
+1747965866 c:\users\estebanr\desktop\utn\cuatri 2\programacion 2\proyecto maxikiosco esteban\projectv1\maxikiosco\tipoproducto.h
+	<string>
+
+1748048678 source:c:\users\estebanr\desktop\utn\cuatri 2\programacion 2\proyecto maxikiosco esteban\projectv1\maxikiosco\funcionesproducto.cpp
+	<iostream>
+	<cstdio>
+	<cstring>
+	"Producto.h"
+	"TipoProducto.h"
+
+1747965856 c:\users\estebanr\desktop\utn\cuatri 2\programacion 2\proyecto maxikiosco esteban\projectv1\maxikiosco\producto.h
+	<string>
+	"TipoProducto.h"
+
+1747967292 source:c:\users\estebanr\desktop\utn\cuatri 2\programacion 2\proyecto maxikiosco esteban\projectv1\maxikiosco\producto.cpp
+	<iostream>
+	<string>
+	<cstring>
+	"Producto.h"
+
