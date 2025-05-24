@@ -1,32 +1,50 @@
-# Prerequisites
-*.d
+###############################################################################
+# 1. IDE-specific transient files (safe to delete / re-generate)
+###############################################################################
+# Per-user window layouts and session data
+*.layout
+*.depend
+*.depend.*
+*.autosave
 
-# Compiled Object files
-*.slo
-*.lo
+# Workspaces you open just to group projects locally
+*.workspace
+
+###############################################################################
+# 2. Build outputs – Code::Blocks’ default folders
+###############################################################################
+/bin/               #   e.g. bin/Debug/*.exe, bin/Release/*.dll …
+/obj/               #   e.g. obj/Debug/foo.o
+/Debug/
+/debug/
+/Release/
+/release/
+
+###############################################################################
+# 3. Compiler artefacts – cross-platform
+###############################################################################
+# Object & intermediate files
 *.o
 *.obj
+*.d
+*.s   *.asm   # generated assembly
 
-# Precompiled Headers
-*.gch
-*.pch
+# Linker / binary outputs
+*.exe  *.dll  *.so  *.dylib  *.a  *.lib
+*.out  *.app  *.pdb  *.exp
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# macOS debug bundles
+*.dSYM/
 
-# Fortran module files
-*.mod
-*.smod
+###############################################################################
+# 4. Temporary & log cruft (editors, OS, build tools)
+###############################################################################
+*.log
+*.tmp
+*.cache
+*.lock
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+# macOS / Windows thumbnails & metadata
+.DS_Store
+Thumbs.db
+desktop.ini
