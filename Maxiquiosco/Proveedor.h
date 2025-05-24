@@ -20,6 +20,8 @@ public:
     Proveedor(int idProveedor, int dni, int cuit, int numeroTelefono, char * nombreProveedor, char * _email, char * direccion);
 
     void AgregarProveedores();
+    void MostrarProveedor();
+
 
     int getIDProveedor();
     void setIDProveedor(int ID);
@@ -44,6 +46,7 @@ public:
 
     bool getEstado();
     void setEstado(bool estado);
+
 
 
 };

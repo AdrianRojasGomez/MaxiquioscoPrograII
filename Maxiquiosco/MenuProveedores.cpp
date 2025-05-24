@@ -1,5 +1,6 @@
 #include <iostream>
 #include "MenuProveedores.h"
+#include "FuncionesProveedor.h"
 
 using namespace std;
 
@@ -20,7 +21,7 @@ void MenuProveedores::MostrarMenu()
         cout << "| 2. BAJA DE PROVEEDORES" <<"                    |" << endl;
         cout << "| 3. MODIFICAR PROVEEDOR" <<"                    |" << endl;
         cout << "| 4. LISTAR PROVEEDOR POR ID" <<"                |" << endl;
-        cout << "| 4. LISTAR TODOS LOS PROVEEDORES" <<"           |" << endl;
+        cout << "| 5. LISTAR TODOS LOS PROVEEDORES" <<"           |" << endl;
         cout << "| 0. VOLVER AL MENU ANTERIOR" <<"                |" << endl;
         cout << "|===========================================|" << endl;
         cout << " \nSelecciona una opcion: ";
@@ -28,10 +29,10 @@ void MenuProveedores::MostrarMenu()
         setOpcion(aux);
         system("cls");
 
-        switch(opcion)
+        switch(_opcion)
         {
         case 1:
-            //Cargar Proveedores;
+            _objFunciones.AgregarProveedor();
             break;
         case 2:
             //Dar de Baja Proveedores;
@@ -43,10 +44,10 @@ void MenuProveedores::MostrarMenu()
             //Listar proveedor POR ID
             break;
         case 5:
-            //Listar todos los proveedores
+            _objFunciones.ListarProveedores();
             break;
         case 0:
-            return 0;
+            return;
         default:
             cout<<"Opcion invalida, por favor intente nuevamente."<<endl;
         }
