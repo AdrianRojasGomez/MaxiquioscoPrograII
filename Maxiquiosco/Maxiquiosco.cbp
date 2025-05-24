@@ -35,6 +35,8 @@
 		<Unit filename="Fecha.cpp" />
 		<Unit filename="Fecha.h" />
 		<Unit filename="Maxiquiosco.cbp" />
+		<Unit filename="Maxiquiosco.depend" />
+		<Unit filename="Maxiquiosco.layout" />
 		<Unit filename="MenuCompra.cpp" />
 		<Unit filename="MenuCompra.h" />
 		<Unit filename="MenuProducto.cpp" />
@@ -43,6 +45,9 @@
 		<Unit filename="MenuProveedores.h" />
 		<Unit filename="Proveedor.cpp" />
 		<Unit filename="Proveedor.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ProveedorFunciones.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="TipoProducto.cpp" />
