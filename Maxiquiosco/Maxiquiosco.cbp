@@ -36,6 +36,8 @@
 		<Unit filename="Fecha.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="FuncionesProducto.cpp" />
+		<Unit filename="FuncionesProducto.h" />
 		<Unit filename="MenuCompra.cpp" />
 		<Unit filename="MenuCompra.h">
 			<Option target="&lt;{~None~}&gt;" />
@@ -44,9 +46,12 @@
 		<Unit filename="MenuProducto.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="MenuProveedores.cpp" />
 		<Unit filename="MenuProveedores.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="Producto.cpp" />
+		<Unit filename="Producto.h" />
 		<Unit filename="TipoProducto.cpp" />
 		<Unit filename="TipoProducto.h">
 			<Option target="&lt;{~None~}&gt;" />
