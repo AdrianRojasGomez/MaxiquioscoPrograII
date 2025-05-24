@@ -25,6 +25,17 @@ Proveedor::Proveedor(int idProveedor, int dni, int cuit, int numeroTelefono, cha
     setEstado(true);
 }
 
+void Proveedor::AgregarProveedores()
+{
+
+
+
+
+}
+
+
+
+
 int Proveedor::getIDProveedor()
 {
     return _idProveedor;

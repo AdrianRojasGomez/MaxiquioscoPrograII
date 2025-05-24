@@ -19,8 +19,7 @@ public:
     Proveedor();
     Proveedor(int idProveedor, int dni, int cuit, int numeroTelefono, char * nombreProveedor, char * _email, char * direccion);
 
-
-
+    void AgregarProveedores();
 
     int getIDProveedor();
     void setIDProveedor(int ID);

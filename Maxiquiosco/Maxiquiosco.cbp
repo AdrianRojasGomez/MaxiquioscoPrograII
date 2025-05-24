@@ -33,24 +33,20 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Fecha.cpp" />
-		<Unit filename="Fecha.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="Fecha.h" />
+		<Unit filename="Maxiquiosco.cbp" />
 		<Unit filename="MenuCompra.cpp" />
-		<Unit filename="MenuCompra.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="MenuCompra.h" />
 		<Unit filename="MenuProducto.cpp" />
-		<Unit filename="MenuProducto.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="MenuProveedores.h">
+		<Unit filename="MenuProducto.h" />
+		<Unit filename="MenuProveedores.cpp" />
+		<Unit filename="MenuProveedores.h" />
+		<Unit filename="Proveedor.cpp" />
+		<Unit filename="Proveedor.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="TipoProducto.cpp" />
-		<Unit filename="TipoProducto.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="TipoProducto.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
