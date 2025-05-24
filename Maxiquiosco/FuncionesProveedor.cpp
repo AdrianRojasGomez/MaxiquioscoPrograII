@@ -64,13 +64,28 @@ void FuncionesProveedor::AgregarProveedor()
         }
     }
     while (agregarOtro);
+}
 
+void FuncionesProveedor::BajaLogicaProveedor()
+{
+    ArchivoProveedores archivoProveedores;
+    int busquedaID;
+    cout << "Ingrese el ID del proveedor para darle de baja" << endl;
+    cin >> busquedaID;
+    archivoProveedores.BajaRegistroPorID(busquedaID);
+}
 
-    }
+void FuncionesProveedor::ListarProveedorPorID()
+{
+    ArchivoProveedores archivoProveedores;
+    int busquedaID;
+    cout << "Ingrese el ID del proveedor para buscarlo" << endl;
+    cin >> busquedaID;
+    archivoProveedores.ListarRegistroPorID(busquedaID);
+}
 
 void FuncionesProveedor::ListarProveedores()
 {
     ArchivoProveedores archivoProveedores;
     archivoProveedores.ListarRegistros();
-
 }

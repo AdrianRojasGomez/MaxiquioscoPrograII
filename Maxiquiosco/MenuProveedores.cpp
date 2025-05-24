@@ -35,13 +35,13 @@ void MenuProveedores::MostrarMenu()
             _objFunciones.AgregarProveedor();
             break;
         case 2:
-            //Dar de Baja Proveedores;
+            _objFunciones.BajaLogicaProveedor();
             break;
         case 3:
             //Modificar Proveedor;
             break;
         case 4:
-            //Listar proveedor POR ID
+            _objFunciones.ListarProveedorPorID();
             break;
         case 5:
             _objFunciones.ListarProveedores();

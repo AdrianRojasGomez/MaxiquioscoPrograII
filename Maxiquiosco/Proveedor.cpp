@@ -33,7 +33,7 @@ void Proveedor::MostrarProveedor()
         cout << "ID Proveedor: " << _idProveedor <<endl;
         cout << "DNI: " << _dni <<endl;
         cout << "CUIT: " << _cuit <<endl;
-        cout << "N° de Telefono: " << _numeroTelefono <<endl;
+        cout << "N# de Telefono: " << _numeroTelefono <<endl;
         cout << "Nombre del Proveedor: " << _nombreProveedor <<endl;
         cout << "Email: " << _email <<endl;
         cout << "Direccion: " << _direccion <<endl;
