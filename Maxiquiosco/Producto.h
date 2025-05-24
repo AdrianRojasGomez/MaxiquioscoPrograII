@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+#include <cstring>
 #include "TipoProducto.h"
 
 class Producto {
@@ -18,10 +18,10 @@ public:
     Producto(int id, const char* nombre, TipoProducto tipo, float precio, int stock, int stockMax, bool estado);
 
     void setIdProducto(int id);
-    void setNombreProducto(const char* nombre);
+    bool setNombreProducto(const char* nombre);
     void setTipoProducto(TipoProducto tipo);
-    void setPrecioUnitario(float precio);
-    void setStockActual(int stock);
+    bool setPrecioUnitario(float precio);
+    bool setStockActual(int stock);
     void setStockMax(int stockMax);
     void setEstado(bool estado);
 

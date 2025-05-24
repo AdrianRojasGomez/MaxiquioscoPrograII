@@ -32,6 +32,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="ArchivoProducto.cpp" />
+		<Unit filename="ArchivoProducto.h" />
 		<Unit filename="Fecha.cpp" />
 		<Unit filename="Fecha.h">
 			<Option target="&lt;{~None~}&gt;" />
