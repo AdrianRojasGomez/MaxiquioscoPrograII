@@ -1,5 +1,8 @@
-#include "Proveedor.h"
 #include <cstring>
+#include <iostream>
+#include "Proveedor.h"
+
+using namespace std;
 
 Proveedor::Proveedor()
 {
@@ -24,6 +27,18 @@ Proveedor::Proveedor(int idProveedor, int dni, int cuit, int numeroTelefono, cha
     setDireccion(direccion);
     setEstado(true);
 }
+
+void Proveedor::MostrarProveedor()
+{
+        cout << "ID Proveedor: " << _idProveedor <<endl;
+        cout << "DNI: " << _dni <<endl;
+        cout << "CUIT: " << _cuit <<endl;
+        cout << "N# de Telefono: " << _numeroTelefono <<endl;
+        cout << "Nombre del Proveedor: " << _nombreProveedor <<endl;
+        cout << "Email: " << _email <<endl;
+        cout << "Direccion: " << _direccion <<endl;
+}
+
 
 int Proveedor::getIDProveedor()
 {
