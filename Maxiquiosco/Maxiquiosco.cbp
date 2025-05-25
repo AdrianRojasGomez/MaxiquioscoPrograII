@@ -36,6 +36,8 @@
 		<Unit filename="Fecha.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="FuncionesCompra.cpp" />
+		<Unit filename="FuncionesCompra.h" />
 		<Unit filename="FuncionesProducto.cpp" />
 		<Unit filename="FuncionesProducto.h" />
 		<Unit filename="MenuCompra.cpp" />
@@ -56,6 +58,8 @@
 		<Unit filename="TipoProducto.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="compra.cpp" />
+		<Unit filename="compra.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
