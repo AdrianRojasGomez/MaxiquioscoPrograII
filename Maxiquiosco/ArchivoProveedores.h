@@ -14,6 +14,7 @@ public:
 
     bool AgregarRegistro(Proveedor proveedor);
     void BajaRegistroPorID(int ID);
+    void ModificarRegistroPorID(int ID);
     void ListarRegistroPorID(int ID);
     void ListarRegistros();
 
