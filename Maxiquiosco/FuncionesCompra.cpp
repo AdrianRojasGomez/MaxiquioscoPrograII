@@ -21,18 +21,18 @@ void agregarCompra() {
     cin >> cantidadComprada;
     cout << "Ingrese importe de la compra: $";
     cin >> importe;
-    cout << "Ingrese fecha de la compra ";
+    cout << "Ingrese fecha de la compra (dia - mes - anio)";
     cin >> fecha;
 
     Compra compra(id, idProveedor, cantidadComprada, importe, fecha);
 
-    FILE* archivo = fopen("ArchivoProducto.dat", "ab");
+    FILE* archivo = fopen("ArchivoCompra.dat", "ab");
     if (archivo == NULL) {
         cout << "Error al abrir el archivo!" << endl;
         return;
     }
 
-    fwrite(&compra, sizeof(Producto), 1, archivo);
+    fwrite(&compra, sizeof(Compra), 1, archivo);
     fclose(archivo);
 
     cout << "Compra agregada con exito!" << endl;
@@ -43,7 +43,7 @@ void bajaCompraPorID(){
     cout << "Ingrese el ID de la compra a dar de baja:  ";
     cin >> buscarCompra;
 
-    FILE* archivo = fopen("archivoProducto.dat", "rb+");
+    FILE* archivo = fopen("archivoCompra.dat", "rb+");
     if (archivo == NULL){
         cout << "Error al abrir el archivo! " << endl;
         return;
@@ -53,7 +53,7 @@ void bajaCompraPorID(){
     bool compraEncontrada = false;
     int pos = 0;
 
-    while(fread(&compra, sizeof(Producto),1, archivo) == 1){
+    while(fread(&compra, sizeof(Compra),1, archivo) == 1){
     if(compra.getIdCompra() == buscarCompra && compra.getEstado()) {
         compraEncontrada = true;
         break;
@@ -93,7 +93,7 @@ void modificarProductoPorID() {
     cout << "Ingrese el numero de compra a modificar: ";
     cin >> compraBuscada;
 
-    FILE* archivo = fopen("ArchivoProducto.dat", "rb+");
+    FILE* archivo = fopen("ArchivoCompra.dat", "rb+");
     if (archivo == NULL) {
         cout << "No se pudo abrir el archivo." <<endl;
         return;
@@ -103,7 +103,7 @@ void modificarProductoPorID() {
     bool compraEncontrada = false;
     int pos = 0;
 
-    while (fread(&compra, sizeof(Producto), 1, archivo) == 1) {
+    while (fread(&compra, sizeof(Compra), 1, archivo) == 1) {
         if (compra.getIdCompra() == compraBuscada && compra.getEstado()) {
             compraEncontrada = true;
             break;
@@ -156,13 +156,11 @@ void modificarProductoPorID() {
             break;
         }
         case 5:
-            Fecha diaAct, mesAct, anioAct;
-            cout<<"Fecha corregida: ";
-            cin>>diaAct>>mesAct>>anioAct;
-            compra.setDia(diaAct);
-            compra.setMes(mesAct);
-            compra.setAnio(anioAct);
-            break;
+            int diaAct, mesAct, anioAct;
+            cout << "Fecha corregida (dd mm aaaa): ";
+            cin >> diaAct >> mesAct >> anioAct;
+            Fecha nuevaFecha(diaAct, mesAct, anioAct);
+            compra.setFecha(nuevaFecha);
         case 0:
             cout << "Modificación cancelada." <<endl;
             fclose(archivo);
@@ -182,14 +180,14 @@ void modificarProductoPorID() {
 
 ///LISTAR COMPRAS
 void listarCompras() {
-    FILE* archivo = fopen("ArchivoProducto.dat", "rb");
+    FILE* archivo = fopen("ArchivoCompra.dat", "rb");
     if (archivo == NULL) {
-        cout << "No se pudo abrir el archivo de productos." <<endl;
+        cout << "No se pudo abrir el archivo de compras" <<endl;
         return;
     }
 
     Compra compras;
-    cout << "--- LISTADO DE PRODUCTOS ---" <<endl;
+    cout << "--- LISTADO DE COMPRAS ---" <<endl;
     while (fread(&compra, sizeof(Compra), 1, archivo) == 1) {
         if (compra.getEstado()) {
             compra.mostrarCompras();

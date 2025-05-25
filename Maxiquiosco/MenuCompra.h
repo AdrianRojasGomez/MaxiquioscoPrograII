@@ -1,8 +1,7 @@
 #pragma once
 
 
-class MenuCompra
-{
+class MenuCompra{
 private:
         int _opcion;
 
