@@ -35,12 +35,15 @@ void MenuProducto::MostrarMenu()
                 break;
             case 2:
                 bajaProductoPorID();
+                system("pause");
                 break;
             case 3:
                 modificarProductoPorID();
+                system("pause");
                 break;
             case 4:
                 listarProductos();
+                system("pause");
                 break;
             case 0:
                 break;
