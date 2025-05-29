@@ -1,5 +1,6 @@
 #include <iostream>
 #include "MenuCompra.h"
+#include "FuncionesCompra.h"
 
 using namespace std;
 
@@ -9,7 +10,8 @@ MenuCompra::MenuCompra()
     MostrarMenu();
 }
 
-void MenuCompra::MostrarMenu(){
+void MenuCompra::MostrarMenu()
+{
     while(_opcion != 0)
     {
         int aux;
@@ -25,28 +27,32 @@ void MenuCompra::MostrarMenu(){
         cin>>aux;
         setOpcion(aux);
         system("cls");
+        switch(_opcion)
+        {
+        case 1:{
 
-         switch (_opcion) {
-            case 1:
-                agregarCompra();
-                system("pause");
-                break;
-            case 2:
-                bajaCompraPorID();
-                break;
-            case 3:
-                modificarCompraPorID();
-                break;
-            case 4:
-                listarCompras();
-                break;
+            agregarCompra();
+            break;
+            }
+        case 2: {
+
+          bajaCompraPorID();
+            break;
+            }
+        case 3:
+            modificarCompraPorID();
+            break;
+        case 4:{
+
+            listarCompras();
+            break;
+            }
             case 0:
-                break;
-            default:
-                cout << "Opción inválida." << endl;
-                system("pause");
-                break;
+            return;
+        default:
+            cout<<"Opcion invalida, por favor intente nuevamente."<<endl;
         }
+        system("pause");
     }
 }
 

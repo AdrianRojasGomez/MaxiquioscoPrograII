@@ -1,5 +1,5 @@
 #include "Fecha.h"
-
+#include <iostream>
 
     Fecha::Fecha()
     {
@@ -38,6 +38,13 @@
     {
         _anio = anio;
     }
+
+
+std::istream& operator>>(std::istream& in, Fecha& f) {
+    std::cout << "Ingrese fecha (dd mm aaaa): ";
+    in >> f._dia >> f._mes >> f._anio;
+    return in;
+}
 
 
 

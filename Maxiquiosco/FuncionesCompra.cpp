@@ -4,12 +4,15 @@
 #include "Producto.h"
 #include "TipoProducto.h"
 #include "FuncionesCompra.h"
+#include "fecha.h"
+#include "Compra.h"
+
 
 using namespace std;
 
 ///AGREGAR COMPRA
 void agregarCompra() {
-    int id, idProveedor, cantidadComprada;
+    int id, idProveedor, cantidadComprada,idCompra=0001;
     float importe;
     Fecha fecha;
 
@@ -21,10 +24,10 @@ void agregarCompra() {
     cin >> cantidadComprada;
     cout << "Ingrese importe de la compra: $";
     cin >> importe;
-    cout << "Ingrese fecha de la compra (dia - mes - anio)";
+    //llamamos a fecha para el ingreso
     cin >> fecha;
 
-    Compra compra(id, idProveedor, cantidadComprada, importe, fecha);
+    Compra compra(idCompra, id, idProveedor, cantidadComprada, fecha, importe);
 
     FILE* archivo = fopen("ArchivoCompra.dat", "ab");
     if (archivo == NULL) {
@@ -88,7 +91,7 @@ void bajaCompraPorID(){
         cout << "Compra dada de baja correctamente." << endl;
 }
 ///MODIFICAR PRODUCTOS
-void modificarProductoPorID() {
+void modificarCompraPorID() {
     int compraBuscada;
     cout << "Ingrese el numero de compra a modificar: ";
     cin >> compraBuscada;
@@ -145,22 +148,25 @@ void modificarProductoPorID() {
             int cantidadNueva;
             cout << "Cantidad corregida: ";
             cin >> cantidadNueva;
-            compra.setCantidad(cantidadNueva);
+            compra.setCantidadComprada(cantidadNueva);
             break;
         }
         case 4: {
             float importeActual;
             cout << "Importe corregido: ";
             cin >> importeActual;
-            compra.setImporte(importeActual);
+            compra.setImporteTotal(importeActual);
             break;
         }
-        case 5:
+        case 5: {
             int diaAct, mesAct, anioAct;
             cout << "Fecha corregida (dd mm aaaa): ";
             cin >> diaAct >> mesAct >> anioAct;
             Fecha nuevaFecha(diaAct, mesAct, anioAct);
-            compra.setFecha(nuevaFecha);
+            compra.setFechaCompra(nuevaFecha);
+            break;
+        }
+
         case 0:
             cout << "Modificación cancelada." <<endl;
             fclose(archivo);
@@ -186,11 +192,12 @@ void listarCompras() {
         return;
     }
 
-    Compra compras;
+    Compra compra;
     cout << "--- LISTADO DE COMPRAS ---" <<endl;
-    while (fread(&compra, sizeof(Compra), 1, archivo) == 1) {
+    while (fread(&compra, sizeof(Compra), 1, archivo) == 1)
+        {
         if (compra.getEstado()) {
-            compra.mostrarCompras();
+            compra.mostrarCompra();
             cout << "---------------------------" <<endl;
 
         }

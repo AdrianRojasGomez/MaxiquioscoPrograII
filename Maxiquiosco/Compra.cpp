@@ -13,6 +13,8 @@ Compra::Compra() {
     _cantidadComprada = 0;
     _fechaCompra = Fecha();
     _importeTotal = 0;
+    _estado = true;
+
 }
 
 Compra::Compra(int idCompra, int idProducto, int idProveedor, int cantidad, Fecha fecha, float precioUnitario) {
@@ -22,14 +24,16 @@ Compra::Compra(int idCompra, int idProducto, int idProveedor, int cantidad, Fech
     _cantidadComprada = cantidad;
     _fechaCompra = fecha;
     _importeTotal = precioUnitario * cantidad;
+    _estado = true;
+
 }
 
     void Compra::setIdCompra(int idCompra) {
         _idCompra = idCompra;
         }
     void Compra::setFechaCompra(Fecha fecha) {
-        _fechaCompra = fecha;
-        }
+    _fechaCompra = fecha;
+}
     void Compra::setIdProducto(int idProducto) {
         _idProducto = idProducto;
         }
@@ -39,12 +43,24 @@ Compra::Compra(int idCompra, int idProducto, int idProveedor, int cantidad, Fech
     void Compra::setCantidadComprada(int cantidad) {
         _cantidadComprada = cantidad;
         }
+ void Compra::setImporteTotal(float importeTotal) {
+    _importeTotal = importeTotal;
+}
+    void Compra::setEstado(bool estado) {
+            _estado = estado;
+        }
+    bool Compra::getEstado() const {
+        return _estado;
+}
+
+
+
 
     int Compra::getIdCompra() const {
     return _idCompra;
 }
 
-    Fecha Compra::getFechaCompra() const {
+Fecha Compra::getFechaCompra() const {
     return _fechaCompra;
 }
 

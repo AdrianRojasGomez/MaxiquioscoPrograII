@@ -12,6 +12,7 @@ MenuProveedores::MenuProveedores()
 
 void MenuProveedores::MostrarMenu()
 {
+    FuncionesProveedor funciones;
     while(_opcion != 0)
     {
         int aux;
@@ -31,21 +32,30 @@ void MenuProveedores::MostrarMenu()
 
         switch(_opcion)
         {
-        case 1:
-            _objFunciones.AgregarProveedor();
+        case 1:{
+
+            funciones.AgregarProveedor();
             break;
-        case 2:
-            _objFunciones.BajaLogicaProveedor();
+            }
+        case 2: {
+
+            funciones.BajaLogicaProveedor();
             break;
+            }
         case 3:
             //Modificar Proveedor;
             break;
-        case 4:
-            _objFunciones.ListarProveedorPorID();
+        case 4:{
+
+            funciones.ListarProveedorPorID();
             break;
-        case 5:
-            _objFunciones.ListarProveedores();
+            }
+
+        case 5:{
+
+            funciones.ListarProveedores();
             break;
+            }
         case 0:
             return;
         default:

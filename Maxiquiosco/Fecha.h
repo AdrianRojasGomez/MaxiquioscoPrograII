@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 class Fecha
 {
@@ -18,6 +19,7 @@ public:
     int getAnio();
     void setAnio(int anio);
 
+friend std::istream& operator>>(std::istream& in, Fecha& f);
 
 };
 

@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Fecha.h"
 
 class Compra {
@@ -10,6 +9,7 @@ private:
     int _idProveedor;
     int _cantidadComprada;
     float _importeTotal;
+    bool _estado;
 
 public:
     Compra();
@@ -17,16 +17,19 @@ public:
 
     void setIdCompra(int idCompra);
     void setFechaCompra(Fecha fecha);
+    Fecha getFechaCompra() const;
     void setIdProducto(int idProducto);
     void setIdProveedor(int idProveedor);
     void setCantidadComprada(int cantidad);
+    void setEstado(bool estado);
+    void setImporteTotal(float importeTotal);
 
     int getIdCompra() const;
-    Fecha getFechaCompra() const;
     int getIdProducto() const;
     int getIdProveedor() const;
     int getCantidadComprada() const;
     float getImporteTotal() const;
+    bool getEstado() const;
 
     void cargarCompra();
     void mostrarCompra() const;
