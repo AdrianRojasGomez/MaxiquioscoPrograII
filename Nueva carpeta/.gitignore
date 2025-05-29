@@ -1,0 +1,6 @@
+*.exe
+*.dat
+bin/
+obj/
+*.cbp
+Maxiquiosco/bin/Debug/*.exe
