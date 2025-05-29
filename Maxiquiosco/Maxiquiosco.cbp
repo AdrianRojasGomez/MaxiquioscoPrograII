@@ -34,10 +34,14 @@
 		</Compiler>
 		<Unit filename="ArchivoProducto.cpp" />
 		<Unit filename="ArchivoProducto.h" />
+		<Unit filename="Compra.cpp" />
+		<Unit filename="Compra.h" />
 		<Unit filename="Fecha.cpp" />
 		<Unit filename="Fecha.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="FuncionesCompra.cpp" />
+		<Unit filename="FuncionesCompra.h" />
 		<Unit filename="FuncionesProducto.cpp" />
 		<Unit filename="FuncionesProducto.h" />
 		<Unit filename="MenuCompra.cpp" />
