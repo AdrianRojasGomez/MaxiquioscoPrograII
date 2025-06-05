@@ -9,6 +9,7 @@ using namespace std;
 Compra::Compra() {
     _idCompra = 0;
     _idProducto = 0;
+    strcpy(_idNombreProducto, "");
     _idProveedor = 0;
     _cantidadComprada = 0;
     _fechaCompra = Fecha();
@@ -17,9 +18,10 @@ Compra::Compra() {
 
 }
 
-Compra::Compra(int idCompra, int idProducto, int idProveedor, int cantidad, Fecha fecha, float precioUnitario) {
+Compra::Compra(int idCompra, int idProducto, const char* idNombreProducto , int idProveedor, int cantidad, Fecha fecha, float precioUnitario) {
     _idCompra = idCompra;
     _idProducto = idProducto;
+    setidNombreProducto(idNombreProducto);
     _idProveedor = idProveedor;
     _cantidadComprada = cantidad;
     _fechaCompra = fecha;
@@ -37,6 +39,19 @@ Compra::Compra(int idCompra, int idProducto, int idProveedor, int cantidad, Fech
     void Compra::setIdProducto(int idProducto) {
         _idProducto = idProducto;
         }
+
+bool Compra::setidNombreProducto(const char* idNombreProducto) {
+
+    if (idNombreProducto == nullptr)
+        {
+        return false;
+        }
+        strncpy(_idNombreProducto, idNombreProducto, sizeof(_idNombreProducto));
+        return true;
+}
+
+
+
     void Compra::setIdProveedor(int idProveedor) {
         _idProveedor = idProveedor;
         }
@@ -53,9 +68,6 @@ Compra::Compra(int idCompra, int idProducto, int idProveedor, int cantidad, Fech
         return _estado;
 }
 
-
-
-
     int Compra::getIdCompra() const {
     return _idCompra;
 }
@@ -67,6 +79,10 @@ Fecha Compra::getFechaCompra() const {
     int Compra::getIdProducto() const {
     return _idProducto;
 }
+
+const char* Compra::getidNombreProducto()const{
+       return _idNombreProducto;
+    }
 
     int Compra::getIdProveedor() const {
     return _idProveedor;
@@ -80,14 +96,18 @@ Fecha Compra::getFechaCompra() const {
     return _importeTotal;
 }
 void Compra::cargarCompra() {
-    cout << "Ingrese Id de comprobante de la compra: ";
+    cout << "Id de comprobante de la compra: ";
     cin >> _idCompra;
 
     cout << "Ingrese fecha de la compra: ";
     ;
 ///aca iria cargarFecha()
-    cout << "Ingrese Id del producto: ";
+    cout << " Id del producto: ";
     cin >> _idProducto;
+
+    cout << " Nombre del producto: ";
+    cin >> _idNombreProducto;
+
 
     cout << "Ingrese Id del proveedor: ";
     cin >> _idProveedor;
@@ -101,7 +121,7 @@ void Compra::cargarCompra() {
 
 void Compra::mostrarCompra() const {
     cout << "ID de la compra: " << _idCompra << endl;
-    cout << "ID del producto: " << _idProducto << endl;
+    cout << "ID: " << _idProducto <<" Nombre del producto: " << _idNombreProducto << endl;
     cout << "ID del proveedor: " << _idProveedor << endl;
     cout << "Cantidad comprada: " << _cantidadComprada << endl;
     cout << "Fecha de la compra: ";

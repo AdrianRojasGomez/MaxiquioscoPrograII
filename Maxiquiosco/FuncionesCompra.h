@@ -4,3 +4,4 @@ void agregarCompra();
 void bajaCompraPorID();
 void modificarCompraPorID();
 void listarCompras();
+int obtenerProximoIDCompra();

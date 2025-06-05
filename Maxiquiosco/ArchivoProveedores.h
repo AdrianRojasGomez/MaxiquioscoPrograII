@@ -7,7 +7,6 @@ private:
     char _nombreArchivo[50];
     int _tamanoRegistro;
 
-
 public:
     ArchivoProveedores();
 

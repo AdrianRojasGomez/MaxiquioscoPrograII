@@ -12,5 +12,7 @@ public:
     bool modificarPorID(int id);
     bool existeID(int id);
     int obtenerProximoID();
+    bool registrarCompraPorID(int idProducto, int cantidad);
+    Producto buscarPorID(int idProducto);
 };
 

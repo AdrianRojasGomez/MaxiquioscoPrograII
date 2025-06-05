@@ -6,18 +6,51 @@
 #include "FuncionesCompra.h"
 #include "fecha.h"
 #include "Compra.h"
+#include "ArchivoProducto.h"
 
 
 using namespace std;
 
+
+int obtenerProximoIDCompra() {
+    FILE* p = fopen("ArchivoCompra.dat", "rb");
+    if (p == nullptr) return 1; // Si no existe, empezamos desde 1
+
+    Compra comp;
+    int maxID = 0;
+
+    while (fread(&comp, sizeof(Compra), 1, p) == 1) {
+        if (comp.getEstado() && comp.getIdCompra() > maxID) {
+            maxID = comp.getIdCompra();
+        }
+    }
+
+    fclose(p);
+    return maxID + 1;
+}
+
+
+
 ///AGREGAR COMPRA
 void agregarCompra() {
-    int id, idProveedor, cantidadComprada,idCompra=0001;
+
+    int idProducto, idProveedor, cantidadComprada;
+    int idCompra = obtenerProximoIDCompra();
     float importe;
     Fecha fecha;
 
     cout << "Ingrese ID del producto: ";
-    cin >> id;
+    cin >> idProducto;
+    ArchivoProducto archivo;
+    Producto prod = archivo.buscarPorID(idProducto);
+    if (prod.getIdProducto() == 0) {
+    cout << "Producto no encontrado." << endl;
+    return;
+}
+
+    cout << "Producto encontrado: " << prod.getNombreProducto() << endl;
+
+
     cout << "Ingrese ID del proveedor: ";
     cin>>idProveedor;
     cout << "Ingrese cantidad comprada: ";
@@ -27,17 +60,17 @@ void agregarCompra() {
     //llamamos a fecha para el ingreso
     cin >> fecha;
 
-    Compra compra(idCompra, id, idProveedor, cantidadComprada, fecha, importe);
+    Compra compra(idCompra, idProducto, prod.getNombreProducto(), idProveedor, cantidadComprada, fecha, importe);
 
-    FILE* archivo = fopen("ArchivoCompra.dat", "ab");
-    if (archivo == NULL) {
+    FILE* archivoCompra = fopen("ArchivoCompra.dat", "ab");
+    if (archivoCompra == nullptr) {
         cout << "Error al abrir el archivo!" << endl;
         return;
     }
 
-    fwrite(&compra, sizeof(Compra), 1, archivo);
-    fclose(archivo);
-
+    fwrite(&compra, sizeof(Compra), 1, archivoCompra);
+    fclose(archivoCompra);
+    archivo.registrarCompraPorID(idProducto, cantidadComprada);
     cout << "Compra agregada con exito!" << endl;
 }
 ///DAR DE BAJA LA COMPRA
@@ -47,7 +80,7 @@ void bajaCompraPorID(){
     cin >> buscarCompra;
 
     FILE* archivo = fopen("archivoCompra.dat", "rb+");
-    if (archivo == NULL){
+    if (archivo == nullptr){
         cout << "Error al abrir el archivo! " << endl;
         return;
     }
@@ -97,7 +130,7 @@ void modificarCompraPorID() {
     cin >> compraBuscada;
 
     FILE* archivo = fopen("ArchivoCompra.dat", "rb+");
-    if (archivo == NULL) {
+    if (archivo == nullptr) {
         cout << "No se pudo abrir el archivo." <<endl;
         return;
     }
@@ -206,3 +239,6 @@ void listarCompras() {
      system("pause");
     fclose(archivo);
 }
+
+
+

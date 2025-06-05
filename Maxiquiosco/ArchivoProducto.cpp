@@ -155,3 +155,43 @@ int ArchivoProducto::obtenerProximoID() {
     fclose(p);
     return maxID + 1;
 }
+
+bool ArchivoProducto::registrarCompraPorID(int idProducto, int cantidad) {
+    FILE* p = fopen(_nombre, "rb+");
+    if (p == nullptr) return false;
+
+    Producto prod;
+    int pos = 0;
+
+    while (fread(&prod, sizeof(Producto), 1, p) == 1) {
+        if (prod.getIdProducto() == idProducto && prod.getEstado()) {
+            prod.setStockActual(prod.getStockActual() + cantidad);
+            fseek(p, pos * sizeof(Producto), SEEK_SET);
+            fwrite(&prod, sizeof(Producto), 1, p);
+            fclose(p);
+            return true;
+        }
+        pos++;
+    }
+
+    fclose(p);
+    return false;
+}
+
+Producto ArchivoProducto::buscarPorID(int idProducto) ///Para registro de compra
+{
+    Producto prod;
+    FILE* p = fopen(_nombre, "rb");
+    if (p == nullptr) return prod;
+
+    while (fread(&prod, sizeof(Producto), 1, p) == 1) {
+            ///std::cout << "Leyendo producto con ID: " << prod.getIdProducto() << " Estado: " << prod.getEstado() << std::endl;
+        if (prod.getIdProducto() == idProducto && prod.getEstado()) {
+            fclose(p);
+            return prod;
+        }
+    }
+
+    fclose(p);
+    return Producto(); // Devuelve producto vacío si no lo encuentra
+}

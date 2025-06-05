@@ -107,26 +107,3 @@ bool ArchivoTipoProducto::modificarPorID(int id, const TipoProducto& nuevoTipo) 
     fclose(p);
     return false;
 }*/
-/*
-bool ArchivoTipoProducto::bajaPorID(int id) {
-    FILE* p = fopen(_nombre, "rb+");
-    if (p == nullptr) return false;
-
-    TipoProducto tipo;
-    int pos = 0;
-
-    while (fread(&tipo, sizeof(TipoProducto), 1, p) == 1) {
-        if (tipo.getIdTipoProducto() == id && tipo.esValido()) {
-            tipo.setIdTipoProducto(0); // Marcar como eliminado
-            fseek(p, pos * sizeof(TipoProducto), SEEK_SET);
-            fwrite(&tipo, sizeof(TipoProducto), 1, p);
-            fclose(p);
-            return true;
-        }
-        pos++;
-    }
-
-    fclose(p);
-    return false;
-}
-*/
