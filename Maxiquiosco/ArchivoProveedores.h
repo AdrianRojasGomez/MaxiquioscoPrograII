@@ -9,7 +9,6 @@ private:
 
 
 public:
-
     ArchivoProveedores();
 
     bool AgregarRegistro(Proveedor proveedor);

@@ -1,26 +1,47 @@
 #include "ArchivoProducto.h"
 #include <cstdio>
 #include <iostream>
+using namespace std;
 
 bool ArchivoProducto::guardar(const Producto& prod) {
+   int op;
+    cout << "¿Desea Guardar el Producto? \n1. SI    \n0. NO" <<  endl;
+    cin >> op;
+    cin.ignore();
+
+   if(op==1){
     FILE* p = fopen(_nombre, "ab");
     if (p == nullptr) return false;
     fwrite(&prod, sizeof(Producto), 1, p);
     fclose(p);
+        system("cls");
+         cout << "Producto guardado con exito.\n1." <<  endl;
+
+         cout << "Detalles del producto creado:" << endl;
+         cout << "- ID: " << prod.getIdProducto() <<  endl;
+         cout << "- Nombre: " << prod.getNombreProducto() <<  endl;
+          cout << "- Tipo: " << prod.getTipoProducto().getClasificacionProducto() <<  endl;
+         cout << "- Precio: $" << prod.getPrecioUnitario() <<  endl;
+         cout << "- Stock Max: " << prod.getStockMax() <<  endl;
+
     return true;
+   }else{
+     cout << "Ingreso de producto CANCELADO" <<  endl;
+   }
+
 }
 
 bool ArchivoProducto::listar() {
     FILE* p = fopen(_nombre, "rb");
     if (p == nullptr) {
-        std::cout << "No se pudo abrir el archivo." << std::endl;
+         cout << "No se pudo abrir el archivo." <<  endl;
         return false;
     }
     Producto prod;
     while (fread(&prod, sizeof(Producto), 1, p) == 1) {
         if (prod.getEstado()) {
             prod.mostrarProducto();
-            std::cout << "---------------------" << std::endl;
+             cout << "---------------------" <<  endl;
         }
     }
     fclose(p);
@@ -72,36 +93,36 @@ bool ArchivoProducto::modificarPorID(int id) {
             prod.mostrarProducto();
 
             int opcion;
-            std::cout << "1. Nombre\n2. Precio\n3. Stock actual\n4. Stock maximo\nOpcion: ";
-            std::cin >> opcion;
-            std::cin.ignore();
+             cout << "1. Nombre\n2. Precio\n3. Stock actual\n4. Stock maximo\nOpcion: ";
+             cin >> opcion;
+             cin.ignore();
 
             switch (opcion) {
                 case 1: {
                     char nombre[20];
-                    std::cout << "Nuevo nombre: ";
-                    std::cin.getline(nombre, 20);
+                     cout << "Nuevo nombre: ";
+                     cin.getline(nombre, 20);
                     prod.setNombreProducto(nombre);
                     break;
                 }
                 case 2: {
                     float precio;
-                    std::cout << "Nuevo precio: ";
-                    std::cin >> precio;
+                     cout << "Nuevo precio: ";
+                     cin >> precio;
                     prod.setPrecioUnitario(precio);
                     break;
                 }
                 case 3: {
                     int stock;
-                    std::cout << "Nuevo stock actual: ";
-                    std::cin >> stock;
+                     cout << "Nuevo stock actual: ";
+                     cin >> stock;
                     prod.setStockActual(stock);
                     break;
                 }
                 case 4: {
                     int max;
-                    std::cout << "Nuevo stock maximo: ";
-                    std::cin >> max;
+                     cout << "Nuevo stock maximo: ";
+                     cin >> max;
                     prod.setStockMax(max);
                     break;
                 }
@@ -116,4 +137,21 @@ bool ArchivoProducto::modificarPorID(int id) {
     }
     fclose(p);
     return false;
+}
+
+int ArchivoProducto::obtenerProximoID() {
+    FILE* p = fopen(_nombre, "rb");
+    if (p == nullptr) return 1; /// Si no existe el archivo, arrancamos desde 1
+
+    Producto prod;
+    int maxID = 0;
+
+    while (fread(&prod, sizeof(Producto), 1, p) == 1) {
+        if (prod.getEstado() && prod.getIdProducto() > maxID) {
+            maxID = prod.getIdProducto();
+        }
+    }
+
+    fclose(p);
+    return maxID + 1;
 }

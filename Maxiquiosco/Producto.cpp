@@ -16,12 +16,9 @@ Producto::Producto() {
 
 Producto::Producto(int id, const char* nombre, TipoProducto tipo, float precio, int stock, int stockMax, bool estado) {
     _idProducto = id;
-    //strncpy(_nombreProducto, nombre, sizeof(_nombreProducto)); cambios validacion
     setNombreProducto(nombre);
     _tipoProducto = tipo;
-   // _precioUnitario = precio; cambios validacion
    setPrecioUnitario(precio);
-    //_stockActual = stock;
     setStockActual(stock);
     _stockMax = stockMax;
        _estado = estado;
@@ -30,9 +27,11 @@ Producto::Producto(int id, const char* nombre, TipoProducto tipo, float precio, 
 void Producto::setIdProducto(int id) { _idProducto = id; }
 
 bool Producto::setNombreProducto(const char* nombre) {
-    //strncpy(_nombreProducto, nombre, sizeof(_nombreProducto));
-    if (nombre == nullptr || strlen(nombre) == 0 || isspace(nombre[0]))// isspace valida que el primer caracter no sea espacio
+
+    if (nombre == nullptr || strlen(nombre) == 0 || isspace(nombre[0])) /// isspace valida que el primer caracter no sea espacio
+        {
         return false;
+        }
         strncpy(_nombreProducto, nombre, sizeof(_nombreProducto));
         return true;
 }
@@ -40,14 +39,14 @@ bool Producto::setNombreProducto(const char* nombre) {
 void Producto::setTipoProducto(TipoProducto tipo) { _tipoProducto = tipo; }
 
 bool Producto::setPrecioUnitario(float precio) {
-    //_precioUnitario = precio;
+
     if (precio <= 0)
         return false;
     _precioUnitario = precio;
     return true;
 }
 bool Producto::setStockActual(int stock) {
-    //_stockActual = stock;
+
     if (stock < 0 || stock > _stockMax)
         return false;
     _stockActual = stock;
@@ -69,7 +68,7 @@ bool Producto::getEstado() const { return _estado; }
 void Producto::mostrarProducto() const {
     cout << "ID Producto: " << _idProducto <<endl;
     cout << "Nombre: " << _nombreProducto <<endl;
-    cout << "Tipo: ";
+    cout << "Categoria de Producto ";
     _tipoProducto.mostrarTipo();
     cout << "Precio Unitario: $" << _precioUnitario <<endl;
     cout << "Stock Actual: " << _stockActual << "/  Stock Maximo: " << _stockMax <<endl;

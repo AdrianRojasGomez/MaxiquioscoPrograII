@@ -12,6 +12,7 @@ MenuProducto::MenuProducto()
 
 void MenuProducto::MostrarMenu()
 {
+    FuncionesProducto funciones;
     while(_opcion != 0)
     {
         int aux;
@@ -30,19 +31,19 @@ void MenuProducto::MostrarMenu()
 
         switch (_opcion) {
             case 1:
-                agregarProducto();
+                funciones.agregarProducto();
                 system("pause");
                 break;
             case 2:
-                bajaProductoPorID();
+                funciones.bajaProductoPorID();
                 system("pause");
                 break;
             case 3:
-                modificarProductoPorID();
+                funciones.modificarProductoPorID();
                 system("pause");
                 break;
             case 4:
-                listarProductos();
+               funciones.listarProductos();
                 system("pause");
                 break;
             case 0:

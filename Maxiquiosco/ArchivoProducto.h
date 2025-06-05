@@ -11,5 +11,6 @@ public:
     bool bajaPorID(int id);
     bool modificarPorID(int id);
     bool existeID(int id);
+    int obtenerProximoID();
 };
 
