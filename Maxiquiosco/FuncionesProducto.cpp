@@ -4,65 +4,66 @@
 #include "Producto.h"
 #include "TipoProducto.h"
 #include "ArchivoProducto.h"
+#include "FuncionesProducto.h"
+#include "ArchivoTipoProducto.h"
 
 using namespace std;
 
-void agregarProducto() {
+void FuncionesProducto::agregarProducto() {
     ArchivoProducto archivo;
-    int id, stock, stockMax, idTipo;
-    char nombre[20], clasificacion[20];
+    ArchivoTipoProducto archivoTipos;
+    int stockMax, idTipo;
     float precio;
-    bool estado;
-
-do {
-    cout << "Ingrese ID del producto: ";
-    cin >> id;
-        if (archivo.existeID(id)) {
-            cout << "Error --> Ya existe un producto con ese ID. Ingrese otro.\n";
-        }
-    } while (archivo.existeID(id));
+    int  stock =0;
+    char nombre[20];
+    bool estado =1;
+    int id = archivo.obtenerProximoID();
 
     cout << "Ingrese nombre del producto: ";
     cin.ignore();
     cin.getline(nombre, 20);
+
+    TipoProducto tipoSeleccionado;
+
+    bool tipoValido = false;
+    cout << "Ingrese ID del tipo de producto: "<<endl;
+    archivoTipos.listar();
+        do {
+                    cout << "Ingrese un ID : ";
+                    cin >> idTipo;
+                    tipoSeleccionado = archivoTipos.buscarPorId(idTipo);
+                    if (tipoSeleccionado.getIdTipoProducto() != 0) {
+                        tipoValido = true;
+                        cout << "Tipo seleccionado: " << tipoSeleccionado.getClasificacionProducto() << endl;
+                    } else {
+                        cout << "Error: Tipo con ID " << idTipo << " no existe. Intente nuevamente." << endl;
+                    }
+            } while (!tipoValido);
+
     cout << "Ingrese precio unitario: ";
     cin >> precio;
-    cout << "Ingrese stock actual: ";
-    cin >> stock;
     cout << "Ingrese stock maximo: ";
     cin >> stockMax;
-    cout << "Ingrese ID del tipo de producto: ";
-    cin >> idTipo;
-    cout << "Ingrese clasificacion del tipo: ";
-    cin.ignore();
-    cin.getline(clasificacion, 20);
-    cout << "¿El producto esta activo? (1 = Si, 0 = No): ";
-    cin >> estado;
 
-    TipoProducto tipo(idTipo, clasificacion);
     Producto prod;
-
     prod.setIdProducto(id);
-    prod.setTipoProducto(tipo);
+    prod.setNombreProducto(nombre);
+    prod.setPrecioUnitario(precio);
+    prod.setTipoProducto(tipoSeleccionado);
     prod.setStockMax(stockMax);
     prod.setEstado(estado);
+   system("cls");
+        cout << "Detalles del producto :" <<endl;
+        cout << "- ID: " << prod.getIdProducto() << endl;
+        cout << "- Nombre: " << prod.getNombreProducto() << endl;
+        cout << "- Precio: $" << prod.getPrecioUnitario() << endl;
+        cout << "- Stock Max: " << prod.getStockMax() << endl;
+        cout << "- Tipo: " << prod.getTipoProducto().getClasificacionProducto() << endl;
 
-
-    if (!prod.setNombreProducto(nombre) ||
-        !prod.setPrecioUnitario(precio) ||
-        !prod.setStockActual(stock)) {
-        cout << "Error en los datos del producto." << endl;
-        return;
-    }
-
-    if (archivo.guardar(prod)) {
-        cout << "Producto guardado con exito." << endl;
-    } else {
-        cout << "Error al guardar el producto." << endl;
-    }
+   archivo.guardar(prod);
 }
 
-void bajaProductoPorID(){///baja logica
+void FuncionesProducto::bajaProductoPorID(){///baja logica
     ArchivoProducto archivo;
     int idBuscado;
     cout << "Ingrese el ID del producto a dar de baja:  ";
@@ -74,7 +75,7 @@ void bajaProductoPorID(){///baja logica
     }
 }
 
-void modificarProductoPorID() {
+void FuncionesProducto::modificarProductoPorID() {
     ArchivoProducto archivo;
     int idBuscado;
     cout << "Ingrese el ID del producto a modificar: ";
@@ -86,7 +87,7 @@ void modificarProductoPorID() {
     }
 }
 
-void listarProductos() {
+void FuncionesProducto::listarProductos() {
     ArchivoProducto archivo;
     archivo.listar();
 }

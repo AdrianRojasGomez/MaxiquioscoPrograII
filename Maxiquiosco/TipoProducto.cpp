@@ -12,17 +12,26 @@ TipoProducto::TipoProducto() {
 
 TipoProducto::TipoProducto(int id, const char* clasificacion) {
     _idTipoProducto = id;
-    strncpy(_clasificacionProducto, clasificacion, sizeof(_clasificacionProducto));
+    strncpy(_clasificacionProducto, clasificacion, sizeof(_clasificacionProducto) - 1);
+    _clasificacionProducto[sizeof(_clasificacionProducto) - 1] = '\0'; // Asegurar terminación nula
 }
 
-void TipoProducto::setIdTipoProducto(int id) { _idTipoProducto = id; }
-void TipoProducto::setClasificacionProducto(const char* clasificacion) {
-    strncpy(_clasificacionProducto, clasificacion, sizeof(_clasificacionProducto));
+void TipoProducto::setIdTipoProducto(int id) {
+    _idTipoProducto = id;
 }
 
-int TipoProducto::getIdTipoProducto() const { return _idTipoProducto; }
-const char* TipoProducto::getClasificacionProducto() const { return _clasificacionProducto; }
+int TipoProducto::getIdTipoProducto() const {
+    return _idTipoProducto;
+}
+
+const char* TipoProducto::getClasificacionProducto() const {
+    return _clasificacionProducto;
+}
 
 void TipoProducto::mostrarTipo() const {
-    cout << getClasificacionProducto() << " (ID: " << getIdTipoProducto() << ")" << endl;
+    cout << "ID: " << getIdTipoProducto() << " - " << getClasificacionProducto()<< endl;
 }
+bool TipoProducto::esValido() const {
+    return _idTipoProducto > 0;
+}
+
