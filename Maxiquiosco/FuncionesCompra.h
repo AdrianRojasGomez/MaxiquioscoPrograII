@@ -1,7 +1,12 @@
 #pragma once
 
-void agregarCompra();
-void bajaCompraPorID();
-void modificarCompraPorID();
-void listarCompras();
-int obtenerProximoIDCompra();
+class FuncionesCompra
+{
+
+public:
+    void AgregarCompra();
+    void BajaCompraPorID();
+    void ModificarCompraPorID();
+    void ListarCompras();
+    int ObtenerProximoIDCompra();
+};

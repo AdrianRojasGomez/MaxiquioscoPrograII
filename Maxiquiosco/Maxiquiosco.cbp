@@ -32,43 +32,47 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename=".gitignore" />
+		<Unit filename="ArchivoCompra.dat" />
+		<Unit filename="ArchivoCompras.cpp" />
+		<Unit filename="ArchivoCompras.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="ArchivoProducto.cpp" />
+		<Unit filename="ArchivoProducto.dat" />
 		<Unit filename="ArchivoProducto.h" />
+		<Unit filename="ArchivoProveedor.dat" />
 		<Unit filename="ArchivoProveedores.cpp" />
 		<Unit filename="ArchivoProveedores.h" />
+		<Unit filename="ArchivoTipoProducto.cpp" />
+		<Unit filename="ArchivoTipoProducto.h" />
 		<Unit filename="Compra.cpp" />
 		<Unit filename="Compra.h" />
 		<Unit filename="Fecha.cpp" />
-		<Unit filename="Fecha.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="Fecha.h" />
 		<Unit filename="FuncionesCompra.cpp" />
 		<Unit filename="FuncionesCompra.h" />
 		<Unit filename="FuncionesProducto.cpp" />
 		<Unit filename="FuncionesProducto.h" />
 		<Unit filename="FuncionesProveedor.cpp" />
 		<Unit filename="FuncionesProveedor.h" />
+		<Unit filename="Maxiquiosco.cbp" />
+		<Unit filename="Maxiquiosco.depend" />
+		<Unit filename="Maxiquiosco.layout" />
 		<Unit filename="MenuCompra.cpp" />
-		<Unit filename="MenuCompra.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="MenuCompra.h" />
 		<Unit filename="MenuProducto.cpp" />
-		<Unit filename="MenuProducto.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="MenuProducto.h" />
 		<Unit filename="MenuProveedores.cpp" />
-		<Unit filename="MenuProveedores.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="MenuProveedores.h" />
 		<Unit filename="Producto.cpp" />
 		<Unit filename="Producto.h" />
 		<Unit filename="Proveedor.cpp" />
 		<Unit filename="Proveedor.h" />
 		<Unit filename="TipoProducto.cpp" />
-		<Unit filename="TipoProducto.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="TipoProducto.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="tipos_productos.dat" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

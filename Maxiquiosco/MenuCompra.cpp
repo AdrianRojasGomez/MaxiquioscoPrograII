@@ -12,6 +12,7 @@ MenuCompra::MenuCompra()
 
 void MenuCompra::MostrarMenu()
 {
+    FuncionesCompra funcionesCompra;
     while(_opcion != 0)
     {
         int aux;
@@ -31,20 +32,19 @@ void MenuCompra::MostrarMenu()
         {
         case 1:{
 
-            agregarCompra();
+            funcionesCompra.AgregarCompra();
             break;
             }
         case 2: {
 
-          bajaCompraPorID();
+          funcionesCompra.BajaCompraPorID();
             break;
             }
         case 3:
-            modificarCompraPorID();
+            funcionesCompra.ModificarCompraPorID();
             break;
         case 4:{
-
-            listarCompras();
+            funcionesCompra.ListarCompras();
             break;
             }
             case 0:

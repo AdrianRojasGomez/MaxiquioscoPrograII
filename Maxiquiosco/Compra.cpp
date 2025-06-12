@@ -6,7 +6,8 @@
 
 using namespace std;
 
-Compra::Compra() {
+Compra::Compra()
+{
     _idCompra = 0;
     _idProducto = 0;
     strcpy(_idNombreProducto, "");
@@ -18,7 +19,8 @@ Compra::Compra() {
 
 }
 
-Compra::Compra(int idCompra, int idProducto, const char* idNombreProducto , int idProveedor, int cantidad, Fecha fecha, float precioUnitario) {
+Compra::Compra(int idCompra, int idProducto, const char* idNombreProducto, int idProveedor, int cantidad, Fecha fecha, float precioUnitario)
+{
     _idCompra = idCompra;
     _idProducto = idProducto;
     setidNombreProducto(idNombreProducto);
@@ -30,69 +32,82 @@ Compra::Compra(int idCompra, int idProducto, const char* idNombreProducto , int 
 
 }
 
-    void Compra::setIdCompra(int idCompra) {
-        _idCompra = idCompra;
-        }
-    void Compra::setFechaCompra(Fecha fecha) {
+void Compra::setIdCompra(int idCompra)
+{
+    _idCompra = idCompra;
+}
+void Compra::setFechaCompra(Fecha fecha)
+{
     _fechaCompra = fecha;
 }
-    void Compra::setIdProducto(int idProducto) {
-        _idProducto = idProducto;
-        }
-
-bool Compra::setidNombreProducto(const char* idNombreProducto) {
-
-    if (idNombreProducto == nullptr)
-        {
-        return false;
-        }
-        strncpy(_idNombreProducto, idNombreProducto, sizeof(_idNombreProducto));
-        return true;
+void Compra::setIdProducto(int idProducto)
+{
+    _idProducto = idProducto;
 }
 
+bool Compra::setidNombreProducto(const char* idNombreProducto)
+{
+    if (idNombreProducto == nullptr)
+    {
+        return false;
+    }
+    strncpy(_idNombreProducto, idNombreProducto, sizeof(_idNombreProducto));
+    return true;
+}
 
-
-    void Compra::setIdProveedor(int idProveedor) {
-        _idProveedor = idProveedor;
-        }
-    void Compra::setCantidadComprada(int cantidad) {
-        _cantidadComprada = cantidad;
-        }
- void Compra::setImporteTotal(float importeTotal) {
+void Compra::setIdProveedor(int idProveedor)
+{
+    _idProveedor = idProveedor;
+}
+void Compra::setCantidadComprada(int cantidad)
+{
+    _cantidadComprada = cantidad;
+}
+void Compra::setImporteTotal(float importeTotal)
+{
     _importeTotal = importeTotal;
 }
-    void Compra::setEstado(bool estado) {
-            _estado = estado;
-        }
-    bool Compra::getEstado() const {
-        return _estado;
+void Compra::setEstado(bool estado)
+{
+    _estado = estado;
+}
+bool Compra::getEstado() const
+{
+    return _estado;
 }
 
-    int Compra::getIdCompra() const {
+int Compra::getIdCompra() const
+{
     return _idCompra;
 }
 
-Fecha Compra::getFechaCompra() const {
+Fecha Compra::getFechaCompra() const
+{
     return _fechaCompra;
 }
 
-    int Compra::getIdProducto() const {
+int Compra::getIdProducto() const
+{
     return _idProducto;
 }
 
-const char* Compra::getidNombreProducto()const{
-       return _idNombreProducto;
-    }
+const char* Compra::getidNombreProducto()const
+{
+    return _idNombreProducto;
+}
 
-    int Compra::getIdProveedor() const {
+int Compra::getIdProveedor() const
+{
     return _idProveedor;
 }
 
-    int Compra::getCantidadComprada() const {
+int Compra::getCantidadComprada() const
+{
     return _cantidadComprada;
 }
 
-    float Compra::getImporteTotal() const {
+float Compra::getImporteTotal() const
+{
     return _importeTotal;
 }
 void Compra::cargarCompra() {

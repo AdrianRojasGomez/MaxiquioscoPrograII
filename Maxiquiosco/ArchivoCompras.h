@@ -1,21 +1,20 @@
 #pragma once
-#include "Proveedor.h"
+#include "Compra.h"
 
-class ArchivoProveedores
+class ArchivoCompras
 {
 private:
     char _nombreArchivo[50];
     int _tamanoRegistro;
 
 public:
-    ArchivoProveedores();
+    ArchivoCompras();
 
-    bool AgregarRegistro(Proveedor proveedor);
+    bool AgregarRegistro(Compra compra);
     void BajaRegistroPorID(int ID);
     void ModificarRegistroPorID(int ID);
-    Proveedor BuscarRegistroPorID (int ID);
+    Compra BuscarRegistroPorID (int ID);
     void ListarRegistroPorID(int ID);
     void ListarRegistros();
 
 };
-

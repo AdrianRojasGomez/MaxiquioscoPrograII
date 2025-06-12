@@ -7,12 +7,13 @@
 #include "fecha.h"
 #include "Compra.h"
 #include "ArchivoProducto.h"
+#include "ArchivoProveedores.h"
 
 
 using namespace std;
 
 
-int obtenerProximoIDCompra() {
+int FuncionesCompra::ObtenerProximoIDCompra() {
     FILE* p = fopen("ArchivoCompra.dat", "rb");
     if (p == nullptr) return 1; // Si no existe, empezamos desde 1
 
@@ -29,20 +30,18 @@ int obtenerProximoIDCompra() {
     return maxID + 1;
 }
 
-
-
 ///AGREGAR COMPRA
-void agregarCompra() {
+void FuncionesCompra::AgregarCompra() {
 
     int idProducto, idProveedor, cantidadComprada;
-    int idCompra = obtenerProximoIDCompra();
+    int idCompra = ObtenerProximoIDCompra();
     float importe;
     Fecha fecha;
 
     cout << "Ingrese ID del producto: ";
     cin >> idProducto;
-    ArchivoProducto archivo;
-    Producto prod = archivo.buscarPorID(idProducto);
+    ArchivoProducto archivoProducto;
+    Producto prod = archivoProducto.buscarPorID(idProducto);
     if (prod.getIdProducto() == 0) {
     cout << "Producto no encontrado." << endl;
     return;
@@ -50,9 +49,25 @@ void agregarCompra() {
 
     cout << "Producto encontrado: " << prod.getNombreProducto() << endl;
 
-
     cout << "Ingrese ID del proveedor: ";
-    cin>>idProveedor;
+    bool proveedorValido = false;
+
+    do
+    {
+
+        cin>>idProveedor;
+        ArchivoProveedores archivoProveedor;
+        Proveedor prov = archivoProveedor.BuscarRegistroPorID(idProveedor);
+        if( prov.getIDProveedor() != 0)
+        {
+            proveedorValido = true;
+            cout << "Proveedor Seleccionado: " << prov.getNombreProveedor() << endl;
+        }
+        else
+        {
+            cout << "Error: Proveedor no existe. Intente nuevamente" << endl;
+        }
+    }while (!proveedorValido);
     cout << "Ingrese cantidad comprada: ";
     cin >> cantidadComprada;
     cout << "Ingrese importe de la compra: $";
@@ -61,20 +76,21 @@ void agregarCompra() {
     cin >> fecha;
 
     Compra compra(idCompra, idProducto, prod.getNombreProducto(), idProveedor, cantidadComprada, fecha, importe);
-
-    FILE* archivoCompra = fopen("ArchivoCompra.dat", "ab");
-    if (archivoCompra == nullptr) {
+    FILE * archivoCompra = fopen("ArchivoCompra.dat", "ab");
+    if (archivoCompra == nullptr)
+    {
         cout << "Error al abrir el archivo!" << endl;
         return;
     }
 
     fwrite(&compra, sizeof(Compra), 1, archivoCompra);
     fclose(archivoCompra);
-    archivo.registrarCompraPorID(idProducto, cantidadComprada);
+    //archivoCompra.registrarCompraPorID(idProducto, cantidadComprada);
     cout << "Compra agregada con exito!" << endl;
 }
+
 ///DAR DE BAJA LA COMPRA
-void bajaCompraPorID(){
+void FuncionesCompra::BajaCompraPorID(){
     int buscarCompra;
     cout << "Ingrese el ID de la compra a dar de baja:  ";
     cin >> buscarCompra;
@@ -123,8 +139,9 @@ void bajaCompraPorID(){
 
         cout << "Compra dada de baja correctamente." << endl;
 }
+
 ///MODIFICAR PRODUCTOS
-void modificarCompraPorID() {
+void FuncionesCompra::ModificarCompraPorID() {
     int compraBuscada;
     cout << "Ingrese el numero de compra a modificar: ";
     cin >> compraBuscada;
@@ -218,7 +235,7 @@ void modificarCompraPorID() {
 }
 
 ///LISTAR COMPRAS
-void listarCompras() {
+void FuncionesCompra::ListarCompras() {
     FILE* archivo = fopen("ArchivoCompra.dat", "rb");
     if (archivo == NULL) {
         cout << "No se pudo abrir el archivo de compras" <<endl;

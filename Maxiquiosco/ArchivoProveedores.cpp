@@ -180,6 +180,29 @@ void ArchivoProveedores::ListarRegistroPorID(int ID)
 
 }
 
+Proveedor ArchivoProveedores::BuscarRegistroPorID (int ID)
+{
+    Proveedor proveedor;
+
+    FILE * pArchivo;
+    pArchivo = fopen (_nombreArchivo, "rb");
+    if(pArchivo == nullptr)
+        return proveedor;
+
+    while(fread(&proveedor,sizeof(Proveedor),1,pArchivo) == 1)
+    {
+        if(proveedor.getIDProveedor() == ID && proveedor.getEstado())
+        {
+            fclose(pArchivo);
+            return proveedor;
+        }
+    }
+
+    fclose(pArchivo);
+    return Proveedor();
+}
+
+
 
 void ArchivoProveedores::ListarRegistros()
 {
