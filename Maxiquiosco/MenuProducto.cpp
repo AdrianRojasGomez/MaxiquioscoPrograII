@@ -27,7 +27,7 @@ void MenuProducto::MostrarMenu()
     FuncionesProducto manager;
     do
     {
-        string aux;
+        string input;
         system("cls");
         cout << "|========== PRODUCTOS MAXIQUIOSCO =========|" << endl;
         cout << "| 1. AGREGAR PRODUCTOS" <<"                     |" << endl;
@@ -38,16 +38,15 @@ void MenuProducto::MostrarMenu()
         cout << "| 0. VOLVER AL MENU ANTERIOR" <<"               |" << endl;
         cout << "|==========================================|" << endl;
         cout << " \nSelecciona una opcion: ";
-        cin >> aux;
-
-        if(!ValidadorInputs::EsUnDigito(aux))
+        getline(cin,input);
+        if(!ValidadorInputs::EsUnDigito(input))
         {
             _opcion = -1;
             system("Pause");
             continue;
         }
-        int auxNumero = stoi(aux);
-        setOpcion(auxNumero);
+        int opcion = stoi(input);
+        setOpcion(opcion);
 
         switch(_opcion)
         {
@@ -58,6 +57,7 @@ void MenuProducto::MostrarMenu()
 
         case 2:
             manager.BajaProducto();
+            system("pause");
             break;
         case 3:
             manager.ModificarProducto();

@@ -20,17 +20,19 @@ void FuncionesProveedor::AgregarProveedor()
     ///DNI
     cout << "Ingrese el DNI del Proveedor.\nSolo numeros, maximo 50 Caracteres." << endl;
     cout << ">> ";
-    cin >> input;
+    cin.ignore();
+    getline (cin,input);
     if(!ValidadorInputs::SonSoloNumeros(input) || !ValidadorInputs::TamanoPermitido(input,Proveedor::TAMANO_CAMPO))
     {
         cout << "Error: Ingrese solo los numeros del DNI, y asegurese que no sean mas de 50 caracteres" <<endl;
         return;
     }
     dni = stoi(input);
+
     ///CUIT
     cout << "Ingrese el CUIT del Proveedor.\nSolo numeros, maximo 50 Caracteres." << endl;
     cout << ">> ";
-    cin >> input;
+    getline (cin,input);
     if(!ValidadorInputs::SonSoloNumeros(input) || !ValidadorInputs::TamanoPermitido(input,Proveedor::TAMANO_CAMPO))
     {
         cout << "Error: Ingrese solo los digitos del CUIT, con un maximo de 50 caracteres" << endl;
@@ -40,36 +42,40 @@ void FuncionesProveedor::AgregarProveedor()
     ///NUM TELEFONO
     cout << "Ingrese el NUMERO DE TELEFONO del Proveedor.\nSolo numeros, maximo 50 Caracteres." << endl;
     cout << ">> ";
-    cin >> input;
+    getline (cin,input);
     if(!ValidadorInputs::SonSoloNumeros(input) || !ValidadorInputs::TamanoPermitido(input,Proveedor::TAMANO_CAMPO))
     {
         cout << "Error: Ingrese solo los digitos del NUMERO DE TELEFONO, con un maximo de 50 caracteres" << endl;
         return;
     }
+    strcpy(numeroTelefono,input.c_str());
+
     ///NOMBRE
     cout << "Ingrese el NOMBRE del Proveedor.\nSolo numeros, maximo 50 Caracteres." << endl;
     cout << ">> ";
-    cin >> input;
+    getline (cin,input);
     if(!ValidadorInputs::TamanoPermitido(input,Proveedor::TAMANO_CAMPO))
     {
         cout << "Error: Ingrese el NOMBRE con un maximo de 50 caracteres"  << endl;
         return;
     }
     strcpy(nombre,input.c_str());
+
     ///EMAIL
     cout << "Ingrese el EMAIL del Proveedor.\nSolo numeros, maximo 50 Caracteres." << endl;
     cout << ">> ";
-    cin >> input;
+    getline (cin,input);
     if(!ValidadorInputs::TamanoPermitido(input,Proveedor::TAMANO_CAMPO))
     {
         cout << "Error: Ingrese el EMAIL con un maximo de 50 caracteres" << endl;
         return;
     }
     strcpy(email,input.c_str());
+
     ///DIRECCION
     cout << "Ingrese la DIRECCION del Proveedor.\nSolo numeros, maximo 50 Caracteres." << endl;
     cout << ">> ";
-    cin >> input;
+    getline (cin,input);
     if(!ValidadorInputs::TamanoPermitido(input,Proveedor::TAMANO_CAMPO))
     {
         cout << "Error: Ingrese el DIRECCION con un maximo de 50 caracteres" << endl;
@@ -87,25 +93,26 @@ void FuncionesProveedor::AgregarProveedor()
 void FuncionesProveedor::BajaProveedor()
 {
     ArchivoProveedor archivoProveedor;
-    int busquedaID;
-    cout << "Ingrese el ID del proveedor para darle de baja" << endl;
-    cin >> busquedaID;
-    archivoProveedor.BajaRegistro(busquedaID);
-}
-
-void FuncionesProveedor::ListarProveedorPorID()
-{
-    ArchivoProveedor archivoProveedor;
-    int busquedaID;
-    cout << "Ingrese el ID del proveedor para buscarlo" << endl;
-    cin >> busquedaID;
-    archivoProveedor.ListarRegistroPorID(busquedaID);
-}
-
-void FuncionesProveedor::ListarProveedores()
-{
-    ArchivoProveedor archivoProveedor;
-    archivoProveedor.ListarRegistros();
+    string input;
+    int IDbuscado;
+    cout << "Ingrese el ID del proveedor que desea modificar. " << endl;
+    cout << ">> ";
+    getline(cin,input);
+    if(!ValidadorInputs::SonSoloNumeros(input))
+    {
+        cout << "Error: Ingrese Solo numeros el ID" << endl;
+        system("pause");
+        return;
+    }
+    IDbuscado = stoi(input);
+    if(!archivoProveedor.ModificarRegistroPorID(IDbuscado))
+    {
+        cout << "Producto No encontrado o Inactivo." << endl;
+        system("pause");
+        return;
+    }
+    cout << "Producto modificado satisfactoriamente" << endl;
+    system("pause");
 }
 
 void FuncionesProveedor::ModificarRegistro()
@@ -115,5 +122,37 @@ void FuncionesProveedor::ModificarRegistro()
     cout << "Ingrese el ID del proveedor para buscarlo" << endl;
     cin >> busquedaID;
     archivoProveedor.ModificarRegistroPorID(busquedaID);
+}
+
+void FuncionesProveedor::ListarProveedorPorID()
+{
+    ArchivoProveedor archivo;
+    string input;
+    int ID;
+    cout << "Ingrese el ID a buscar." << endl;
+    cout << ">> ";
+    cin >> input;
+    if(!ValidadorInputs::SonSoloNumeros(input))
+    {
+        cout << "Error: Ingrese Solo numeros el ID" <<endl;
+        system("Pause");
+        return;
+    }
+    else
+    {
+        ID = stoi(input);
+    }
+    archivo.ListarRegistroPorID(ID);
+}
+
+void FuncionesProveedor::ListarProveedores()
+{
+    ArchivoProveedor archivoProveedor;
+    archivoProveedor.ListarRegistros();
+}
+
+void PrecargarProveedoresDeDocumento()
+{
+
 }
 
