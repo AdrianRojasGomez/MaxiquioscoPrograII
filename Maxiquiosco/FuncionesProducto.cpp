@@ -24,8 +24,9 @@ void FuncionesProducto::AgregarProducto()
     string input;
     int aux;
     ///NOMBRE
-
-    cin >> input;
+    cout << "Ingrese el Nombre del Producto" << endl;
+    cout << ">> ";
+    getline(cin,input);
     if(!ValidadorInputs::TamanoPermitido(input,Producto::TAMANO_NOMBRE))
     {
         cout << "Ingrese un nombre con una longitud Valida" <<endl;
@@ -35,13 +36,13 @@ void FuncionesProducto::AgregarProducto()
 
     ///TIPO DE PRODUCTO
     bool tipoValido = false;
-    cout << "Ingrese el ID del tipo de Producto. " << endl;
+
     archivoTipoProducto.ListarResistros();
     do
     {
-        cout << "Ingrese el ID" << endl;
+        cout << "Ingrese el ID del tipo de Producto. " << endl;
         cout << ">> ";
-        cin >> input;
+        getline(cin,input);
         if(!ValidadorInputs::SonSoloNumeros(input))
         {
             cout << "Error: Ingrese Solo numeros para el ID del tipo de Producto" <<endl;
@@ -64,7 +65,7 @@ void FuncionesProducto::AgregarProducto()
     ///PRECIO
     cout << "Ingrese el Precio Unitario. " << endl;
     cout << ">> ";
-    cin >> input;
+    getline(cin,input);
     if(!ValidadorInputs::EsFloat(input))
     {
         cout << "Error: Ingrese un precio valido para el campo Precio unitario" <<endl;
@@ -74,7 +75,7 @@ void FuncionesProducto::AgregarProducto()
     ///STOCK MAXIMO
     cout << "Ingrese el Stock Maximo Permitido. " << endl;
     cout << ">> ";
-    cin >> input;
+    getline(cin,input);
     if(!ValidadorInputs::SonSoloNumeros(input))
     {
         cout << "Error: Ingrese Solo numeros para el stock maximo" <<endl;
@@ -98,7 +99,7 @@ void FuncionesProducto::BajaProducto()
     int IDbuscado;
     cout << "Ingrese el ID del producto que desea dar de baja. " << endl;
     cout << ">> ";
-    cin >> input;
+    getline(cin,input);
     if(!ValidadorInputs::SonSoloNumeros(input))
     {
         cout << "Error: Ingrese Solo numeros el ID" << endl;
@@ -123,7 +124,7 @@ void FuncionesProducto::ModificarProducto()
     int IDbuscado;
     cout << "Ingrese el ID del producto que desea modificar. " << endl;
     cout << ">> ";
-    cin>>input;
+    getline(cin,input);
     if(!ValidadorInputs::SonSoloNumeros(input))
     {
         cout << "Error: Ingrese Solo numeros el ID" << endl;
@@ -144,6 +145,7 @@ void FuncionesProducto::ModificarProducto()
 void FuncionesProducto::ListarProducto()
 {
     ArchivoProducto archivo;
+    system("cls");
     archivo.ListarRegistros();
 }
 
@@ -154,7 +156,7 @@ void FuncionesProducto::ListarProductoPorID()
     int ID;
     cout << "Ingrese el ID a buscar." << endl;
     cout << ">> ";
-    cin >> input;
+    getline(cin,input);
     if(!ValidadorInputs::SonSoloNumeros(input))
     {
         cout << "Error: Ingrese Solo numeros el ID" <<endl;
@@ -165,5 +167,6 @@ void FuncionesProducto::ListarProductoPorID()
     {
         ID = stoi(input);
     }
+    system("cls");
     archivo.ListarRegistroPorID(ID);
 }

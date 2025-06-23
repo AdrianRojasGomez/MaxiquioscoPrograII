@@ -28,6 +28,7 @@ void FuncionesProveedor::AgregarProveedor()
         return;
     }
     dni = stoi(input);
+
     ///CUIT
     cout << "Ingrese el CUIT del Proveedor.\nSolo numeros, maximo 50 Caracteres." << endl;
     cout << ">> ";
@@ -48,6 +49,7 @@ void FuncionesProveedor::AgregarProveedor()
         return;
     }
     strcpy(numeroTelefono,input.c_str());
+
     ///NOMBRE
     cout << "Ingrese el NOMBRE del Proveedor.\nSolo numeros, maximo 50 Caracteres." << endl;
     cout << ">> ";
@@ -58,6 +60,7 @@ void FuncionesProveedor::AgregarProveedor()
         return;
     }
     strcpy(nombre,input.c_str());
+
     ///EMAIL
     cout << "Ingrese el EMAIL del Proveedor.\nSolo numeros, maximo 50 Caracteres." << endl;
     cout << ">> ";
@@ -68,6 +71,7 @@ void FuncionesProveedor::AgregarProveedor()
         return;
     }
     strcpy(email,input.c_str());
+
     ///DIRECCION
     cout << "Ingrese la DIRECCION del Proveedor.\nSolo numeros, maximo 50 Caracteres." << endl;
     cout << ">> ";
@@ -89,25 +93,26 @@ void FuncionesProveedor::AgregarProveedor()
 void FuncionesProveedor::BajaProveedor()
 {
     ArchivoProveedor archivoProveedor;
-    int busquedaID;
-    cout << "Ingrese el ID del proveedor para darle de baja" << endl;
-    cin >> busquedaID;
-    archivoProveedor.BajaRegistro(busquedaID);
-}
-
-void FuncionesProveedor::ListarProveedorPorID()
-{
-    ArchivoProveedor archivoProveedor;
-    int busquedaID;
-    cout << "Ingrese el ID del proveedor para buscarlo" << endl;
-    cin >> busquedaID;
-    archivoProveedor.ListarRegistroPorID(busquedaID);
-}
-
-void FuncionesProveedor::ListarProveedores()
-{
-    ArchivoProveedor archivoProveedor;
-    archivoProveedor.ListarRegistros();
+    string input;
+    int IDbuscado;
+    cout << "Ingrese el ID del proveedor que desea modificar. " << endl;
+    cout << ">> ";
+    getline(cin,input);
+    if(!ValidadorInputs::SonSoloNumeros(input))
+    {
+        cout << "Error: Ingrese Solo numeros el ID" << endl;
+        system("pause");
+        return;
+    }
+    IDbuscado = stoi(input);
+    if(!archivoProveedor.ModificarRegistroPorID(IDbuscado))
+    {
+        cout << "Producto No encontrado o Inactivo." << endl;
+        system("pause");
+        return;
+    }
+    cout << "Producto modificado satisfactoriamente" << endl;
+    system("pause");
 }
 
 void FuncionesProveedor::ModificarRegistro()
@@ -117,5 +122,37 @@ void FuncionesProveedor::ModificarRegistro()
     cout << "Ingrese el ID del proveedor para buscarlo" << endl;
     cin >> busquedaID;
     archivoProveedor.ModificarRegistroPorID(busquedaID);
+}
+
+void FuncionesProveedor::ListarProveedorPorID()
+{
+    ArchivoProveedor archivo;
+    string input;
+    int ID;
+    cout << "Ingrese el ID a buscar." << endl;
+    cout << ">> ";
+    cin >> input;
+    if(!ValidadorInputs::SonSoloNumeros(input))
+    {
+        cout << "Error: Ingrese Solo numeros el ID" <<endl;
+        system("Pause");
+        return;
+    }
+    else
+    {
+        ID = stoi(input);
+    }
+    archivo.ListarRegistroPorID(ID);
+}
+
+void FuncionesProveedor::ListarProveedores()
+{
+    ArchivoProveedor archivoProveedor;
+    archivoProveedor.ListarRegistros();
+}
+
+void PrecargarProveedoresDeDocumento()
+{
+
 }
 
