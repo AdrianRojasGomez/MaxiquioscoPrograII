@@ -5,8 +5,8 @@ class FuncionesProveedor
 
 public:
     void AgregarProveedor();
-    void BajaLogicaProveedor();
-    void ListarProveedorPorID();
+    void BajaProveedor();
+    void ModificarRegistro();
     void ListarProveedores();
-
+    void ListarProveedorPorID();
 };

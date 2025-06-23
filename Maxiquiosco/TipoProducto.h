@@ -1,21 +1,25 @@
 #pragma once
-#include <string>
 
-class TipoProducto {
+class TipoProducto
+{
 private:
-    int _idTipoProducto, _tamTipoProducto;
-    char _clasificacionProducto[30];
+    int _idTipoProducto;
+    int _tamTipoProducto;
+    char _clasificacionProducto[50];
+
 
 public:
 
     TipoProducto();
     TipoProducto(int id, const char* clasificacion);
-    void mostrarTipo() const;
-    bool esValido() const;
-    bool esIgual(const TipoProducto& otro) const;
+    bool EsValido() const;
+    //bool EsIgual(const TipoProducto& otro) const;
+    void MostrarTipoProductoEnConsola() const;
 
-    void setIdTipoProducto(int id);
-    int getIdTipoProducto() const;
-    const char* getClasificacionProducto() const;
+    int getIDTipoProducto() const;
+    void setIDTipoProducto(int id);
+    int getTamTipoProducto() const;
+    const char *getClasificacionProducto() const;
 
 };
+

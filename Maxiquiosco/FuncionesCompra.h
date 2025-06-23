@@ -5,8 +5,8 @@ class FuncionesCompra
 
 public:
     void AgregarCompra();
-    void BajaCompraPorID();
-    void ModificarCompraPorID();
-    void ListarCompras();
-    int ObtenerProximoIDCompra();
+    void BajaCompra();
+    void ModificarCompra();
+    void ListarCompra();
+    void ListarCompraPorID();
 };

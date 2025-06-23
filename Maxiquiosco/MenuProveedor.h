@@ -1,13 +1,13 @@
 #pragma once
 
-class MenuProducto
+class MenuProveedor
 {
 private:
     int _opcion;
     void setOpcion(int opcion);
 
 public:
-    MenuProducto();
+    MenuProveedor();
     int getOpcion();
     void MostrarMenu();
 };

@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 #include <cstring>
 #include "TipoProducto.h"
 
@@ -10,28 +9,38 @@ TipoProducto::TipoProducto() {
     strcpy(_clasificacionProducto, "");
 }
 
-TipoProducto::TipoProducto(int id, const char* clasificacion) {
+TipoProducto::TipoProducto(int id, const char* clasificacion)
+{
     _idTipoProducto = id;
-    strncpy(_clasificacionProducto, clasificacion, sizeof(_clasificacionProducto) - 1);
-    _clasificacionProducto[sizeof(_clasificacionProducto) - 1] = '\0'; // Asegurar terminación nula
+    strcpy(_clasificacionProducto, clasificacion);
 }
 
-void TipoProducto::setIdTipoProducto(int id) {
+void TipoProducto::setIDTipoProducto(int id)
+{
     _idTipoProducto = id;
 }
 
-int TipoProducto::getIdTipoProducto() const {
+int TipoProducto::getIDTipoProducto() const
+{
     return _idTipoProducto;
 }
 
-const char* TipoProducto::getClasificacionProducto() const {
+int TipoProducto::getTamTipoProducto() const
+{
+    return _tamTipoProducto;
+}
+
+const char* TipoProducto::getClasificacionProducto() const
+{
     return _clasificacionProducto;
 }
 
-void TipoProducto::mostrarTipo() const {
-    cout << "ID: " << getIdTipoProducto() << " - " << getClasificacionProducto()<< endl;
-}
-bool TipoProducto::esValido() const {
+bool TipoProducto::EsValido() const
+{
     return _idTipoProducto > 0;
 }
 
+void TipoProducto::MostrarTipoProductoEnConsola() const
+{
+    cout << "ID: " << getIDTipoProducto() << " - " << getClasificacionProducto()<< endl;
+}

@@ -1,25 +1,20 @@
 #pragma once
-#include <iostream>
+#include <string>
 
-class Fecha
-{
-private:
-    int _dia;
-    int _mes;
-    int _anio;
 
-public:
+class Fecha{
+    private:
+    int _dia, _mes, _anio;
+
+    public:
     Fecha();
     Fecha(int dia, int mes, int anio);
 
-    int getDia();
+    int getDia() const;
+    int getMes() const;
+    int getAnio() const;
     void setDia(int dia);
-    int getMes();
     void setMes(int mes);
-    int getAnio();
     void setAnio(int anio);
-
-friend std::istream& operator>>(std::istream& in, Fecha& f);
-
+    std::string toString();
 };
-

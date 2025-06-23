@@ -2,26 +2,12 @@
 
 class Proveedor
 {
-private:
-
-    int _idProveedor;
-    int _dni;
-    int _cuit;
-    int _numeroTelefono;
-
-    char _nombreProveedor[20];
-    char _email[20];
-    char _direccion [50];
-
-    bool _estado;
-
 public:
     Proveedor();
-    Proveedor(int idProveedor, int dni, int cuit, int numeroTelefono, char * nombreProveedor, char * _email, char * direccion);
+    Proveedor(int idProveedor, int dni, char * cuit, char * numeroTelefono,
+               char * nombreProveedor, char * email, char * direccion);
 
-    void AgregarProveedores();
-    void MostrarProveedor();
-
+    void MostrarProveedorEnColsola() const;
 
     int getIDProveedor();
     void setIDProveedor(int ID);
@@ -29,11 +15,11 @@ public:
     int  getDNI();
     void setDNI(int dni);
 
-    int  getCUIT();
-    void setCUIT(int cuit);
+    char *  getCUIT();
+    void setCUIT(char* cuit);
 
-    int  getNumeroTelefono();
-    void setNumeroTelefono(int numero);
+    char * getNumeroTelefono();
+    void setNumeroTelefono(char* numero);
 
     char * getNombreProveedor() ;
     void  setNombreProveedor(char* nombre);
@@ -47,6 +33,17 @@ public:
     bool getEstado();
     void setEstado(bool estado);
 
+    static const int TAMANO_CAMPO = 50;
 
+private:
+    int _idProveedor;
+    int _dni;
+    char _cuit[TAMANO_CAMPO];
+    char _numeroTelefono[TAMANO_CAMPO];
+    char _nombreProveedor[TAMANO_CAMPO];
+    char _email[TAMANO_CAMPO];
+    char _direccion [TAMANO_CAMPO];
 
+    bool _estado;
 };
+

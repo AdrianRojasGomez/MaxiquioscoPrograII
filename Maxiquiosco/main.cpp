@@ -1,7 +1,7 @@
 #include <iostream>
-#include "MenuCompra.h"
+//#include "MenuCompra.h"
 #include "MenuProducto.h"
-#include "MenuProveedores.h"
+#include "MenuProveedor.h"
 
 using namespace std;
 
@@ -24,17 +24,17 @@ int main()
         switch(opcion)
         {
         case 1:
-            MenuCompra();
+            //MenuCompra();
             break;
         case 2:
             MenuProducto();
             break;
         case 3:
-            MenuProveedores();
+            MenuProveedor();
             break;
         case 4:
             ///Logica Generar Reportes();
-            //TODO: Tenemos que pensar si incluir los reportes en cada seccion y replicarlos aca.
+            ///TODO: Tenemos que pensar si incluir los reportes en cada seccion y replicarlos aca.
             break;
         case 0:
             return 0;

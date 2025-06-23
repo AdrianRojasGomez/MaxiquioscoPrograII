@@ -1,40 +1,40 @@
 #include <iostream>
 #include <string>
-#include "MenuProducto.h"
-#include "FuncionesProducto.h"
+#include "MenuProveedor.h"
+#include "FuncionesProveedor.h"
 #include "ValidadorInputs.h"
 
 using namespace std;
 
-MenuProducto::MenuProducto()
+MenuProveedor::MenuProveedor()
 {
     setOpcion(-1);
     MostrarMenu();
 }
 
-void MenuProducto::setOpcion(int opcion)
+void MenuProveedor::setOpcion(int opcion)
 {
     _opcion = opcion;
 }
 
-int MenuProducto::getOpcion()
+int MenuProveedor::getOpcion()
 {
     return _opcion;
 }
 
-void MenuProducto::MostrarMenu()
+void MenuProveedor::MostrarMenu()
 {
-    FuncionesProducto manager;
+    FuncionesProveedor manager;
     do
     {
         string aux;
         system("cls");
-        cout << "|========== PRODUCTOS MAXIQUIOSCO =========|" << endl;
-        cout << "| 1. AGREGAR PRODUCTOS" <<"                     |" << endl;
-        cout << "| 2. BAJA DE PRODUCTOS" <<"                     |" << endl;
-        cout << "| 3. MODIFICAR PRODUCTOS" <<"                   |" << endl;
-        cout << "| 4. LISTAR PRODUCTOS" <<"                      |" << endl;
-        cout << "| 5. LISTAR PRODUCTOS POR ID" <<"               |" << endl;
+        cout << "|========== PROVEEDOR MAXIQUIOSCO =========|" << endl;
+        cout << "| 1. AGREGAR PROVEEDOR" <<"                     |" << endl;
+        cout << "| 2. BAJA DE PROVEEDOR" <<"                     |" << endl;
+        cout << "| 3. MODIFICAR PROVEEDOR" <<"                   |" << endl;
+        cout << "| 4. LISTAR PROVEEDORES" <<"                    |" << endl;
+        cout << "| 5. LISTAR PROVEEDOR POR ID" <<"               |" << endl;
         cout << "| 0. VOLVER AL MENU ANTERIOR" <<"               |" << endl;
         cout << "|==========================================|" << endl;
         cout << " \nSelecciona una opcion: ";
@@ -52,23 +52,23 @@ void MenuProducto::MostrarMenu()
         switch(_opcion)
         {
         case 1:
-            manager.AgregarProducto();
+            manager.AgregarProveedor();
             system("pause");
             break;
 
         case 2:
-            manager.BajaProducto();
+            manager.BajaProveedor();
             break;
         case 3:
-            manager.ModificarProducto();
+            manager.ModificarRegistro();
             system("pause");
             break;
         case 4:
-            manager.ListarProducto();
+            manager.ListarProveedores();
             system("pause");
             break;
         case 5:
-            manager.ListarProductoPorID();
+            manager.ListarProveedorPorID();
             system("pause");
             break;
         case 0:
@@ -82,5 +82,3 @@ void MenuProducto::MostrarMenu()
     while (_opcion != 0);
 
 }
-
-
