@@ -1,40 +1,40 @@
 #include <iostream>
 #include <string>
-#include "MenuProducto.h"
-#include "FuncionesProducto.h"
+#include "MenuCompras.h"
+#include "FuncionesCompra.h"
 #include "ValidadorInputs.h"
 
 using namespace std;
 
-MenuProducto::MenuProducto()
+MenuCompras::MenuCompras()
 {
     setOpcion(-1);
     MostrarMenu();
 }
 
-void MenuProducto::setOpcion(int opcion)
+void MenuCompras::setOpcion(int opcion)
 {
     _opcion = opcion;
 }
 
-int MenuProducto::getOpcion()
+int MenuCompras::getOpcion()
 {
     return _opcion;
 }
 
-void MenuProducto::MostrarMenu()
+void MenuCompras::MostrarMenu()
 {
-    FuncionesProducto manager;
+    FuncionesCompra manager;
     do
     {
         string aux;
         system("cls");
-        cout << "|========== PRODUCTOS MAXIQUIOSCO =========|" << endl;
-        cout << "| 1. AGREGAR PRODUCTOS" <<"                     |" << endl;
-        cout << "| 2. BAJA DE PRODUCTOS" <<"                     |" << endl;
-        cout << "| 3. MODIFICAR PRODUCTOS" <<"                   |" << endl;
-        cout << "| 4. LISTAR PRODUCTOS" <<"                      |" << endl;
-        cout << "| 5. LISTAR PRODUCTOS POR ID" <<"               |" << endl;
+        cout << "|========== COMPRAS   MAXIQUIOSCO =========|" << endl;
+        cout << "| 1. AGREGAR COMPRAS"   <<"                     |" << endl;
+        cout << "| 2. BAJA DE COMPRAS"   <<"                     |" << endl;
+        cout << "| 3. MODIFICAR COMPRAS"   <<"                   |" << endl;
+        cout << "| 4. LISTAR COMPRAS"   <<"                      |" << endl;
+        cout << "| 5. LISTAR COMPRAS POR ID" <<"                 |" << endl;
         cout << "| 0. VOLVER AL MENU ANTERIOR" <<"               |" << endl;
         cout << "|==========================================|" << endl;
         cout << " \nSelecciona una opcion: ";
@@ -52,23 +52,23 @@ void MenuProducto::MostrarMenu()
         switch(_opcion)
         {
         case 1:
-            manager.AgregarProducto();
+            manager.AgregarCompra();
             system("pause");
             break;
 
         case 2:
-            manager.BajaProducto();
+            manager.BajaCompra();
             break;
         case 3:
-            manager.ModificarProducto();
+            manager.ModificarCompra();
             system("pause");
             break;
         case 4:
-            manager.ListarProducto();
+            manager.ListarCompra();
             system("pause");
             break;
         case 5:
-            manager.ListarProductoPorID();
+            manager.ListarCompraPorID();
             system("pause");
             break;
         case 0:
@@ -82,5 +82,3 @@ void MenuProducto::MostrarMenu()
     while (_opcion != 0);
 
 }
-
-

@@ -4,221 +4,184 @@
 #include "Producto.h"
 #include "TipoProducto.h"
 #include "FuncionesCompra.h"
-#include "fecha.h"
+#include "Fecha.h"
 #include "Compra.h"
 #include "ArchivoProducto.h"
-
+#include "ArchivoProveedor.h"
+#include "ArchivoCompra.h"
+#include "ValidadorInputs.h"
 
 using namespace std;
 
 
-int obtenerProximoIDCompra() {
-    FILE* p = fopen("ArchivoCompra.dat", "rb");
-    if (p == nullptr) return 1; // Si no existe, empezamos desde 1
-
-    Compra comp;
-    int maxID = 0;
-
-    while (fread(&comp, sizeof(Compra), 1, p) == 1) {
-        if (comp.getEstado() && comp.getIdCompra() > maxID) {
-            maxID = comp.getIdCompra();
-        }
-    }
-
-    fclose(p);
-    return maxID + 1;
-}
-
-
-
 ///AGREGAR COMPRA
-void agregarCompra() {
+void FuncionesCompra::AgregarCompra()
+{
+    ArchivoProducto archivoProducto;
+    Producto producto;
+    ArchivoProveedor archivoProveedor;
+    Proveedor proveedor;
+    ArchivoCompra archivocompra;
 
+
+    int idCompra = archivocompra.ObtenerProximoID();
     int idProducto, idProveedor, cantidadComprada;
-    int idCompra = obtenerProximoIDCompra();
     float importe;
+    int dia,mes,anio;
     Fecha fecha;
+    bool estado = true;
 
-    cout << "Ingrese ID del producto: ";
-    cin >> idProducto;
-    ArchivoProducto archivo;
-    Producto prod = archivo.buscarPorID(idProducto);
-    if (prod.getIdProducto() == 0) {
-    cout << "Producto no encontrado." << endl;
-    return;
-}
-
-    cout << "Producto encontrado: " << prod.getNombreProducto() << endl;
-
-
-    cout << "Ingrese ID del proveedor: ";
-    cin>>idProveedor;
-    cout << "Ingrese cantidad comprada: ";
-    cin >> cantidadComprada;
-    cout << "Ingrese importe de la compra: $";
-    cin >> importe;
-    //llamamos a fecha para el ingreso
-    cin >> fecha;
-
-    Compra compra(idCompra, idProducto, prod.getNombreProducto(), idProveedor, cantidadComprada, fecha, importe);
-
-    FILE* archivoCompra = fopen("ArchivoCompra.dat", "ab");
-    if (archivoCompra == nullptr) {
-        cout << "Error al abrir el archivo!" << endl;
+    string input;
+    // Buscar producto
+    cout << "Ingrese ID del producto:" << endl;
+    cout << ">> ";
+    cin >> input;
+    if(!ValidadorInputs::SonSoloNumeros(input))
+    {
+        cout << "Error: Por favor ingrese solo numeros" << endl;
+        system("Pause");
         return;
     }
+    idProducto = stoi(input);
+    if(!archivoProducto.ExisteID(idProducto))
+    {
+        cout << "Error: Producto no encontrado." << endl;
+        return;
+    }
+    producto = archivoProducto.BuscarRegistroPorID(idProducto);
+    cout << "Producto encontrado: "  << endl;
+    producto.MostrarProductoEnConsola();
 
-    fwrite(&compra, sizeof(Compra), 1, archivoCompra);
-    fclose(archivoCompra);
-    archivo.registrarCompraPorID(idProducto, cantidadComprada);
+    //Buscar proveedor
+    cout << "Ingrese ID del proveedor:" << endl;
+    cout << ">> ";
+    cin >> input;
+    if(!ValidadorInputs::SonSoloNumeros(input))
+    {
+        cout << "Error: Por favor ingrese solo numeros" << endl;
+        system("Pause");
+        return;
+    }
+    idProveedor = stoi(input);
+    if(!archivoProveedor.ExisteID(idProveedor))
+    {
+        cout << "Error: Proveedor no encontrado." << endl;
+        return;
+    }
+    proveedor = archivoProveedor.BuscarRegistroPorID(idProveedor);
+    cout << "Proveedor encontrado: " << endl;
+    proveedor.MostrarProveedorEnColsola();
+
+    //Datos De la Compra
+    cout << "Ingrese cantidad comprada:" << endl;
+    cout << ">> ";
+    cin >> input;
+    if(!ValidadorInputs::SonSoloNumeros(input))
+    {
+        cout << "Error: Ingrese solo numeros en la cantidad comprada." << endl;
+        return;
+    }
+    cantidadComprada = stoi(input);
+    cout << "Ingrese el importe de la compra:" << endl;
+    cout << ">> ";
+    cin >> input;
+    if(!ValidadorInputs::EsFloat(input))
+    {
+        cout << "Error: Ingrese solo cantidades validas en el importe de la compra." << endl;
+        return;
+    }
+    importe = stof(input);
+    cout << "Ingrese la fecha de la compra:" << endl;
+    cout << "Mes (Numero del 1 al 12):" << endl;
+    cout << ">> ";
+    cin >> input;
+    if(!ValidadorInputs::MesValido(input))
+    {
+        cout << "Error: Ingrese un Mes Valido." << endl;
+        return;
+    }
+    mes = stoi(input);
+    fecha.setMes(mes);
+    cout << "Dia: (Numero del 1 al 31)" << endl;
+    cout << ">> ";
+    cin >> input;
+    if(!ValidadorInputs::DiaValido(input,mes))
+    {
+        cout << "Error: Ingrese un Dia Valido." << endl;
+        return;
+    }
+    dia = stoi(input);
+    fecha.setDia(dia);
+    cout << "Anio:" << endl;
+    cout << ">> ";
+    cin >> input;
+    if(!ValidadorInputs::AnioValido(input))
+    {
+        cout << "Error: Ingrese un Anio Valido." << endl;
+        return;
+    }
+    anio = stoi(input);
+    fecha.setAnio(anio);
+
+
+    // Crear y guardar la compra
+    Compra compra(idCompra,producto,proveedor,cantidadComprada,fecha,importe,estado);
+    archivocompra.AgregarRegistro(compra);
     cout << "Compra agregada con exito!" << endl;
+    compra.MostrarCompraEnConsola();
 }
+
 ///DAR DE BAJA LA COMPRA
-void bajaCompraPorID(){
-    int buscarCompra;
+void FuncionesCompra::BajaCompra()
+{
+    ArchivoCompra archivo;
+    string input;
+    int idCompra;
     cout << "Ingrese el ID de la compra a dar de baja:  ";
-    cin >> buscarCompra;
-
-    FILE* archivo = fopen("archivoCompra.dat", "rb+");
-    if (archivo == nullptr){
-        cout << "Error al abrir el archivo! " << endl;
+    cin >> input;
+    if(!ValidadorInputs::SonSoloNumeros(input))
+    {
+        cout << "Error: Ingrese un ID valido." << endl;
         return;
     }
-
-    Compra compra;
-    bool compraEncontrada = false;
-    int pos = 0;
-
-    while(fread(&compra, sizeof(Compra),1, archivo) == 1){
-    if(compra.getIdCompra() == buscarCompra && compra.getEstado()) {
-        compraEncontrada = true;
-        break;
-            }
-       pos++;
-       }
-
-       if(!compraEncontrada){
-        cout << " La compra solicitada no se encontro " << endl;
-        fclose(archivo);
-        return;
-        }
-
-       cout << "Compra encontrada:  " <<endl;
-       compra.mostrarCompra();
-
-         char confirmacion;
-            cout << "\n¿Confirmar baja? (S/N): ";
-            cin >> confirmacion;
-
-        if (toupper(confirmacion) != 'S') {
-            cout << "Baja cancelada." << endl;
-            fclose(archivo);
-            return;
+    idCompra = stoi(input);
+    if(!archivo.BajaRegistro(idCompra));
+    {
+        cout << "Compra No encontrado o dado de baja anteriormente." << endl;
+        system("pause");
     }
-           compra.setEstado(false); /// Baja lógica
-
-        fseek(archivo, pos * sizeof(Compra), SEEK_SET);
-        fwrite(&compra, sizeof(Compra), 1, archivo);
-        fclose(archivo);
-
-        cout << "Compra dada de baja correctamente." << endl;
+    cout << "Compra dada de baja satifactoriamente" << endl;
+    system("pause");
 }
+
 ///MODIFICAR PRODUCTOS
-void modificarCompraPorID() {
-    int compraBuscada;
-    cout << "Ingrese el numero de compra a modificar: ";
-    cin >> compraBuscada;
-
-    FILE* archivo = fopen("ArchivoCompra.dat", "rb+");
-    if (archivo == nullptr) {
-        cout << "No se pudo abrir el archivo." <<endl;
+void FuncionesCompra::ModificarCompra()
+ {
+    ArchivoCompra archivo;
+    string input;
+    int IDbuscado;
+    cout << "Ingrese el ID de la compra que desea modificar. " << endl;
+    cout << ">> ";
+    cin>>input;
+    if(!ValidadorInputs::SonSoloNumeros(input))
+    {
+        cout << "Error: Ingrese Solo numeros el ID" << endl;
+        system("pause");
         return;
     }
-
-    Compra compra;
-    bool compraEncontrada = false;
-    int pos = 0;
-
-    while (fread(&compra, sizeof(Compra), 1, archivo) == 1) {
-        if (compra.getIdCompra() == compraBuscada && compra.getEstado()) {
-            compraEncontrada = true;
-            break;
-        }
-        pos++;
-    }
-
-    if (!compraEncontrada) {
-        cout << "La compra solicitada no se encontro" <<endl;
-        fclose(archivo);
+    IDbuscado = stoi(input);
+    if(!archivo.ModificarRegistroPorID(IDbuscado))
+    {
+        cout << "Compra No encontrada o Inactiva." << endl;
+        system("pause");
         return;
     }
-
-    cout << "Compra:" <<endl;
-    compra.mostrarCompra();
-
-    int opcion;
-    cout << "\nSeleccione que desea modificar:" <<endl;
-    cout << "1. ID producto\n2. ID proveedor\n3. Cantidad comprada\n4. Importe de la compra\n5. Fecha\n0. Cancelar\n"<<endl<<"Opcion: ";
-    cin >> opcion;
-    cin.ignore();
-
-    switch (opcion) {
-        case 1: {
-           int nuevoID;
-            cout << "Nuevo ID producto: ";
-            cin>>nuevoID;
-            compra.setIdProducto(nuevoID);
-            break;
-        }
-        case 2: {
-            int idProveedor;
-            cout << "Nuevo proveedor: ";
-            cin >> idProveedor;
-            compra.setIdProveedor(idProveedor);
-            break;
-        }
-        case 3: {
-            int cantidadNueva;
-            cout << "Cantidad corregida: ";
-            cin >> cantidadNueva;
-            compra.setCantidadComprada(cantidadNueva);
-            break;
-        }
-        case 4: {
-            float importeActual;
-            cout << "Importe corregido: ";
-            cin >> importeActual;
-            compra.setImporteTotal(importeActual);
-            break;
-        }
-        case 5: {
-            int diaAct, mesAct, anioAct;
-            cout << "Fecha corregida (dd mm aaaa): ";
-            cin >> diaAct >> mesAct >> anioAct;
-            Fecha nuevaFecha(diaAct, mesAct, anioAct);
-            compra.setFechaCompra(nuevaFecha);
-            break;
-        }
-
-        case 0:
-            cout << "Modificación cancelada." <<endl;
-            fclose(archivo);
-            return;
-        default:
-            cout << "Opcion invalida." <<endl;
-            fclose(archivo);
-            return;
-    }
-
-    fseek(archivo, pos * sizeof(Compra), SEEK_SET);
-    fwrite(&compra, sizeof(Compra), 1, archivo);
-    fclose(archivo);
-
-    cout << "Compra modificada con exito" <<endl;
+    cout << "Compra modificada satisfactoriamente" << endl;
+    system("pause");
 }
 
 ///LISTAR COMPRAS
-void listarCompras() {
+void FuncionesCompra::ListarCompra() {
     FILE* archivo = fopen("ArchivoCompra.dat", "rb");
     if (archivo == NULL) {
         cout << "No se pudo abrir el archivo de compras" <<endl;
@@ -230,7 +193,7 @@ void listarCompras() {
     while (fread(&compra, sizeof(Compra), 1, archivo) == 1)
         {
         if (compra.getEstado()) {
-            compra.mostrarCompra();
+            compra.MostrarCompraEnConsola();
             cout << "---------------------------" <<endl;
 
         }
@@ -240,5 +203,9 @@ void listarCompras() {
     fclose(archivo);
 }
 
+void FuncionesCompra::ListarCompraPorID()
+{
+
+}
 
 

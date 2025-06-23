@@ -1,40 +1,46 @@
 #pragma once
 #include "Fecha.h"
+#include "Producto.h"
+#include "Proveedor.h"
 
-class Compra {
-private:
-    int _idCompra;
-    Fecha _fechaCompra;
-    int _idProducto;
-    int _idProveedor;
-    int _cantidadComprada;
-    float _importeTotal;
-    bool _estado;
-    char _idNombreProducto[20];
-
+class Compra
+{
 public:
     Compra();
-    Compra(int idCompra, int idProducto,const char* idNombreProducto, int idProveedor, int cantidad, Fecha fecha, float precioUnitario);
+    Compra(int IDCompra, Producto producto, Proveedor proveedor,
+    int cantidadComprada, Fecha fecha, float importe, bool estado);
 
-    void setIdCompra(int idCompra);
+    void setIDCompra(int idCompra);
     void setFechaCompra(Fecha fecha);
     Fecha getFechaCompra() const;
-    void setIdProducto(int idProducto);
-    bool setidNombreProducto(const char* idNombreProducto);
 
-    void setIdProveedor(int idProveedor);
     void setCantidadComprada(int cantidad);
     void setEstado(bool estado);
-    void setImporteTotal(float importeTotal);
+    void setImporte(float importe);
 
-    int getIdCompra() const;
-    int getIdProducto() const;
-    const char* getidNombreProducto() const;
-    int getIdProveedor() const;
+    int getIDCompra() const;
+
     int getCantidadComprada() const;
-    float getImporteTotal() const;
+    float getImporte() const;
     bool getEstado() const;
-    char getidNombreProducto();
-    void cargarCompra();
-    void mostrarCompra() const;
+
+    void setProducto(Producto producto);
+    Producto getProducto();
+    void setProveedor(Proveedor proveedor);
+    Proveedor getProveedor();
+
+    void MostrarCompraEnConsola() const;
+
+    static const int TAMANO_CAMPO = 20;
+
+private:
+    int _IDCompra;
+    Fecha _fechaCompra;
+    Producto _producto;
+    Proveedor _proveedor;
+    int _cantidadComprada;
+    float _importe;
+    bool _estado;
+
 };
+
