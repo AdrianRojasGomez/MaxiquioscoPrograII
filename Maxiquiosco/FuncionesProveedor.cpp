@@ -20,7 +20,8 @@ void FuncionesProveedor::AgregarProveedor()
     ///DNI
     cout << "Ingrese el DNI del Proveedor.\nSolo numeros, maximo 50 Caracteres." << endl;
     cout << ">> ";
-    cin >> input;
+    cin.ignore();
+    getline (cin,input);
     if(!ValidadorInputs::SonSoloNumeros(input) || !ValidadorInputs::TamanoPermitido(input,Proveedor::TAMANO_CAMPO))
     {
         cout << "Error: Ingrese solo los numeros del DNI, y asegurese que no sean mas de 50 caracteres" <<endl;
@@ -30,7 +31,7 @@ void FuncionesProveedor::AgregarProveedor()
     ///CUIT
     cout << "Ingrese el CUIT del Proveedor.\nSolo numeros, maximo 50 Caracteres." << endl;
     cout << ">> ";
-    cin >> input;
+    getline (cin,input);
     if(!ValidadorInputs::SonSoloNumeros(input) || !ValidadorInputs::TamanoPermitido(input,Proveedor::TAMANO_CAMPO))
     {
         cout << "Error: Ingrese solo los digitos del CUIT, con un maximo de 50 caracteres" << endl;
@@ -40,16 +41,17 @@ void FuncionesProveedor::AgregarProveedor()
     ///NUM TELEFONO
     cout << "Ingrese el NUMERO DE TELEFONO del Proveedor.\nSolo numeros, maximo 50 Caracteres." << endl;
     cout << ">> ";
-    cin >> input;
+    getline (cin,input);
     if(!ValidadorInputs::SonSoloNumeros(input) || !ValidadorInputs::TamanoPermitido(input,Proveedor::TAMANO_CAMPO))
     {
         cout << "Error: Ingrese solo los digitos del NUMERO DE TELEFONO, con un maximo de 50 caracteres" << endl;
         return;
     }
+    strcpy(numeroTelefono,input.c_str());
     ///NOMBRE
     cout << "Ingrese el NOMBRE del Proveedor.\nSolo numeros, maximo 50 Caracteres." << endl;
     cout << ">> ";
-    cin >> input;
+    getline (cin,input);
     if(!ValidadorInputs::TamanoPermitido(input,Proveedor::TAMANO_CAMPO))
     {
         cout << "Error: Ingrese el NOMBRE con un maximo de 50 caracteres"  << endl;
@@ -59,7 +61,7 @@ void FuncionesProveedor::AgregarProveedor()
     ///EMAIL
     cout << "Ingrese el EMAIL del Proveedor.\nSolo numeros, maximo 50 Caracteres." << endl;
     cout << ">> ";
-    cin >> input;
+    getline (cin,input);
     if(!ValidadorInputs::TamanoPermitido(input,Proveedor::TAMANO_CAMPO))
     {
         cout << "Error: Ingrese el EMAIL con un maximo de 50 caracteres" << endl;
@@ -69,7 +71,7 @@ void FuncionesProveedor::AgregarProveedor()
     ///DIRECCION
     cout << "Ingrese la DIRECCION del Proveedor.\nSolo numeros, maximo 50 Caracteres." << endl;
     cout << ">> ";
-    cin >> input;
+    getline (cin,input);
     if(!ValidadorInputs::TamanoPermitido(input,Proveedor::TAMANO_CAMPO))
     {
         cout << "Error: Ingrese el DIRECCION con un maximo de 50 caracteres" << endl;

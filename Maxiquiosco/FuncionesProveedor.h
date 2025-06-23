@@ -9,4 +9,5 @@ public:
     void ModificarRegistro();
     void ListarProveedores();
     void ListarProveedorPorID();
+    void PrecargarProveedoresDeDocumento();
 };

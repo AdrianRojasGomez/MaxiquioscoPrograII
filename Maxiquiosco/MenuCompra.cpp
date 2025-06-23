@@ -1,28 +1,28 @@
 #include <iostream>
 #include <string>
-#include "MenuCompras.h"
+#include "MenuCompra.h"
 #include "FuncionesCompra.h"
 #include "ValidadorInputs.h"
 
 using namespace std;
 
-MenuCompras::MenuCompras()
+MenuCompra::MenuCompra()
 {
     setOpcion(-1);
     MostrarMenu();
 }
 
-void MenuCompras::setOpcion(int opcion)
+void MenuCompra::setOpcion(int opcion)
 {
     _opcion = opcion;
 }
 
-int MenuCompras::getOpcion()
+int MenuCompra::getOpcion()
 {
     return _opcion;
 }
 
-void MenuCompras::MostrarMenu()
+void MenuCompra::MostrarMenu()
 {
     FuncionesCompra manager;
     do

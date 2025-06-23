@@ -169,7 +169,7 @@ bool ArchivoProveedor::ModificarRegistroPorID(int ID)
                         break;
                     }
                     strcpy(direccion, direccionInput.c_str());
-                    proveedor.setEmail(direccion);
+                    proveedor.setDireccion(direccion);
                     esModificable = true;
                     break;
                 }
