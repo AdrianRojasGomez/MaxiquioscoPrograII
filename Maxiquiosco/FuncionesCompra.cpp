@@ -50,11 +50,12 @@ void agregarCompra() {
 
     cout << "Producto encontrado: " << prod.getNombreProducto() << endl;
 
-
     cout << "Ingrese ID del proveedor: ";
     cin>>idProveedor;
+
     cout << "Ingrese cantidad comprada: ";
     cin >> cantidadComprada;
+
     cout << "Ingrese importe de la compra: $";
     cin >> importe;
     //llamamos a fecha para el ingreso
@@ -236,7 +237,7 @@ void listarCompras() {
         }
 
     }
-     system("pause");
+     //system("pause");
     fclose(archivo);
 }
 

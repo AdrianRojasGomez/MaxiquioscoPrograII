@@ -25,7 +25,7 @@ Compra::Compra(int idCompra, int idProducto, const char* idNombreProducto , int 
     _idProveedor = idProveedor;
     _cantidadComprada = cantidad;
     _fechaCompra = fecha;
-    _importeTotal = precioUnitario * cantidad;
+    _importeTotal = precioUnitario;
     _estado = true;
 
 }
@@ -49,8 +49,6 @@ bool Compra::setidNombreProducto(const char* idNombreProducto) {
         strncpy(_idNombreProducto, idNombreProducto, sizeof(_idNombreProducto));
         return true;
 }
-
-
 
     void Compra::setIdProveedor(int idProveedor) {
         _idProveedor = idProveedor;

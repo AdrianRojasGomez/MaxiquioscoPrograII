@@ -32,28 +32,25 @@ void MenuProducto::MostrarMenu()
         switch (_opcion) {
             case 1:
                 funciones.agregarProducto();
-                system("pause");
                 break;
             case 2:
                 funciones.bajaProductoPorID();
-                system("pause");
                 break;
             case 3:
                 funciones.modificarProductoPorID();
-                system("pause");
                 break;
             case 4:
                funciones.listarProductos();
-                system("pause");
                 break;
             case 0:
-                break;
+               return;
             default:
                 cout << "Opción inválida." << endl;
-                system("pause");
                 break;
         }
+            system("pause");
     }
+
 }
 
 int MenuProducto::getOpcion()

@@ -170,6 +170,7 @@ bool ArchivoProducto::registrarCompraPorID(int idProducto, int cantidad) {
             fwrite(&prod, sizeof(Producto), 1, p);
             fclose(p);
             return true;
+            cout <<" nuevo stock = " <<prod.getStockActual()<< endl;
         }
         pos++;
     }
@@ -193,5 +194,5 @@ Producto ArchivoProducto::buscarPorID(int idProducto) ///Para registro de compra
     }
 
     fclose(p);
-    return Producto(); // Devuelve producto vacío si no lo encuentra
+    return Producto();
 }
