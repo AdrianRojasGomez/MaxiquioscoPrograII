@@ -14,6 +14,7 @@ public:
     bool AgregarRegistro(Producto& prod);
     bool BajaRegistro(int ID);
     bool ModificarRegistroPorID(int ID);
+    bool ModificarStockporCompra(int ID, int cantidadComprada);
     bool ListarRegistroPorID(int ID);
     bool ListarRegistros();
 

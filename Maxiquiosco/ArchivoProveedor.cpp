@@ -215,6 +215,7 @@ bool ArchivoProveedor::ListarRegistroPorID(int ID)
     }
     cout << "=============================" << endl;
     CerrarArchivo(pArchivo);
+    return true;
 }
 bool ArchivoProveedor::ListarRegistros()
 {
@@ -231,6 +232,7 @@ bool ArchivoProveedor::ListarRegistros()
         cout << "---------------------------" << endl;
     }
     CerrarArchivo(pArchivo);
+    return true;
 }
 
 ///Operacion Interna
@@ -254,11 +256,39 @@ int ArchivoProveedor::ObtenerProximoID()
 }
 bool ArchivoProveedor::ExisteID(int ID)
 {
-
+    FILE * pArchivo = AbrirArchivo("rb");
+    if (pArchivo == nullptr)
+        return false;
+    Proveedor proveedor;
+    while(fread(&proveedor,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(proveedor.getEstado() && proveedor.getIDProveedor() == ID)
+        {
+            CerrarArchivo(pArchivo);
+            return true;
+        }
+    }
+    CerrarArchivo(pArchivo);
+    return false;
 }
 
 ///Operacion Para Compras
 Proveedor ArchivoProveedor::BuscarRegistroPorID(int ID)
 {
+    Proveedor proveedor;
+    FILE * pArchivo = AbrirArchivo("rb");
+    if(pArchivo == nullptr)
+        return proveedor;
 
+    while(fread(&proveedor,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(proveedor.getEstado() && proveedor.getIDProveedor() == ID)
+        {
+            CerrarArchivo(pArchivo);
+            return proveedor;
+        }
+    }
+    ///Si no lo encuentra, devuelve uno vacio.
+    CerrarArchivo(pArchivo);
+    return Proveedor();
 }
