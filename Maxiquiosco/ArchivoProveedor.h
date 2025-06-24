@@ -1,30 +1,30 @@
 #pragma once
 #include "ArchivoBase.h"
-#include "Producto.h"
+#include "Proveedor.h"
 
-class ArchivoProducto : public ArchivoBase
+class ArchivoProveedor : public ArchivoBase
 {
 private:
-    const char* _nombre = "ArchivoProducto.dat";
+    const char* _nombre = "ArchivoProveedor.dat";
 
 public:
-    ArchivoProducto();
+    ArchivoProveedor();
 
     ///ABML
-    bool AgregarRegistro(Producto& prod);
+    bool AgregarRegistro(Proveedor& proveedor);
     bool BajaRegistro(int ID);
     bool ModificarRegistroPorID(int ID);
-    bool ModificarStockporCompra(int ID, int cantidadComprada);
     bool ListarRegistroPorID(int ID);
     bool ListarRegistros();
-    bool ListarProducto();
 
     ///Operacion Interna
     int ObtenerProximoID();
     bool ExisteID(int ID);
 
     ///Operacion Para Compras
-    Producto BuscarRegistroPorID(int ID);
+    Proveedor BuscarRegistroPorID(int ID);
+    bool ListarProveedor();
+
 
 };
 

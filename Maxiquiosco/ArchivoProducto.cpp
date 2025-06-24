@@ -1,198 +1,294 @@
-#include "ArchivoProducto.h"
-#include <cstdio>
 #include <iostream>
+#include "ArchivoProducto.h"
+#include "Producto.h"
+#include "ValidadorInputs.h"
+
 using namespace std;
 
-bool ArchivoProducto::guardar(const Producto& prod) {
-   int op;
-    cout << "¿Desea Guardar el Producto? \n1. SI    \n0. NO" <<  endl;
-    cin >> op;
-    cin.ignore();
-
-   if(op==1){
-    FILE* p = fopen(_nombre, "ab");
-    if (p == nullptr) return false;
-    fwrite(&prod, sizeof(Producto), 1, p);
-    fclose(p);
-        system("cls");
-         cout << "Producto guardado con exito.\n1." <<  endl;
-
-         cout << "Detalles del producto creado:" << endl;
-         cout << "- ID: " << prod.getIdProducto() <<  endl;
-         cout << "- Nombre: " << prod.getNombreProducto() <<  endl;
-          cout << "- Tipo: " << prod.getTipoProducto().getClasificacionProducto() <<  endl;
-         cout << "- Precio: $" << prod.getPrecioUnitario() <<  endl;
-         cout << "- Stock Max: " << prod.getStockMax() <<  endl;
-
-    return true;
-   }else{
-     cout << "Ingreso de producto CANCELADO" <<  endl;
-   }
-
+ArchivoProducto::ArchivoProducto()
+{
+    strcpy(_nombreArchivo, _nombre);
+    _tamanoRegistro = sizeof(Producto);
 }
 
-bool ArchivoProducto::listar() {
-    FILE* p = fopen(_nombre, "rb");
-    if (p == nullptr) {
-         cout << "No se pudo abrir el archivo." <<  endl;
+///Inicio de ABML
+bool ArchivoProducto::AgregarRegistro(Producto &producto)
+{
+    FILE* pArchivo = AbrirArchivo("ab");
+    if(pArchivo == nullptr)
         return false;
-    }
-    Producto prod;
-    while (fread(&prod, sizeof(Producto), 1, p) == 1) {
-        if (prod.getEstado()) {
-            prod.mostrarProducto();
-             cout << "---------------------" <<  endl;
-        }
-    }
-    fclose(p);
+    fwrite(&producto, _tamanoRegistro, 1, pArchivo);
+    CerrarArchivo(pArchivo);
     return true;
 }
-
-bool ArchivoProducto::existeID(int id) {
-    FILE* p = fopen(_nombre, "rb");
-    if (p == nullptr) return false;
-    Producto prod;
-    while (fread(&prod, sizeof(Producto), 1, p) == 1) {
-        if (prod.getIdProducto() == id && prod.getEstado()) {
-            fclose(p);
+bool ArchivoProducto::BajaRegistro(int ID)
+{
+    FILE* pArchivo = AbrirArchivo("rb+");
+    if(pArchivo == nullptr)
+        return false;
+    Producto producto;
+    int posicion = 0;
+    while(fread(&producto,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(producto.getEstado() && producto.getIDProducto() == ID)
+        {
+            cout << "Producto Encontrado: " << endl;
+            producto.MostrarProductoEnConsola();
+            producto.setEstado(false);
+            fseek(pArchivo, posicion * _tamanoRegistro, SEEK_SET);
+            fwrite(&producto, _tamanoRegistro, 1, pArchivo);
+            CerrarArchivo(pArchivo);
             return true;
         }
+        posicion++;
     }
-    fclose(p);
+    CerrarArchivo(pArchivo);
     return false;
 }
-
-bool ArchivoProducto::bajaPorID(int id) {
-    FILE* p = fopen(_nombre, "rb+");
-    if (p == nullptr) return false;
-
-    Producto prod;
-    long pos = 0;
-    while (fread(&prod, sizeof(Producto), 1, p) == 1) {
-        if (prod.getIdProducto() == id && prod.getEstado()) {
-            prod.setEstado(false);
-            fseek(p, pos * sizeof(Producto), SEEK_SET);
-            fwrite(&prod, sizeof(Producto), 1, p);
-            fclose(p);
-            return true;
-        }
-        pos++;
-    }
-    fclose(p);
-    return false;
-}
-
-bool ArchivoProducto::modificarPorID(int id) {
-    FILE* p = fopen(_nombre, "rb+");
-    if (p == nullptr) return false;
-
-    Producto prod;
-    long pos = 0;
-    while (fread(&prod, sizeof(Producto), 1, p) == 1) {
-        if (prod.getIdProducto() == id && prod.getEstado()) {
-            prod.mostrarProducto();
-
-            int opcion;
-             cout << "1. Nombre\n2. Precio\n3. Stock actual\n4. Stock maximo\nOpcion: ";
-             cin >> opcion;
-             cin.ignore();
-
-            switch (opcion) {
-                case 1: {
-                    char nombre[20];
-                     cout << "Nuevo nombre: ";
-                     cin.getline(nombre, 20);
-                    prod.setNombreProducto(nombre);
+bool ArchivoProducto::ModificarRegistroPorID(int ID)
+{
+    FILE * pArchivo = AbrirArchivo("rb+");
+    if(pArchivo == nullptr)
+        return false;
+    Producto producto;
+    int posicion = 0;
+    while(fread(&producto,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(producto.getEstado() && producto.getIDProducto() == ID)
+        {
+            bool esModificable = false;
+            cout << "Producto Encontrado: " << endl;
+            producto.MostrarProductoEnConsola();
+            int aux;
+            do
+            {
+                string opcion;
+                cout << "Elija la opcion a Editar" << endl;
+                cout << "1. Nombre\n2. Precio\n3. Stock actual\n4. Stock maximo\n0. No Modificar\nOpcion: ";
+                getline(cin,opcion);
+                if(!ValidadorInputs::EsUnDigito(opcion))
+                {
+                    aux = -1;
+                    continue;
+                }
+                aux = stoi(opcion);
+                switch(aux)
+                {
+                case 1:
+                {   cout << "Nuevo nombre: ";
+                    ///TODO: FALTA VALIDACION DE TAMAÑO
+                    char nombre[50];
+                    cin.getline(nombre,50);
+                    producto.setNombreProducto(nombre);
+                    esModificable = true;
                     break;
                 }
-                case 2: {
+                case 2:
+                {
+                    cout << "Nuevo precio: ";
                     float precio;
-                     cout << "Nuevo precio: ";
-                     cin >> precio;
-                    prod.setPrecioUnitario(precio);
+                    string precioInput;
+                    getline(cin,precioInput);
+                    if(!ValidadorInputs::SonSoloNumeros(precioInput))
+                    {
+                        cout << "Ingrese solo numeros" << endl;
+                        aux = -1;
+                        break;
+                    }
+                    precio = stoi(precioInput);
+                    producto.setPrecioUnitario(precio);
+                    esModificable = true;
                     break;
                 }
-                case 3: {
-                    int stock;
-                     cout << "Nuevo stock actual: ";
-                     cin >> stock;
-                    prod.setStockActual(stock);
+                case 3:
+                {
+                    cout << "Nuevo Stock: ";
+                    int stockActual;
+                    string stockActualInput;
+                    cin >> stockActualInput;
+                    if(!ValidadorInputs::SonSoloNumeros(stockActualInput))
+                    {
+                        cout << "Ingrese solo numeros" << endl;
+                        aux = -1;
+                        break;
+                    }
+                    stockActual = stoi(stockActualInput);
+                    producto.setStockActual(stockActual);
+                    esModificable = true;
                     break;
                 }
-                case 4: {
-                    int max;
-                     cout << "Nuevo stock maximo: ";
-                     cin >> max;
-                    prod.setStockMax(max);
+                case 4:
+                {
+                    cout << "Nuevo stock Maximo: ";
+                    int stockMax;
+                    string stockMaxInput;
+                    cin >> stockMaxInput;
+                    if(!ValidadorInputs::SonSoloNumeros(stockMaxInput))
+                    {
+                        cout << "Ingrese solo numeros" << endl;
+                        aux = -1;
+                        break;
+                    }
+                    stockMax = stoi(stockMaxInput);
+                    producto.setStockMax(stockMax);
+                    esModificable = true;
+                    break;
+                }
+                case 0:
+                    cout << "No se ha Modificado." << endl;
+                    break;
+
+                default:
+                    cout << "Opcion Invalida." << endl;
+                    aux = -1;
+                    system("pause");
                     break;
                 }
             }
-
-            fseek(p, pos * sizeof(Producto), SEEK_SET);
-            fwrite(&prod, sizeof(Producto), 1, p);
-            fclose(p);
+            while (aux == -1);
+            if(!esModificable)
+            {
+                return false;
+            }
+            fseek(pArchivo,posicion * _tamanoRegistro, SEEK_SET);
+            fwrite(&producto, _tamanoRegistro, 1, pArchivo);
+            CerrarArchivo(pArchivo);
             return true;
         }
-        pos++;
+        posicion++;
     }
-    fclose(p);
+    CerrarArchivo(pArchivo);
     return false;
 }
 
-int ArchivoProducto::obtenerProximoID() {
-    FILE* p = fopen(_nombre, "rb");
-    if (p == nullptr) return 1; /// Si no existe el archivo, arrancamos desde 1
+bool ArchivoProducto::ModificarStockporCompra(int ID, int cantidadComprada)
+{
+    FILE* pArchivo = AbrirArchivo("rb+");
+    if(pArchivo == nullptr)
+        return false;
+    Producto producto;
+    int posicion = 0;
+    while(fread(&producto,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(!producto.getEstado() || producto.getIDProducto() != ID)
+        {
+            posicion++;
+            continue;
+        }
+        producto.setStockActual(producto.getStockActual() + cantidadComprada);
+        fseek(pArchivo,posicion * _tamanoRegistro, SEEK_SET);
+        fwrite(&producto, _tamanoRegistro,1,pArchivo);
+        CerrarArchivo(pArchivo);
+        return true;
+    }
+    CerrarArchivo(pArchivo);
+    return false;
+}
 
-    Producto prod;
-    int maxID = 0;
-
-    while (fread(&prod, sizeof(Producto), 1, p) == 1) {
-        if (prod.getEstado() && prod.getIdProducto() > maxID) {
-            maxID = prod.getIdProducto();
+bool ArchivoProducto::ListarRegistroPorID(int ID)
+{
+    FILE * pArchivo = AbrirArchivo("rb");
+    if(pArchivo == nullptr)
+        return false;
+    Producto producto;
+    while(fread(&producto,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(producto.getEstado() && producto.getIDProducto() == ID)
+        {
+            producto.MostrarProductoEnConsola();
         }
     }
+    cout << "=============================" << endl;
+    CerrarArchivo(pArchivo);
+}
+bool ArchivoProducto::ListarRegistros()
+{
+    FILE * pArchivo = AbrirArchivo("rb");
+    if(pArchivo == nullptr)
+        return false;
+    Producto producto;
+    while(fread(&producto,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(producto.getEstado())
+        {
+            producto.MostrarProductoEnConsola();
+        }
+        cout << "---------------------------" << endl;
+    }
+    CerrarArchivo(pArchivo);
+}
+///Fin de ABML
 
-    fclose(p);
+int ArchivoProducto::ObtenerProximoID()
+{
+    FILE * pArchivo = AbrirArchivo("rb");
+    if(pArchivo == nullptr)
+        return 1;
+    Producto producto;
+    int maxID = 0;
+
+    while(fread(&producto,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if (producto.getIDProducto() > maxID)
+        {
+            maxID = producto.getIDProducto();
+        }
+    }
+    CerrarArchivo(pArchivo);
     return maxID + 1;
 }
 
-bool ArchivoProducto::registrarCompraPorID(int idProducto, int cantidad) {
-    FILE* p = fopen(_nombre, "rb+");
-    if (p == nullptr) return false;
+Producto ArchivoProducto::BuscarRegistroPorID(int ID)
+{
+    Producto producto;
+    FILE * pArchivo = AbrirArchivo("rb");
+    if(pArchivo == nullptr)
+        return producto;
 
-    Producto prod;
-    int pos = 0;
-
-    while (fread(&prod, sizeof(Producto), 1, p) == 1) {
-        if (prod.getIdProducto() == idProducto && prod.getEstado()) {
-            prod.setStockActual(prod.getStockActual() + cantidad);
-            fseek(p, pos * sizeof(Producto), SEEK_SET);
-            fwrite(&prod, sizeof(Producto), 1, p);
-            fclose(p);
-            return true;
-            cout <<" nuevo stock = " <<prod.getStockActual()<< endl;
+    while(fread(&producto,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(producto.getEstado() && producto.getIDProducto() == ID)
+        {
+            CerrarArchivo(pArchivo);
+            return producto;
         }
-        pos++;
     }
+    ///Si no lo encuentra, devuelve uno vacio.
+    CerrarArchivo(pArchivo);
+    return Producto();
+}
 
-    fclose(p);
+bool ArchivoProducto::ExisteID(int ID)
+{
+    FILE * pArchivo = AbrirArchivo("rb");
+    if (pArchivo == nullptr)
+        return false;
+    Producto producto;
+    while(fread(&producto,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(producto.getEstado() && producto.getIDProducto() == ID)
+        {
+            CerrarArchivo(pArchivo);
+            return true;
+        }
+    }
+    CerrarArchivo(pArchivo);
     return false;
 }
 
-Producto ArchivoProducto::buscarPorID(int idProducto) ///Para registro de compra
+bool ArchivoProducto::ListarProducto()
 {
-    Producto prod;
-    FILE* p = fopen(_nombre, "rb");
-    if (p == nullptr) return prod;
-
-    while (fread(&prod, sizeof(Producto), 1, p) == 1) {
-            ///std::cout << "Leyendo producto con ID: " << prod.getIdProducto() << " Estado: " << prod.getEstado() << std::endl;
-        if (prod.getIdProducto() == idProducto && prod.getEstado()) {
-            fclose(p);
-            return prod;
+    FILE * pArchivo = AbrirArchivo("rb");
+    if(pArchivo == nullptr)
+        return false;
+    Producto producto;
+    while(fread(&producto,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(producto.getEstado())
+        {
+            producto.MostrarProducto();
         }
+        cout << "---------------------------" << endl;
     }
-
-    fclose(p);
-    return Producto();
+    CerrarArchivo(pArchivo);
 }

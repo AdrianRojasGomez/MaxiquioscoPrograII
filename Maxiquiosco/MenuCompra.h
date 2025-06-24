@@ -3,14 +3,11 @@
 class MenuCompra
 {
 private:
-        int _opcion;
+    int _opcion;
+    void setOpcion(int opcion);
 
 public:
     MenuCompra();
-
-    void MostrarMenu();
-
     int getOpcion();
-    void setOpcion(int opcion);
+    void MostrarMenu();
 };
-

@@ -1,6 +1,7 @@
-#include <cstring>
-#include <iostream>
 #include "Proveedor.h"
+#include <iostream>
+#include <string>
+#include <cstring>
 
 using namespace std;
 
@@ -8,15 +9,16 @@ Proveedor::Proveedor()
 {
     _idProveedor = 0;
     _dni = 0;
-    _cuit = 0;
-    _numeroTelefono = 0;
-    std::strcpy(_nombreProveedor,"");
-    std::strcpy(_email,"");
-    std::strcpy(_direccion,"");
+    strcpy(_cuit,"");
+    strcpy(_numeroTelefono,"");
+    strcpy(_nombreProveedor,"");
+    strcpy(_email,"");
+    strcpy(_direccion,"");
     _estado = false;
 }
 
-Proveedor::Proveedor(int idProveedor, int dni, int cuit, int numeroTelefono, char * nombreProveedor, char * email, char * direccion)
+Proveedor::Proveedor(int idProveedor, int dni, char * cuit, char * numeroTelefono,
+                     char * nombreProveedor, char * email, char * direccion)
 {
     setIDProveedor(idProveedor);
     setDNI(dni);
@@ -28,7 +30,7 @@ Proveedor::Proveedor(int idProveedor, int dni, int cuit, int numeroTelefono, cha
     setEstado(true);
 }
 
-void Proveedor::MostrarProveedor()
+void Proveedor::MostrarProveedorEnColsola() const
 {
         cout << "ID Proveedor: " << _idProveedor <<endl;
         cout << "DNI: " << _dni <<endl;
@@ -38,7 +40,10 @@ void Proveedor::MostrarProveedor()
         cout << "Email: " << _email <<endl;
         cout << "Direccion: " << _direccion <<endl;
 }
-
+void Proveedor::MostrarProveedor() const
+{
+        cout << "ID Proveedor: " << _idProveedor << " - CUIT: " << _cuit <<" - Nombre del Proveedor: " << _nombreProveedor <<endl;
+}
 
 int Proveedor::getIDProveedor()
 {
@@ -48,7 +53,6 @@ void Proveedor::setIDProveedor(int ID)
 {
     _idProveedor = ID;
 }
-
 int  Proveedor::getDNI()
 {
     return _dni;
@@ -57,52 +61,47 @@ void Proveedor::setDNI(int dni)
 {
     _dni = dni;
 }
-
-int  Proveedor::getCUIT()
+char *  Proveedor::getCUIT()
 {
     return _cuit;
 }
-void Proveedor::setCUIT(int cuit)
+void Proveedor::setCUIT(char * cuit)
 {
-    _cuit = cuit;
+    strcpy(_cuit, cuit);
 }
 
-int  Proveedor::getNumeroTelefono()
+char *  Proveedor::getNumeroTelefono()
 {
     return _numeroTelefono;
 }
-void Proveedor::setNumeroTelefono(int numeroTelefono)
+void Proveedor::setNumeroTelefono(char * numeroTelefono)
 {
-    _numeroTelefono = numeroTelefono;
+    strcpy(_numeroTelefono,numeroTelefono);
 }
-
 char * Proveedor::getNombreProveedor()
 {
     return _nombreProveedor;
 }
 void  Proveedor::setNombreProveedor(char* nombreProveedor)
 {
-    std::strcpy(_nombreProveedor, nombreProveedor);
+    strcpy(_nombreProveedor, nombreProveedor);
 }
-
 char * Proveedor::getEmail()
 {
     return _email;
 }
 void  Proveedor::setEmail( char* email)
 {
-    std::strcpy(_email,email);
+    strcpy(_email,email);
 }
-
 char * Proveedor::getDireccion()
 {
     return _direccion;
 }
 void  Proveedor::setDireccion( char* direccion)
 {
-    std::strcpy(_direccion,direccion);
+    strcpy(_direccion,direccion);
 }
-
 bool Proveedor::getEstado()
 {
     return _estado;

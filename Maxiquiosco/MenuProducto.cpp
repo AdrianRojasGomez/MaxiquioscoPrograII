@@ -1,6 +1,8 @@
 #include <iostream>
+#include <string>
 #include "MenuProducto.h"
 #include "FuncionesProducto.h"
+#include "ValidadorInputs.h"
 
 using namespace std;
 
@@ -10,47 +12,9 @@ MenuProducto::MenuProducto()
     MostrarMenu();
 }
 
-void MenuProducto::MostrarMenu()
+void MenuProducto::setOpcion(int opcion)
 {
-    FuncionesProducto funciones;
-    while(_opcion != 0)
-    {
-        int aux;
-        system("cls");
-        cout << "|========== PRODUCTOS MAXIQUIOSCO =========|" << endl;
-        cout << "| 1. AGREGAR PRODUCTOS" <<"                     |" << endl;
-        cout << "| 2. BAJA DE PRODUCTOS" <<"                     |" << endl;
-        cout << "| 3. MODIFICAR PRODUCTOS" <<"                   |" << endl;
-        cout << "| 4. LISTAR PRODUCTOS" <<"                      |" << endl;
-        cout << "| 0. VOLVER AL MENU ANTERIOR" <<"               |" << endl;
-        cout << "|==========================================|" << endl;
-        cout << " \nSelecciona una opcion: ";
-        cin >> aux;
-        setOpcion(aux);
-        system("cls");
-
-        switch (_opcion) {
-            case 1:
-                funciones.agregarProducto();
-                break;
-            case 2:
-                funciones.bajaProductoPorID();
-                break;
-            case 3:
-                funciones.modificarProductoPorID();
-                break;
-            case 4:
-               funciones.listarProductos();
-                break;
-            case 0:
-               return;
-            default:
-                cout << "Opción inválida." << endl;
-                break;
-        }
-            system("pause");
-    }
-
+    _opcion = opcion;
 }
 
 int MenuProducto::getOpcion()
@@ -58,7 +22,63 @@ int MenuProducto::getOpcion()
     return _opcion;
 }
 
-void MenuProducto::setOpcion(int opcion)
+void MenuProducto::MostrarMenu()
 {
-    _opcion = opcion;
+    FuncionesProducto manager;
+    do
+    {
+        string input;
+        system("cls");
+        cout << "|========== PRODUCTOS MAXIQUIOSCO =========|" << endl;
+        cout << "| 1. AGREGAR PRODUCTOS" <<"                     |" << endl;
+        cout << "| 2. BAJA DE PRODUCTOS" <<"                     |" << endl;
+        cout << "| 3. MODIFICAR PRODUCTOS" <<"                   |" << endl;
+        cout << "| 4. LISTAR PRODUCTOS" <<"                      |" << endl;
+        cout << "| 5. LISTAR PRODUCTOS POR ID" <<"               |" << endl;
+        cout << "| 0. VOLVER AL MENU ANTERIOR" <<"               |" << endl;
+        cout << "|==========================================|" << endl;
+        cout << " \nSelecciona una opcion: ";
+        getline(cin,input);
+        if(!ValidadorInputs::EsUnDigito(input))
+        {
+            _opcion = -1;
+            system("Pause");
+            continue;
+        }
+        int opcion = stoi(input);
+        setOpcion(opcion);
+
+        switch(_opcion)
+        {
+        case 1:
+            manager.AgregarProducto();
+            system("pause");
+            break;
+
+        case 2:
+            manager.BajaProducto();
+            system("pause");
+            break;
+        case 3:
+            manager.ModificarProducto();
+            system("pause");
+            break;
+        case 4:
+            manager.ListarProducto();
+            system("pause");
+            break;
+        case 5:
+            manager.ListarProductoPorID();
+            system("pause");
+            break;
+        case 0:
+            break;
+        default:
+            cout << "Opcion Invalida." << endl;
+            system("pause");
+            break;
+        }
+    }
+    while (_opcion != 0);
+
 }

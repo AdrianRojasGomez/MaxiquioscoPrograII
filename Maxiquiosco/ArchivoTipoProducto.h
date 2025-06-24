@@ -1,18 +1,20 @@
 #pragma once
+#include "ArchivoBase.h"
 #include "TipoProducto.h"
 
-class ArchivoTipoProducto {
+class ArchivoTipoProducto : public ArchivoBase
+{
 private:
-    const char* _nombre = "tipos_productos.dat";
-    void inicializarArchivo();
+    const char* _nombre = "TipoProductos.dat";
+    void InicializarArchivo();
+    void ObtenerTipos(TipoProducto tipos[]);
 
 public:
     ArchivoTipoProducto();
+    bool ListarResistros();
 
-    bool guardar(const TipoProducto& tipo);
-    bool listar();
-    bool existeID(int id);
-    TipoProducto buscarPorId(int id);
-   /// bool modificarPorID(int id, const TipoProducto& nuevoTipo);
-    ///bool bajaPorID(int id);
+    bool ExisteID(int ID);
+    TipoProducto BuscarRegistroPorID(int ID);
+
+
 };
