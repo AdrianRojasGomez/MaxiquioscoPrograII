@@ -17,6 +17,7 @@ public:
     bool ModificarStockporCompra(int ID, int cantidadComprada);
     bool ListarRegistroPorID(int ID);
     bool ListarRegistros();
+    bool ListarProducto();
 
     ///Operacion Interna
     int ObtenerProximoID();

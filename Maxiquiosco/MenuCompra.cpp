@@ -30,10 +30,10 @@ void MenuCompra::MostrarMenu()
         string input;
         system("cls");
         cout << "|========== COMPRAS   MAXIQUIOSCO =========|" << endl;
-        cout << "| 1. AGREGAR COMPRAS"  <<"                      |" << endl;
-        cout << "| 2. BAJA DE COMPRAS"  <<"                      |" << endl;
-        cout << "| 3. MODIFICAR COMPRAS"  <<"                    |" << endl;
-        cout << "| 4. LISTAR COMPRAS"   <<"                      |" << endl;
+        cout << "| 1. AGREGAR COMPRAS"  <<"                       |" << endl;
+        cout << "| 2. BAJA DE COMPRAS"  <<"                       |" << endl;
+        cout << "| 3. MODIFICAR COMPRAS"  <<"                     |" << endl;
+        cout << "| 4. LISTAR COMPRAS"   <<"                        |" << endl;
         cout << "| 5. LISTAR COMPRAS POR ID" <<"                 |" << endl;
         cout << "| 0. VOLVER AL MENU ANTERIOR" <<"               |" << endl;
         cout << "|==========================================|" << endl;
@@ -52,6 +52,7 @@ void MenuCompra::MostrarMenu()
         switch(_opcion)
         {
         case 1:
+            system("cls");
             manager.AgregarCompra();
             system("pause");
             break;

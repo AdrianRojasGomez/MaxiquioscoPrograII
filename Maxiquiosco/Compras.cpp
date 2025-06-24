@@ -33,15 +33,15 @@ Fecha fecha, float importe, bool estado)
 void Compra::MostrarCompraEnConsola() const
 {
     cout << "ID Compra: " << _IDCompra << endl;
-    cout << "Producto Comprado: " << endl;
-    cout << "--------------------" << endl;
-    _producto.MostrarProductoEnConsola();
-    cout << "--------------------" << endl;
+    //cout << "Producto Comprado: " ;
+    //cout << "--------------------" << endl;
+    _producto.MostrarProducto();
+  /// cout << "--------------------" << endl;
     cout << "Cantidad Comprada: " << _cantidadComprada << endl;
-    cout << "Proveedor de la compra: " << endl;
-    cout << "--------------------" << endl;
-    _proveedor.MostrarProveedorEnColsola();
-    cout << "--------------------" << endl;    cout << "Fecha de la compra: " << _fechaCompra.getDia() << "/"
+    //cout << "Proveedor de la compra: ";
+    //cout << "--------------------" << endl;
+    _proveedor.MostrarProveedor();
+   // cout << "--------------------" << endl;    cout << "Fecha de la compra: " << _fechaCompra.getDia() << "/"
     << _fechaCompra.getMes() << "/" << _fechaCompra.getAnio() << endl;
     cout << "Importe de la Compra: " << _importe << endl;
 }

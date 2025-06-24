@@ -40,6 +40,10 @@ void Proveedor::MostrarProveedorEnColsola() const
         cout << "Email: " << _email <<endl;
         cout << "Direccion: " << _direccion <<endl;
 }
+void Proveedor::MostrarProveedor() const
+{
+        cout << "ID Proveedor: " << _idProveedor << " - CUIT: " << _cuit <<" - Nombre del Proveedor: " << _nombreProveedor <<endl;
+}
 
 int Proveedor::getIDProveedor()
 {

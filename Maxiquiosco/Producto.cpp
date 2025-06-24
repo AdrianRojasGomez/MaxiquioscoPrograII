@@ -87,9 +87,15 @@ void Producto::MostrarProductoEnConsola() const
     cout << "Precio Unitario: $" << _precioUnitario <<endl;
     cout << "Stock Actual: " << _stockActual << "/  Stock Maximo: " << _stockMax <<endl;
     if (_estado)
-        cout << "Activo"<<endl;
-    else
-        cout << "Dado de baja"<<endl;
+       cout << "Activo"<<endl;
+     else
+       cout << "Dado de baja"<<endl;
+}
+
+void Producto::MostrarProducto() const
+{
+    cout << "ID Producto: " << _idProducto << " - Nombre: " << _nombreProducto << " -  Categoria de Producto ";
+    _tipoProducto.MostrarTipoProductoEnConsola();
 }
 
 int Producto::getStockMax() const

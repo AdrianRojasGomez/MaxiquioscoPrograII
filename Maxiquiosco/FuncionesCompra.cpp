@@ -32,26 +32,45 @@ void FuncionesCompra::AgregarCompra()
 
     string input;
     // Buscar producto
+    cout << " --------PRODUCTOS-------------" << endl;
+    archivoProducto.ListarProducto();
+    cout << " ------------------------------------" << endl;
+    bool ProductoValido = false;
+     do
+    {
+
     cout << "Ingrese ID del producto:" << endl;
     cout << ">> ";
     getline(cin,input);
     if(!ValidadorInputs::SonSoloNumeros(input))
     {
         cout << "Error: Por favor ingrese solo numeros" << endl;
-        system("Pause");
-        return;
+
     }
     idProducto = stoi(input);
-    if(!archivoProducto.ExisteID(idProducto))
+     if (!archivoProducto.ExisteID(idProducto))
     {
         cout << "Error: Producto no encontrado." << endl;
-        return;
+
+    }else{
+     ProductoValido = true;
     }
+
+    }while(!ProductoValido);
+
+
     producto = archivoProducto.BuscarRegistroPorID(idProducto);
-    cout << "Producto encontrado: "  << endl;
-    producto.MostrarProductoEnConsola();
+    ///cout << "Producto encontrado: "  << endl;
+    ///producto.MostrarProducto();
+
+    bool ProveedorValido = false;
 
     //Buscar proveedor
+        cout << " --------PROVEEDOR-------------" << endl;
+    archivoProveedor.ListarProveedor();
+    cout << " ------------------------------------" << endl;
+     do
+    {
     cout << "Ingrese ID del proveedor:" << endl;
     cout << ">> ";
     getline(cin,input);
@@ -59,17 +78,22 @@ void FuncionesCompra::AgregarCompra()
     {
         cout << "Error: Por favor ingrese solo numeros" << endl;
         system("Pause");
-        return;
+
     }
     idProveedor = stoi(input);
     if(!archivoProveedor.ExisteID(idProveedor))
     {
         cout << "Error: Proveedor no encontrado." << endl;
-        return;
+
+    }else{
+     ProveedorValido = true;
     }
+
+    }while(!ProveedorValido);
+
     proveedor = archivoProveedor.BuscarRegistroPorID(idProveedor);
-    cout << "Proveedor encontrado: " << endl;
-    proveedor.MostrarProveedorEnColsola();
+    //cout << "Proveedor encontrado: " << endl;
+    //proveedor.MostrarProveedor();
 
     //Datos De la Compra
     cout << "Ingrese cantidad comprada:" << endl;
@@ -131,6 +155,7 @@ void FuncionesCompra::AgregarCompra()
         return;
     }
     archivoProducto.ModificarStockporCompra(producto.getIDProducto(), compra.getCantidadComprada());
+    system("cls");
     cout << "Compra agregada con exito!" << endl;
     compra.MostrarCompraEnConsola();
 }
@@ -211,5 +236,3 @@ void FuncionesCompra::ListarCompraPorID()
 {
 
 }
-
-
