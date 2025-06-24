@@ -248,6 +248,7 @@ bool ArchivoCompra::ListarRegistroPorID(int ID)
     }
     cout << "=============================" << endl;
     CerrarArchivo(pArchivo);
+    return true;
 }
 bool ArchivoCompra::ListarRegistros()
 {
@@ -264,6 +265,7 @@ bool ArchivoCompra::ListarRegistros()
         cout << "---------------------------" << endl;
     }
     CerrarArchivo(pArchivo);
+    return true;
 }
 ///Fin de ABML
 

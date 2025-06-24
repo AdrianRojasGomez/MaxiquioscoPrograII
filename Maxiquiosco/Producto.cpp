@@ -123,3 +123,8 @@ int Producto::getTAMANO_NOMBRE() const
 {
     return TAMANO_NOMBRE;
 }
+
+int Producto::getStockActual() const
+{
+    return _stockActual;
+}

@@ -27,27 +27,27 @@ void MenuCompra::MostrarMenu()
     FuncionesCompra manager;
     do
     {
-        string aux;
+        string input;
         system("cls");
         cout << "|========== COMPRAS   MAXIQUIOSCO =========|" << endl;
-        cout << "| 1. AGREGAR COMPRAS"   <<"                     |" << endl;
-        cout << "| 2. BAJA DE COMPRAS"   <<"                     |" << endl;
-        cout << "| 3. MODIFICAR COMPRAS"   <<"                   |" << endl;
+        cout << "| 1. AGREGAR COMPRAS"  <<"                      |" << endl;
+        cout << "| 2. BAJA DE COMPRAS"  <<"                      |" << endl;
+        cout << "| 3. MODIFICAR COMPRAS"  <<"                    |" << endl;
         cout << "| 4. LISTAR COMPRAS"   <<"                      |" << endl;
         cout << "| 5. LISTAR COMPRAS POR ID" <<"                 |" << endl;
         cout << "| 0. VOLVER AL MENU ANTERIOR" <<"               |" << endl;
         cout << "|==========================================|" << endl;
         cout << " \nSelecciona una opcion: ";
-        cin >> aux;
+        getline(cin,input);
 
-        if(!ValidadorInputs::EsUnDigito(aux))
+        if(!ValidadorInputs::EsUnDigito(input))
         {
             _opcion = -1;
             system("Pause");
             continue;
         }
-        int auxNumero = stoi(aux);
-        setOpcion(auxNumero);
+        int opcion = stoi(input);
+        setOpcion(opcion);
 
         switch(_opcion)
         {

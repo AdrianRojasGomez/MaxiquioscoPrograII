@@ -15,7 +15,6 @@ void FuncionesProveedor::AgregarProveedor()
          nombre[Proveedor::TAMANO_CAMPO], email[Proveedor::TAMANO_CAMPO], direccion[Proveedor::TAMANO_CAMPO];
 
     string input;
-    int aux;
 
     ///DNI
     cout << "Ingrese el DNI del Proveedor.\nSolo numeros, maximo 50 Caracteres." << endl;

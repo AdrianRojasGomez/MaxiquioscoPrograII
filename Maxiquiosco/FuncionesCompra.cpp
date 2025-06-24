@@ -23,7 +23,6 @@ void FuncionesCompra::AgregarCompra()
     Proveedor proveedor;
     ArchivoCompra archivocompra;
 
-
     int idCompra = archivocompra.ObtenerProximoID();
     int idProducto, idProveedor, cantidadComprada;
     float importe;
@@ -35,7 +34,7 @@ void FuncionesCompra::AgregarCompra()
     // Buscar producto
     cout << "Ingrese ID del producto:" << endl;
     cout << ">> ";
-    cin >> input;
+    getline(cin,input);
     if(!ValidadorInputs::SonSoloNumeros(input))
     {
         cout << "Error: Por favor ingrese solo numeros" << endl;
@@ -55,7 +54,7 @@ void FuncionesCompra::AgregarCompra()
     //Buscar proveedor
     cout << "Ingrese ID del proveedor:" << endl;
     cout << ">> ";
-    cin >> input;
+    getline(cin,input);
     if(!ValidadorInputs::SonSoloNumeros(input))
     {
         cout << "Error: Por favor ingrese solo numeros" << endl;
@@ -75,7 +74,7 @@ void FuncionesCompra::AgregarCompra()
     //Datos De la Compra
     cout << "Ingrese cantidad comprada:" << endl;
     cout << ">> ";
-    cin >> input;
+    getline(cin,input);
     if(!ValidadorInputs::SonSoloNumeros(input))
     {
         cout << "Error: Ingrese solo numeros en la cantidad comprada." << endl;
@@ -84,7 +83,7 @@ void FuncionesCompra::AgregarCompra()
     cantidadComprada = stoi(input);
     cout << "Ingrese el importe de la compra:" << endl;
     cout << ">> ";
-    cin >> input;
+    getline(cin,input);
     if(!ValidadorInputs::EsFloat(input))
     {
         cout << "Error: Ingrese solo cantidades validas en el importe de la compra." << endl;
@@ -94,7 +93,7 @@ void FuncionesCompra::AgregarCompra()
     cout << "Ingrese la fecha de la compra:" << endl;
     cout << "Mes (Numero del 1 al 12):" << endl;
     cout << ">> ";
-    cin >> input;
+    getline(cin,input);
     if(!ValidadorInputs::MesValido(input))
     {
         cout << "Error: Ingrese un Mes Valido." << endl;
@@ -104,7 +103,7 @@ void FuncionesCompra::AgregarCompra()
     fecha.setMes(mes);
     cout << "Dia: (Numero del 1 al 31)" << endl;
     cout << ">> ";
-    cin >> input;
+    getline(cin,input);
     if(!ValidadorInputs::DiaValido(input,mes))
     {
         cout << "Error: Ingrese un Dia Valido." << endl;
@@ -112,9 +111,9 @@ void FuncionesCompra::AgregarCompra()
     }
     dia = stoi(input);
     fecha.setDia(dia);
-    cout << "Anio:" << endl;
+    cout << "Anio: (Formato AAAA)" << endl;
     cout << ">> ";
-    cin >> input;
+    getline(cin,input);
     if(!ValidadorInputs::AnioValido(input))
     {
         cout << "Error: Ingrese un Anio Valido." << endl;
@@ -126,7 +125,12 @@ void FuncionesCompra::AgregarCompra()
 
     // Crear y guardar la compra
     Compra compra(idCompra,producto,proveedor,cantidadComprada,fecha,importe,estado);
-    archivocompra.AgregarRegistro(compra);
+    if(!archivocompra.AgregarRegistro(compra))
+    {
+        cout << "Error: No se pudo realizar la compra" << endl;
+        return;
+    }
+    archivoProducto.ModificarStockporCompra(producto.getIDProducto(), compra.getCantidadComprada());
     cout << "Compra agregada con exito!" << endl;
     compra.MostrarCompraEnConsola();
 }

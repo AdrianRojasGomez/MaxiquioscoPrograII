@@ -65,7 +65,7 @@ bool ArchivoProducto::ModificarRegistroPorID(int ID)
                 string opcion;
                 cout << "Elija la opcion a Editar" << endl;
                 cout << "1. Nombre\n2. Precio\n3. Stock actual\n4. Stock maximo\n0. No Modificar\nOpcion: ";
-                cin >> opcion;
+                getline(cin,opcion);
                 if(!ValidadorInputs::EsUnDigito(opcion))
                 {
                     aux = -1;
@@ -87,7 +87,7 @@ bool ArchivoProducto::ModificarRegistroPorID(int ID)
                 {
                     float precio;
                     string precioInput;
-                    cin >> precioInput;
+                    getline(cin,precioInput);
                     if(!ValidadorInputs::SonSoloNumeros(precioInput))
                     {
                         cout << "Ingrese solo numeros" << endl;
@@ -157,6 +157,32 @@ bool ArchivoProducto::ModificarRegistroPorID(int ID)
     CerrarArchivo(pArchivo);
     return false;
 }
+
+bool ArchivoProducto::ModificarStockporCompra(int ID, int cantidadComprada)
+{
+    FILE* pArchivo = AbrirArchivo("rb+");
+    if(pArchivo == nullptr)
+        return false;
+    Producto producto;
+    int posicion = 0;
+    while(fread(&producto,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(!producto.getEstado() || producto.getIDProducto() != ID)
+        {
+            posicion++;
+            continue;
+        }
+        producto.setStockActual(producto.getStockActual() + cantidadComprada);
+        fseek(pArchivo,posicion * _tamanoRegistro, SEEK_SET);
+        fwrite(&producto, _tamanoRegistro,1,pArchivo);
+        CerrarArchivo(pArchivo);
+        return true;
+    }
+    CerrarArchivo(pArchivo);
+    return false;
+}
+
+
 bool ArchivoProducto::ListarRegistroPorID(int ID)
 {
     FILE * pArchivo = AbrirArchivo("rb");

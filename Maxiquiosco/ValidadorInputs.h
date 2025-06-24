@@ -11,7 +11,5 @@ public:
     static bool MesValido(const std::string &input);
     static bool DiaValido(const std::string &input, int mes);
     static bool AnioValido(const std::string &input);
-
-
 };
 
