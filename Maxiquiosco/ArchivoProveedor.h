@@ -23,6 +23,8 @@ public:
 
     ///Operacion Para Compras
     Proveedor BuscarRegistroPorID(int ID);
+    bool ListarProveedor();
+
 
 };
 

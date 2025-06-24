@@ -292,3 +292,20 @@ Proveedor ArchivoProveedor::BuscarRegistroPorID(int ID)
     CerrarArchivo(pArchivo);
     return Proveedor();
 }
+bool ArchivoProveedor::ListarProveedor()
+{
+    FILE * pArchivo = AbrirArchivo("rb");
+    if(pArchivo == nullptr)
+        return false;
+    Proveedor proveedor;
+    while(fread(&proveedor,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(proveedor.getEstado())
+        {
+            proveedor.MostrarProveedor();
+        }
+        cout << "---------------------------" << endl;
+    }
+    CerrarArchivo(pArchivo);
+    return true;
+}

@@ -82,5 +82,3 @@ void MenuProducto::MostrarMenu()
     while (_opcion != 0);
 
 }
-
-

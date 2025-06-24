@@ -75,7 +75,7 @@ bool ArchivoProducto::ModificarRegistroPorID(int ID)
                 switch(aux)
                 {
                 case 1:
-                {
+                {   cout << "Nuevo nombre: ";
                     ///TODO: FALTA VALIDACION DE TAMAÑO
                     char nombre[50];
                     cin.getline(nombre,50);
@@ -85,6 +85,7 @@ bool ArchivoProducto::ModificarRegistroPorID(int ID)
                 }
                 case 2:
                 {
+                    cout << "Nuevo precio: ";
                     float precio;
                     string precioInput;
                     getline(cin,precioInput);
@@ -101,6 +102,7 @@ bool ArchivoProducto::ModificarRegistroPorID(int ID)
                 }
                 case 3:
                 {
+                    cout << "Nuevo Stock: ";
                     int stockActual;
                     string stockActualInput;
                     cin >> stockActualInput;
@@ -117,6 +119,7 @@ bool ArchivoProducto::ModificarRegistroPorID(int ID)
                 }
                 case 4:
                 {
+                    cout << "Nuevo stock Maximo: ";
                     int stockMax;
                     string stockMaxInput;
                     cin >> stockMaxInput;
@@ -181,7 +184,6 @@ bool ArchivoProducto::ModificarStockporCompra(int ID, int cantidadComprada)
     CerrarArchivo(pArchivo);
     return false;
 }
-
 
 bool ArchivoProducto::ListarRegistroPorID(int ID)
 {
@@ -272,4 +274,21 @@ bool ArchivoProducto::ExisteID(int ID)
     }
     CerrarArchivo(pArchivo);
     return false;
+}
+
+bool ArchivoProducto::ListarProducto()
+{
+    FILE * pArchivo = AbrirArchivo("rb");
+    if(pArchivo == nullptr)
+        return false;
+    Producto producto;
+    while(fread(&producto,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(producto.getEstado())
+        {
+            producto.MostrarProducto();
+        }
+        cout << "---------------------------" << endl;
+    }
+    CerrarArchivo(pArchivo);
 }

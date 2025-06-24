@@ -8,7 +8,7 @@ public:
                char * nombreProveedor, char * email, char * direccion);
 
     void MostrarProveedorEnColsola() const;
-
+    void MostrarProveedor() const;
     int getIDProveedor();
     void setIDProveedor(int ID);
 

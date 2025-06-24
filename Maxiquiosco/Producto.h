@@ -27,6 +27,7 @@ public:
     void setEstado(bool estado);
 
     void MostrarProductoEnConsola() const;
+    void MostrarProducto() const;
 
     static const int TAMANO_NOMBRE = 50;
 private:

@@ -5,14 +5,14 @@
 
 using namespace std;
 
-ArchivoTipoProducto::ArchivoTipoProducto()
-{
+ArchivoTipoProducto::ArchivoTipoProducto(){
+
+
     strcpy(_nombreArchivo, _nombre);
     _tamanoRegistro = sizeof(TipoProducto);
     InicializarArchivo();
 }
-void ArchivoTipoProducto::InicializarArchivo()
-{
+void ArchivoTipoProducto::InicializarArchivo(){
 
     FILE * pNuevoArchivo = AbrirArchivo("wb");
     if(pNuevoArchivo == nullptr)
@@ -26,8 +26,8 @@ void ArchivoTipoProducto::InicializarArchivo()
     CerrarArchivo(pNuevoArchivo);
 }
 
-void ArchivoTipoProducto::ObtenerTipos(TipoProducto tipos[])
-{
+void ArchivoTipoProducto::ObtenerTipos(TipoProducto tipos[]){
+
     tipos[0]  = TipoProducto(1,  "Bebidas");
     tipos[1]  = TipoProducto(2,  "Comestibles");
     tipos[2]  = TipoProducto(3,  "Lacteos");
