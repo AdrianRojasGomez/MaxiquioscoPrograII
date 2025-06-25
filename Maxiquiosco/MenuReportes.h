@@ -1,6 +1,6 @@
 #pragma once
 
-class MenuReportes.h
+class MenuReportes
 {
 private:
     int _opcion;

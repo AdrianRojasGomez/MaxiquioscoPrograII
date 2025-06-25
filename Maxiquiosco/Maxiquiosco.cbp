@@ -72,6 +72,10 @@
 		<Unit filename="FuncionesProveedor.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="FuncionesReportes.cpp" />
+		<Unit filename="FuncionesReportes.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="MenuCompra.cpp" />
 		<Unit filename="MenuCompra.h">
 			<Option target="&lt;{~None~}&gt;" />
