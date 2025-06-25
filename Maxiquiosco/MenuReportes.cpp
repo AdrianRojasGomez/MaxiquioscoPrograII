@@ -1,11 +1,6 @@
 #include <iostream>
-using namespace std;
-
-int main()
-{
-#include <iostream>
 #include <string>
-#include "MenuReportes"
+#include "MenuReportes.h"
 #include "ValidadorInputs.h"
 
 using namespace std;
@@ -30,17 +25,17 @@ void MenuReportes::MostrarMenu()
 {
     do
     {
-        string input;
+string input;
         system("cls");
-        cout << "|========== REPORTES  MAXIQUIOSCO =========|" << endl;
-        cout << "| 1. AGREGAR COMPRAS"  <<"                       |" << endl;
-        cout << "| 2. BAJA DE COMPRAS"  <<"                       |" << endl;
-        cout << "| 3. MODIFICAR COMPRAS"  <<"                     |" << endl;
-        cout << "| 4. LISTAR COMPRAS"   <<"                        |" << endl;
-        cout << "| 5. LISTAR COMPRAS POR ID" <<"                 |" << endl;
-        cout << "| 0. VOLVER AL MENU ANTERIOR" <<"               |" << endl;
-        cout << "|==========================================|" << endl;
-        cout << " \nSelecciona una opcion: ";
+        cout << "|========== REPORTES  MAXIQUIOSCO =============|" << endl;
+        cout << "| 1. COMPRAS TOTALES POR PROVEEDOR             |" << endl;
+        cout << "| 2. COMPRAS POR TIPO DE PRODUCTO              |" << endl;
+        cout << "| 3. DISTRIBUCION MENSUAL DE COMPRAS           |" << endl;
+        cout << "| 4. VALOR TOTAL DEL INVENTARIO                |" << endl;
+        cout << "| 5. SOBRESTOCK                                |" << endl;
+        cout << "| 0. VOLVER AL MENU ANTERIOR                   |" << endl;
+        cout << "|==============================================|" << endl;
+        cout << "\nSelecciona una opción: ";
         getline(cin,input);
 
         if(!ValidadorInputs::EsUnDigito(input))
@@ -55,25 +50,19 @@ void MenuReportes::MostrarMenu()
         switch(_opcion)
         {
         case 1:
-            system("cls");
-            manager.AgregarCompra();
-            system("pause");
+            //
             break;
-
         case 2:
-            manager.BajaCompra();
+            //
             break;
         case 3:
-            manager.ModificarCompra();
-            system("pause");
+            //
             break;
         case 4:
-            manager.ListarCompra();
-            system("pause");
+            //
             break;
         case 5:
-            manager.ListarCompraPorID();
-            system("pause");
+            //
             break;
         case 0:
             break;
@@ -88,4 +77,4 @@ void MenuReportes::MostrarMenu()
 }
 
 
-}
+

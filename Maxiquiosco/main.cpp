@@ -2,6 +2,7 @@
 #include "MenuCompra.h"
 #include "MenuProducto.h"
 #include "MenuProveedor.h"
+#include "MenuReportes.h"
 #include "ValidadorInputs.h"
 
 using namespace std;
@@ -43,8 +44,7 @@ int main()
             MenuProveedor();
             break;
         case 4:
-            ///Logica Generar Reportes();
-            ///TODO: Tenemos que pensar si incluir los reportes en cada seccion y replicarlos aca.
+            MenuReportes();
             break;
         case 0:
             return 0;
