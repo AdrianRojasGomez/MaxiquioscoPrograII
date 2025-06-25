@@ -22,7 +22,6 @@ void FuncionesProducto::AgregarProducto()
     bool estado = true;
 
     string input;
-    int aux;
     ///NOMBRE
     cout << "Ingrese el Nombre del Producto" << endl;
     cout << ">> ";
@@ -48,8 +47,8 @@ void FuncionesProducto::AgregarProducto()
             cout << "Error: Ingrese Solo numeros para el ID del tipo de Producto" <<endl;
             continue;
         }
-        aux = stoi(input);
-        tipoSeleccionado = archivoTipoProducto.BuscarRegistroPorID(aux);
+        IDTipoProducto = stoi(input);
+        tipoSeleccionado = archivoTipoProducto.BuscarRegistroPorID(IDTipoProducto);
         if(tipoSeleccionado.getIDTipoProducto() != 0)
         {
             tipoValido = true;
@@ -57,7 +56,7 @@ void FuncionesProducto::AgregarProducto()
         }
         else
         {
-            cout << "Error: Tipo con ID " << aux << " no existe. Intente nuevamente." << endl;
+            cout << "Error: Tipo con ID " << IDTipoProducto << " no existe. Intente nuevamente." << endl;
         }
     }
     while(!tipoValido);
