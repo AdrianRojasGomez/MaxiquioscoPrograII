@@ -55,7 +55,7 @@ bool ValidadorInputs::EsFloat(const string &input)
     bool hayDigitos       = false;
     bool hayDigitosDesp   = false;
 
-    ///Chequear signos
+    ///Chequear signos y puntos
     if (cadena[i] == '+' || cadena[i] == '-') {
         ++i;
     }
@@ -81,17 +81,20 @@ bool ValidadorInputs::EsFloat(const string &input)
         }
         ++i;
     }
-
     delete[] cadena;
     return hayDigitos && (!hayPunto || hayDigitosDesp);
 }
 
 bool ValidadorInputs::TamanoPermitido(const string &input, int limite)
 {
+    /// Levanta warning pero es porque size() devuelve un tipo de dato size_t
+    /// pero igual devuelve uno por cada caracter, entonces al compararlo con el limite funciona
+    /// perfecto. Podriamos castearlo a size_t el limite pero da igual.
     if(input.size() > limite)
+    {
         return false;
-    else
-        return true;
+    }
+    return true;
 }
 
 bool ValidadorInputs::MesValido(const string &input)
@@ -141,7 +144,7 @@ bool ValidadorInputs::DiaValido(const std::string &input, int mes)
         return true;
 }
 
-bool ValidadorInputs::AnioValido(const std::string &inputAnio)
+bool ValidadorInputs::AnioValido(const string &inputAnio)
 {
     if(!SonSoloNumeros(inputAnio))
         return false;
@@ -149,7 +152,7 @@ bool ValidadorInputs::AnioValido(const std::string &inputAnio)
     if(inputAnio.empty() || inputAnio.size() > 4)
         return false;
 
-    int anio = std::stoi(inputAnio);
+    int anio = stoi(inputAnio);
 
     if(anio < 1900 || anio > 2100)
         return false;

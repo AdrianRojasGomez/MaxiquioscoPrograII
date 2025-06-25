@@ -174,10 +174,11 @@ void FuncionesCompra::BajaCompra()
         return;
     }
     idCompra = stoi(input);
-    if(!archivo.BajaRegistro(idCompra));
+    if(!archivo.BajaRegistro(idCompra))
     {
         cout << "Compra No encontrado o dado de baja anteriormente." << endl;
         system("pause");
+        return;
     }
     cout << "Compra dada de baja satifactoriamente" << endl;
     system("pause");
