@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "MenuReportes.h"
+#include "FuncionesReportes.h"
 #include "ValidadorInputs.h"
 
 using namespace std;
@@ -23,6 +24,7 @@ int MenuReportes::getOpcion()
 
 void MenuReportes::MostrarMenu()
 {
+    FuncionesReportes manager;
     do
     {
 string input;
@@ -35,7 +37,7 @@ string input;
         cout << "| 5. SOBRESTOCK                                |" << endl;
         cout << "| 0. VOLVER AL MENU ANTERIOR                   |" << endl;
         cout << "|==============================================|" << endl;
-        cout << "\nSelecciona una opción: ";
+        cout << "\nSelecciona una opcion: ";
         getline(cin,input);
 
         if(!ValidadorInputs::EsUnDigito(input))
@@ -59,7 +61,7 @@ string input;
             //
             break;
         case 4:
-            //
+            manager.MostrarValorTotalDelInventario();
             break;
         case 5:
             //

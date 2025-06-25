@@ -295,3 +295,42 @@ bool ArchivoProducto::ListarProducto()
     CerrarArchivo(pArchivo);
     return true;
 }
+
+int ArchivoProducto::ObtenerObjetosTotales()
+{
+    FILE * pArchivo = AbrirArchivo("rb");
+    Producto producto;
+    int objetosTotales = 0;
+    while(fread(&producto,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(!producto.getEstado())
+        {
+            cout << "Debug: Producto "<< producto.getIDProducto() << " dado de baja" << endl;
+            continue;
+        }
+        objetosTotales += producto.getStockActual();
+    }
+    CerrarArchivo(pArchivo);
+    return objetosTotales;
+
+}
+int ArchivoProducto::ObtenerValorDelInventarioActual()
+{
+    FILE * pArchivo = AbrirArchivo("rb");
+    Producto producto;
+    int valorInventario = 0;
+    int objetosTotales = 0;
+    while(fread(&producto,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(!producto.getEstado())
+        {
+            cout << "Debug: Producto "<< producto.getIDProducto() << " dado de baja" << endl;
+            continue;
+        }
+        objetosTotales += producto.getStockActual();
+        valorInventario += producto.getStockActual()*producto.getPrecioUnitario();
+    }
+    CerrarArchivo(pArchivo);
+    return valorInventario;
+}
+
