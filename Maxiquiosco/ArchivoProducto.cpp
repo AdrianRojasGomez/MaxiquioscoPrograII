@@ -200,6 +200,7 @@ bool ArchivoProducto::ListarRegistroPorID(int ID)
     }
     cout << "=============================" << endl;
     CerrarArchivo(pArchivo);
+    return true;
 }
 bool ArchivoProducto::ListarRegistros()
 {
@@ -216,6 +217,7 @@ bool ArchivoProducto::ListarRegistros()
         cout << "---------------------------" << endl;
     }
     CerrarArchivo(pArchivo);
+    return true;
 }
 ///Fin de ABML
 
@@ -291,4 +293,5 @@ bool ArchivoProducto::ListarProducto()
         cout << "---------------------------" << endl;
     }
     CerrarArchivo(pArchivo);
+    return true;
 }

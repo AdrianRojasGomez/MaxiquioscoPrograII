@@ -36,27 +36,27 @@ void FuncionesCompra::AgregarCompra()
     archivoProducto.ListarProducto();
     cout << " ------------------------------------" << endl;
     bool ProductoValido = false;
-     do
+    do
     {
 
-    cout << "Ingrese ID del producto:" << endl;
-    cout << ">> ";
-    getline(cin,input);
-    if(!ValidadorInputs::SonSoloNumeros(input))
-    {
-        cout << "Error: Por favor ingrese solo numeros" << endl;
+        cout << "Ingrese ID del producto:" << endl;
+        cout << ">> ";
+        getline(cin,input);
+        if(!ValidadorInputs::SonSoloNumeros(input))
+        {
+            cout << "Error: Por favor ingrese solo numeros" << endl;
+            continue;
+        }
+        idProducto = stoi(input);
+        if (!archivoProducto.ExisteID(idProducto))
+        {
+            cout << "Error: Producto no encontrado." << endl;
+            continue;
+        }
 
+        ProductoValido = true;
     }
-    idProducto = stoi(input);
-     if (!archivoProducto.ExisteID(idProducto))
-    {
-        cout << "Error: Producto no encontrado." << endl;
-
-    }else{
-     ProductoValido = true;
-    }
-
-    }while(!ProductoValido);
+    while(!ProductoValido);
 
 
     producto = archivoProducto.BuscarRegistroPorID(idProducto);
@@ -174,10 +174,11 @@ void FuncionesCompra::BajaCompra()
         return;
     }
     idCompra = stoi(input);
-    if(!archivo.BajaRegistro(idCompra));
+    if(!archivo.BajaRegistro(idCompra))
     {
         cout << "Compra No encontrado o dado de baja anteriormente." << endl;
         system("pause");
+        return;
     }
     cout << "Compra dada de baja satifactoriamente" << endl;
     system("pause");
