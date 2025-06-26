@@ -48,12 +48,12 @@ bool ValidadorInputs::SonSoloNumeros(const string &input)
 bool ValidadorInputs::EsFloat(const string &input)
 {
     char *cadena = new char[input.size() + 1];
-    strcpy(cadena, input.c_str());
+    std::strcpy(cadena, input.c_str());
 
-    int  i = 0;
-    bool hayPunto = false;
-    bool hayDigitos = false;
-    bool hayDigitosDespues= false;
+    int  i                = 0;
+    bool hayPunto         = false;
+    bool hayDigitos       = false;
+    bool hayDigitosDesp   = false;
 
     ///Chequear signos y puntos
     if (cadena[i] == '+' || cadena[i] == '-') {
@@ -72,7 +72,7 @@ bool ValidadorInputs::EsFloat(const string &input)
         else if (cadena[i] >= '0' && cadena[i] <= '9') {
             hayDigitos = true;
             if (hayPunto) {
-                hayDigitosDespues = true;
+                hayDigitosDesp = true;
             }
         }
         else {
@@ -82,7 +82,7 @@ bool ValidadorInputs::EsFloat(const string &input)
         ++i;
     }
     delete[] cadena;
-    return hayDigitos && (!hayPunto || hayDigitosDespues);
+    return hayDigitos && (!hayPunto || hayDigitosDesp);
 }
 
 bool ValidadorInputs::TamanoPermitido(const string &input, int limite)

@@ -130,6 +130,7 @@ bool ArchivoCompra::ModificarRegistroPorID(int ID)
                     aux = -1;
                     break;
                 }
+
                 proveedor = archivoProveedor.BuscarRegistroPorID(ID);
                 compra.setProveedor(proveedor);
                 esModificable = true;
@@ -318,7 +319,9 @@ int ArchivoCompra::ObtenerImporteTotalPorMes(int mes, int anio)
 
 bool ArchivoCompra::ObtenerTotalUnidadesconFacturado()
 {
-    const int MAX_PROVEEDORES = 100;
+    ArchivoProveedor archivoProveedor;
+
+    const int MAX_PROVEEDORES = archivoProveedor.ObtenerProximoID();
     int unidadesPorProveedor[MAX_PROVEEDORES] = {0};
     int montoTotalFacturado[MAX_PROVEEDORES] = {0};
 
@@ -345,7 +348,6 @@ bool ArchivoCompra::ObtenerTotalUnidadesconFacturado()
 
     CerrarArchivo(pArchivo);
 
-    ArchivoProveedor archivoProveedor;
     cout << "\n====== TOTAL DE UNIDADES Y FACTURADO POR PROVEEDOR ======\n";
     for (int i = 0; i < MAX_PROVEEDORES; ++i)
     {
