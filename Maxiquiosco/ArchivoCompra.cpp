@@ -379,6 +379,7 @@ int ArchivoCompra::FiltrarComprasPorTipoProducto(int IDbusqueda, Compra* &compra
             continue;
         }
         cantidad++;
+
     }
 
     if(cantidad == 0)
@@ -401,6 +402,7 @@ int ArchivoCompra::FiltrarComprasPorTipoProducto(int IDbusqueda, Compra* &compra
         {
             continue;
         }
+
         comprasFiltradas[i] = compra;
         i++;
     }

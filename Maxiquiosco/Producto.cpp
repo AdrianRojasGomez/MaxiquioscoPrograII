@@ -32,6 +32,11 @@ void Producto::setIDProducto(int ID)
     _idProducto = ID;
 }
 
+int Producto::getStockActual() const
+{
+    return _stockActual;
+}
+
 void Producto::setStockActual(int stock)
 {
     _stockActual = stock;
@@ -85,7 +90,7 @@ void Producto::MostrarProductoEnConsola() const
     cout << "Categoria de Producto ";
     _tipoProducto.MostrarTipoProductoEnConsola();
     cout << "Precio Unitario: $" << _precioUnitario <<endl;
-    cout << "Stock Actual: " << _stockActual << "/  Stock Maximo: " << _stockMax <<endl;
+    cout << "Stock Actual: " << _stockActual << " /  Stock Maximo: " << _stockMax <<endl;
     if (_estado)
        cout << "Activo"<<endl;
      else
@@ -130,7 +135,4 @@ int Producto::getTAMANO_NOMBRE() const
     return TAMANO_NOMBRE;
 }
 
-int Producto::getStockActual() const
-{
-    return _stockActual;
-}
+

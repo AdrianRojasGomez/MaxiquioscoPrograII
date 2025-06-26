@@ -35,7 +35,7 @@ void Compra::MostrarCompraEnConsola() const
     cout << "ID Compra: " << _IDCompra << endl;
     _producto.MostrarProducto();
 
-    cout << "Cantidad Comprada: " << _cantidadComprada << endl;
+    cout << "Cantidad Comprada: " << getCantidadComprada() << endl;
 
     _proveedor.MostrarProveedor();
     cout << "Fecha de la compra: " << _fechaCompra.getDia() << "/"
@@ -62,6 +62,11 @@ void Compra::setCantidadComprada(int cantidad)
     _cantidadComprada = cantidad;
 }
 
+int Compra::getCantidadComprada() const
+{
+    return _cantidadComprada;
+}
+
 void Compra::setEstado(bool estado)
 {
     _estado = estado;
@@ -75,11 +80,6 @@ void Compra::setImporte(float importe)
 int Compra::getIDCompra() const
 {
     return _IDCompra;
-}
-
-int Compra::getCantidadComprada() const
-{
-    return _cantidadComprada;
 }
 
 float Compra::getImporte() const
