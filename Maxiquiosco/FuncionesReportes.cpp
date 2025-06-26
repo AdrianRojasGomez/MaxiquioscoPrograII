@@ -37,7 +37,11 @@ void FuncionesReportes::MostrarComprasPorTipoDeProducto()
 {
     ArchivoTipoProducto archivoTipoProducto;
     ArchivoCompra archivoCompra;
+    ArchivoProducto archivoProducto;
     Compra * comprasFiltradas;
+    Producto producto;
+
+
     int IDbusqueda;
     system("cls");
     cout << "Estos son los IDs de los tipos de producto:" << endl;
@@ -55,14 +59,36 @@ void FuncionesReportes::MostrarComprasPorTipoDeProducto()
     string clasificacion  = archivoTipoProducto.BuscarRegistroPorID(IDbusqueda).getClasificacionProducto();
     int cantidadComprasFiltradas = archivoCompra.FiltrarComprasPorTipoProducto(IDbusqueda, comprasFiltradas);
 
-    cout <<"Cantidad de Compras Filtradas del tipo " << clasificacion << ":" << cantidadComprasFiltradas << endl;
+    cout <<"\n\nCantidad de Compras Filtradas del tipo " << clasificacion << ":" << cantidadComprasFiltradas << endl;
 
     int sumaTotalPorTipo = 0;
+    int* idProducto = new int[cantidadComprasFiltradas]{};
     int totalUnidadesAdquiridas = 0;
     for(int i = 0; i < cantidadComprasFiltradas; i++)
     {
         sumaTotalPorTipo += comprasFiltradas[i].getImporte();
-        totalUnidadesAdquiridas += comprasFiltradas[i].getProducto().getStockActual();
+        idProducto[i] = comprasFiltradas[i].getProducto().getIDProducto();
+    }
+
+    for (int i = 0; i < cantidadComprasFiltradas; i++)
+    {
+        if(idProducto[i] == 0)
+            continue;
+
+        bool repetido = false;
+        for (int j = 0; j < i; ++j)
+        {
+            if (idProducto[j] == idProducto[i])
+            {
+                repetido = true;
+                break;
+            }
+        }
+
+        if (repetido)
+            continue;
+        producto = archivoProducto.BuscarRegistroPorID(idProducto[i]);
+        totalUnidadesAdquiridas += producto.getStockActual();
     }
 
     cout << "Importes totales del tipo " << clasificacion << ": $" << sumaTotalPorTipo << endl;
@@ -70,8 +96,12 @@ void FuncionesReportes::MostrarComprasPorTipoDeProducto()
 
     //Delete del new de FiltrarComprasPorTipoProducto, se pasa el puntero comprasFiltradas por referencia!
     delete[] comprasFiltradas;
+    delete[] idProducto;
     system("Pause");
 }
+
+
+
 void FuncionesReportes::MostrarDistribucionMensualDeCompras()
 {
     ArchivoCompra archivoCompra;
