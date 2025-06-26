@@ -328,7 +328,7 @@ bool ArchivoCompra::ObtenerTotalUnidadesconFacturado()
 
     Compra compra;
 
-    while (fread(&compra, sizeof(Compra), 1, pArchivo) == 1)
+    while (fread(&compra, _tamanoRegistro, 1, pArchivo) == 1)
     {
         if (compra.getEstado())
         {
@@ -358,4 +358,60 @@ bool ArchivoCompra::ObtenerTotalUnidadesconFacturado()
 
     system("Pause");
     return true;
+}
+
+int ArchivoCompra::FiltrarComprasPorTipoProducto(int IDbusqueda, Compra* &comprasFiltradas)
+{
+
+    FILE * pArchivo = AbrirArchivo("rb");
+    int cantidad = 0;
+    if(pArchivo == nullptr)
+    {
+        cout << "ERROR CRITICO: No se pudo abrir archivos" << endl;
+        return 0;
+    }
+    Compra compra;
+    while(fread(&compra,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(!compra.getEstado() ||
+                compra.getProducto().getTipoProducto().getIDTipoProducto() != IDbusqueda)
+        {
+            continue;
+        }
+        cantidad++;
+    }
+
+    if(cantidad == 0)
+    {
+        CerrarArchivo(pArchivo);
+        comprasFiltradas = nullptr;
+        return 0;
+    }
+
+    //Puntero por referencia, el delete[] de este new *tiene* que estar en la funcion de la clase FuncionesReportes
+    comprasFiltradas = new Compra[cantidad];
+    //Posiciona el cursor al principio del archivo
+    fseek(pArchivo, 0L, SEEK_SET);
+
+    int i = 0;
+    while(fread(&compra,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(!compra.getEstado() ||
+                compra.getProducto().getTipoProducto().getIDTipoProducto() != IDbusqueda)
+        {
+            continue;
+        }
+        comprasFiltradas[i] = compra;
+        i++;
+    }
+
+    if(i != cantidad)
+    {
+        cout << "ERROR CRITICO: Tamaño del vector no compatible con indice" << endl;
+        return 0;
+    }
+
+    CerrarArchivo(pArchivo);
+    return cantidad;
+
 }

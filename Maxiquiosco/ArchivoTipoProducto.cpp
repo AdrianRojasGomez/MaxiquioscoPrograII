@@ -82,24 +82,48 @@ void ArchivoTipoProducto::ObtenerTipos(TipoProducto tipos[]){
 
 bool ArchivoTipoProducto::ListarResistros()
 {
-    FILE * pArchivo = AbrirArchivo("rb");
-    if(pArchivo == nullptr)
+
+    FILE* pArchivo = AbrirArchivo("rb");
+    if (pArchivo == nullptr)
     {
-      cout << "Error Critico: No se pudo Abrir el archivo de tipos de Producto" << endl;
-      return false;
+        cout << "Error Critico: No se pudo Abrir el archivo de tipos de Producto" << endl;
+        return false;
     }
+
     TipoProducto tipo;
-    while (fread(&tipo, sizeof(TipoProducto), 1, pArchivo) == 1)
+    int contador = 0;
+    const int anchoColumna = 35;
+
+    while (fread(&tipo, _tamanoRegistro, 1, pArchivo) == 1)
     {
-        if(tipo.EsValido())
+        if (!tipo.EsValido())
+            continue;
+
+        string texto = "ID: " + to_string(tipo.getIDTipoProducto()) + " - " + tipo.getClasificacionProducto();
+        while (texto.length() < anchoColumna)
         {
-            tipo.MostrarTipoProductoEnConsola();
+            texto += " ";
         }
-        cout << "----------------------------" << endl;
+        cout << texto;
+        contador++;
+        if (contador % 3 == 0)
+        {
+            cout << endl;
+        }
     }
+
+    if (contador % 3 != 0)
+    {
+        cout << endl;
+    }
+
     CerrarArchivo(pArchivo);
     return true;
+
 }
+
+
+
 
 bool ArchivoTipoProducto::ExisteID(int ID)
 {

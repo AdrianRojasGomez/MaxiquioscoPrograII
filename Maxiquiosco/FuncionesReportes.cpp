@@ -1,12 +1,11 @@
 #include <iostream>
 #include <string>
-#include "FuncionesReportes.h"
 #include "Compra.h"
-#include "Proveedor.h"
-#include "Producto.h"
+#include "FuncionesReportes.h"
 #include "ArchivoCompra.h"
 #include "ArchivoProveedor.h"
 #include "ArchivoProducto.h"
+#include "ArchivoTipoProducto.h"
 #include "ValidadorInputs.h"
 
 using namespace std;
@@ -36,8 +35,42 @@ void FuncionesReportes::MostrarComprasTotalesPorProveedor()
 
 void FuncionesReportes::MostrarComprasPorTipoDeProducto()
 {
+    ArchivoTipoProducto archivoTipoProducto;
+    ArchivoCompra archivoCompra;
+    Compra * comprasFiltradas;
+    int IDbusqueda;
+    system("cls");
+    cout << "Estos son los IDs de los tipos de producto:" << endl;
+    archivoTipoProducto.ListarResistros();
+    cout << "Ingrese el ID del tipo de producto:" << endl;
+    cout << ">>";
+    string input;
+    getline(cin,input);
+    if(!ValidadorInputs::SonSoloNumeros(input))
+    {
+        cout << "Error: Ingrese solo numeros" << endl;
+        return;
+    }
+    IDbusqueda = stoi(input);
+    string clasificacion  = archivoTipoProducto.BuscarRegistroPorID(IDbusqueda).getClasificacionProducto();
+    int cantidadComprasFiltradas = archivoCompra.FiltrarComprasPorTipoProducto(IDbusqueda, comprasFiltradas);
 
+    cout <<"Cantidad de Compras Filtradas del tipo " << clasificacion << ":" << cantidadComprasFiltradas << endl;
 
+    int sumaTotalPorTipo = 0;
+    int totalUnidadesAdquiridas = 0;
+    for(int i = 0; i < cantidadComprasFiltradas; i++)
+    {
+        sumaTotalPorTipo += comprasFiltradas[i].getImporte();
+        totalUnidadesAdquiridas += comprasFiltradas[i].getProducto().getStockActual();
+    }
+
+    cout << "Importes totales del tipo " << clasificacion << ": $" << sumaTotalPorTipo << endl;
+    cout << "Unidades totales compradas del tipo " << clasificacion << ": " << totalUnidadesAdquiridas << endl;
+
+    //Delete del new de FiltrarComprasPorTipoProducto, se pasa el puntero comprasFiltradas por referencia!
+    delete[] comprasFiltradas;
+    system("Pause");
 }
 void FuncionesReportes::MostrarDistribucionMensualDeCompras()
 {
@@ -81,14 +114,13 @@ void FuncionesReportes::MostrarDistribucionMensualDeCompras()
             importeMayor = compras[i];
         }
     }
-    const int anchoBarra = 40;
-    const int anchoMes = 12;
 
+    const int anchoBarra = 40;
     for (int i = 0; i < meses; i++)
     {
         string mes = _meses[i];
         int largoMes = mes.length();
-        int espacios = anchoMes - largoMes;
+        int espacios = meses - largoMes;
         cout << mes;
 
         for (int e = 0; e < espacios; e++)
