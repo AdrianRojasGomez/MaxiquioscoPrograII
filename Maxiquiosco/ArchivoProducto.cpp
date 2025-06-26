@@ -334,3 +334,31 @@ int ArchivoProducto::ObtenerValorDelInventarioActual()
     return valorInventario;
 }
 
+void ArchivoProducto::MostrarProductoConSobreStock()
+{
+    FILE * pArchivo = AbrirArchivo("rb");
+    Producto producto;
+    int objetosTotales = 0;
+    bool haySobrestock = false;
+    while(fread(&producto,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(!producto.getEstado() ||
+        producto.getStockActual() <= producto.getStockMax())
+        {
+            continue;
+        }
+        int sobrestock = (-1) * (producto.getStockMax() - producto.getStockActual());
+        haySobrestock = true;
+        cout << "=====================================" << endl;
+        cout << producto.getNombreProducto() << endl;
+        cout << "Tiene un sobrestock de " << sobrestock << " unidades." << endl;
+    }
+        cout << "=====================================" << endl;
+        if(!haySobrestock)
+        {
+            cout << "No Hay Sobrestock de productos." << endl;
+            cout << "=====================================" << endl;
+        }
+        CerrarArchivo(pArchivo);
+        system("Pause");
+}

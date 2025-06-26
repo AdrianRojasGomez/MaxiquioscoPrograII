@@ -124,5 +124,7 @@ void FuncionesReportes::MostrarValorTotalDelInventario()
 
 void FuncionesReportes::MostrarSobreStock()
 {
+    ArchivoProducto archivoProducto;
 
+    archivoProducto.MostrarProductoConSobreStock();
 }

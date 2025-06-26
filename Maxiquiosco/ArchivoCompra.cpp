@@ -298,6 +298,11 @@ int ArchivoCompra::ObtenerImporteTotalPorMes(int mes, int anio)
 
     while(fread(&compra,_tamanoRegistro,1,pArchivo) == 1)
     {
+        if(!compra.getEstado())
+        {
+            continue;
+        }
+
         if(compra.getFechaCompra().getAnio() != anio ||
                 compra.getFechaCompra().getMes() != mes)
         {
@@ -305,6 +310,7 @@ int ArchivoCompra::ObtenerImporteTotalPorMes(int mes, int anio)
         }
         importePorMes += compra.getImporte();
     }
+    CerrarArchivo(pArchivo);
     return importePorMes;
 
 }

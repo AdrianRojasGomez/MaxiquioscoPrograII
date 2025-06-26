@@ -29,6 +29,7 @@ public:
     ///Operaciones para Reportes
     int ObtenerObjetosTotales();
     int ObtenerValorDelInventarioActual();
+    void MostrarProductoConSobreStock();
 
 };
 

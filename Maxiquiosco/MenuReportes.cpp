@@ -64,7 +64,7 @@ string input;
             manager.MostrarValorTotalDelInventario();
             break;
         case 5:
-            //
+            manager.MostrarSobreStock();
             break;
         case 0:
             break;
