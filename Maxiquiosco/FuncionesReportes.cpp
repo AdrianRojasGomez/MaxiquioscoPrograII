@@ -39,17 +39,25 @@ void FuncionesReportes::MostrarComprasPorTipoDeProducto()
     ArchivoCompra archivoCompra;
     Compra * comprasFiltradas;
     int IDbusqueda;
+
+    do {
     system("cls");
+
     cout << "Estos son los IDs de los tipos de producto:" << endl;
     archivoTipoProducto.ListarResistros();
-    cout << "Ingrese el ID del tipo de producto:" << endl;
+    cout << "Ingrese el ID del tipo de producto (0 para salir):" << endl;
     cout << ">>";
     string input;
     getline(cin,input);
+
+    if (input == "0") {
+            break;
+        }
     if(!ValidadorInputs::SonSoloNumeros(input))
     {
         cout << "Error: Ingrese solo numeros" << endl;
-        return;
+        system("pause");
+        continue;
     }
     IDbusqueda = stoi(input);
     string clasificacion  = archivoTipoProducto.BuscarRegistroPorID(IDbusqueda).getClasificacionProducto();
@@ -71,6 +79,8 @@ void FuncionesReportes::MostrarComprasPorTipoDeProducto()
     //Delete del new de FiltrarComprasPorTipoProducto, se pasa el puntero comprasFiltradas por referencia!
     delete[] comprasFiltradas;
     system("Pause");
+    }while (true);
+
 }
 void FuncionesReportes::MostrarDistribucionMensualDeCompras()
 {
