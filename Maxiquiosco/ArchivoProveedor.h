@@ -25,6 +25,5 @@ public:
     Proveedor BuscarRegistroPorID(int ID);
     bool ListarProveedor();
 
-
 };
 

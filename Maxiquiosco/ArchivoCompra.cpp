@@ -287,3 +287,30 @@ int ArchivoCompra::ObtenerProximoID()
     CerrarArchivo(pArchivo);
     return maxID + 1;
 }
+
+int ArchivoCompra::ObtenerImporteTotalPorMes(int mes, int anio)
+{
+    FILE * pArchivo = AbrirArchivo("rb");
+    if(pArchivo == nullptr)
+        return 1;
+    Compra compra;
+    int importePorMes = 0;
+
+    while(fread(&compra,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(!compra.getEstado())
+        {
+            continue;
+        }
+
+        if(compra.getFechaCompra().getAnio() != anio ||
+                compra.getFechaCompra().getMes() != mes)
+        {
+            continue;
+        }
+        importePorMes += compra.getImporte();
+    }
+    CerrarArchivo(pArchivo);
+    return importePorMes;
+
+}

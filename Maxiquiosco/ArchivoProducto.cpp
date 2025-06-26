@@ -295,3 +295,70 @@ bool ArchivoProducto::ListarProducto()
     CerrarArchivo(pArchivo);
     return true;
 }
+
+int ArchivoProducto::ObtenerObjetosTotales()
+{
+    FILE * pArchivo = AbrirArchivo("rb");
+    Producto producto;
+    int objetosTotales = 0;
+    while(fread(&producto,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(!producto.getEstado())
+        {
+            cout << "Debug: Producto "<< producto.getIDProducto() << " dado de baja" << endl;
+            continue;
+        }
+        objetosTotales += producto.getStockActual();
+    }
+    CerrarArchivo(pArchivo);
+    return objetosTotales;
+
+}
+int ArchivoProducto::ObtenerValorDelInventarioActual()
+{
+    FILE * pArchivo = AbrirArchivo("rb");
+    Producto producto;
+    int valorInventario = 0;
+    int objetosTotales = 0;
+    while(fread(&producto,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(!producto.getEstado())
+        {
+            cout << "Debug: Producto "<< producto.getIDProducto() << " dado de baja" << endl;
+            continue;
+        }
+        objetosTotales += producto.getStockActual();
+        valorInventario += producto.getStockActual()*producto.getPrecioUnitario();
+    }
+    CerrarArchivo(pArchivo);
+    return valorInventario;
+}
+
+void ArchivoProducto::MostrarProductoConSobreStock()
+{
+    FILE * pArchivo = AbrirArchivo("rb");
+    Producto producto;
+    int objetosTotales = 0;
+    bool haySobrestock = false;
+    while(fread(&producto,_tamanoRegistro,1,pArchivo) == 1)
+    {
+        if(!producto.getEstado() ||
+        producto.getStockActual() <= producto.getStockMax())
+        {
+            continue;
+        }
+        int sobrestock = (-1) * (producto.getStockMax() - producto.getStockActual());
+        haySobrestock = true;
+        cout << "=====================================" << endl;
+        cout << producto.getNombreProducto() << endl;
+        cout << "Tiene un sobrestock de " << sobrestock << " unidades." << endl;
+    }
+        cout << "=====================================" << endl;
+        if(!haySobrestock)
+        {
+            cout << "No Hay Sobrestock de productos." << endl;
+            cout << "=====================================" << endl;
+        }
+        CerrarArchivo(pArchivo);
+        system("Pause");
+}

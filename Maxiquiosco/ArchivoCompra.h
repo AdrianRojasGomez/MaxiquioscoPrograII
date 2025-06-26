@@ -24,4 +24,7 @@ public:
     ///Operacion Para Compras
     Compra BuscarRegistroPorID (int ID);
 
+    ///Operacion para Registros
+    int ObtenerImporteTotalPorMes(int mes, int anio);
+
 };

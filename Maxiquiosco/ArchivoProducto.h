@@ -26,5 +26,10 @@ public:
     ///Operacion Para Compras
     Producto BuscarRegistroPorID(int ID);
 
+    ///Operaciones para Reportes
+    int ObtenerObjetosTotales();
+    int ObtenerValorDelInventarioActual();
+    void MostrarProductoConSobreStock();
+
 };
 
