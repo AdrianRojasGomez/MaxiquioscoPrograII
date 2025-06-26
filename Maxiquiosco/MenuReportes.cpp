@@ -58,7 +58,7 @@ string input;
             //
             break;
         case 3:
-            //
+            manager.MostrarDistribucionMensualDeCompras();
             break;
         case 4:
             manager.MostrarValorTotalDelInventario();

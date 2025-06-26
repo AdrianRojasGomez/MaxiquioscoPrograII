@@ -1,12 +1,19 @@
 #pragma once
+#include <string>
+
 
 class FuncionesReportes
 {
+private:
+    std::string _meses[12];
+
 public:
 
-    void MostrarTotalUnidadesPorProveedor();
-    void MostrarMontoTotalPorProveedor();
-    void MostrarTotalUnidadesAdquiridasPorProducto();
-    void MostrarImporteTotalPorTipoDeProducto();
+    FuncionesReportes();
+
+    void MostrarComprasTotalesPorProveedor();
+    void MostrarComprasPorTipoDeProducto();
+    void MostrarDistribucionMensualDeCompras();
     void MostrarValorTotalDelInventario();
+    void MostrarSobreStock();
 };
