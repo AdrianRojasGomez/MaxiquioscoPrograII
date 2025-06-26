@@ -13,7 +13,6 @@ public:
     TipoProducto();
     TipoProducto(int id, const char* clasificacion);
     bool EsValido() const;
-    //bool EsIgual(const TipoProducto& otro) const;
     void MostrarTipoProductoEnConsola() const;
 
     int getIDTipoProducto() const;

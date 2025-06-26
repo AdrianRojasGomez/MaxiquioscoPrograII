@@ -26,5 +26,6 @@ public:
     bool ObtenerTotalUnidadesconFacturado();
     ///Operacion para Registros
     int ObtenerImporteTotalPorMes(int mes, int anio);
+    int FiltrarComprasPorTipoProducto(int IDbusqueda, Compra* &comprasFiltradas);
 
 };

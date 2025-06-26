@@ -55,7 +55,7 @@ string input;
             manager.MostrarComprasTotalesPorProveedor();
             break;
         case 2:
-            //
+            manager.MostrarComprasPorTipoDeProducto();
             break;
         case 3:
             manager.MostrarDistribucionMensualDeCompras();

@@ -338,7 +338,6 @@ void ArchivoProducto::MostrarProductoConSobreStock()
 {
     FILE * pArchivo = AbrirArchivo("rb");
     Producto producto;
-    int objetosTotales = 0;
     bool haySobrestock = false;
     while(fread(&producto,_tamanoRegistro,1,pArchivo) == 1)
     {
