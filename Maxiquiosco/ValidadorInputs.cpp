@@ -8,6 +8,10 @@ using namespace std;
 
 bool ValidadorInputs::EsUnDigito(const string &input)
 {
+    if (input.empty())
+    {
+        return false;
+    }
     if(input.length() != 1)
     {
         cout << "Error: Ingrese un solo digito." << endl;
@@ -27,6 +31,12 @@ bool ValidadorInputs::EsUnDigito(const string &input)
 
 bool ValidadorInputs::SonSoloNumeros(const string &input)
 {
+
+    if (input.empty())
+    {
+        return false;
+    }
+
     char *cadena = new char[input.size() + 1];
     strcpy(cadena, input.c_str());
 
@@ -47,6 +57,11 @@ bool ValidadorInputs::SonSoloNumeros(const string &input)
 
 bool ValidadorInputs::EsFloat(const string &input)
 {
+    if (input.empty())
+    {
+        return false;
+    }
+
     char *cadena = new char[input.size() + 1];
     std::strcpy(cadena, input.c_str());
 
@@ -87,6 +102,10 @@ bool ValidadorInputs::EsFloat(const string &input)
 
 bool ValidadorInputs::TamanoPermitido(const string &input, int limite)
 {
+    if (input.empty())
+    {
+        return false;
+    }
     /// Levanta warning pero es porque size() devuelve un tipo de dato size_t
     /// pero igual devuelve uno por cada caracter, entonces al compararlo con el limite funciona
     /// perfecto. Podriamos castearlo a size_t el limite pero da igual.
@@ -99,6 +118,11 @@ bool ValidadorInputs::TamanoPermitido(const string &input, int limite)
 
 bool ValidadorInputs::MesValido(const string &input)
 {
+    if (input.empty())
+    {
+        return false;
+    }
+
     if(!SonSoloNumeros(input))
     {
         return false;
@@ -112,6 +136,10 @@ bool ValidadorInputs::MesValido(const string &input)
 
 bool ValidadorInputs::DiaValido(const std::string &input, int mes)
 {
+    if (input.empty())
+    {
+        return false;
+    }
     if(!SonSoloNumeros(input))
         return false;
 
@@ -144,15 +172,20 @@ bool ValidadorInputs::DiaValido(const std::string &input, int mes)
         return true;
 }
 
-bool ValidadorInputs::AnioValido(const string &inputAnio)
+bool ValidadorInputs::AnioValido(const string &input)
 {
-    if(!SonSoloNumeros(inputAnio))
+    if (input.empty())
+    {
+        return false;
+    }
+
+    if(!SonSoloNumeros(input))
         return false;
 
-    if(inputAnio.empty() || inputAnio.size() > 4)
+    if(input.empty() || input.size() > 4)
         return false;
 
-    int anio = stoi(inputAnio);
+    int anio = stoi(input);
 
     if(anio < 1900 || anio > 2100)
         return false;

@@ -322,8 +322,8 @@ bool ArchivoCompra::ObtenerTotalUnidadesconFacturado()
     ArchivoProveedor archivoProveedor;
 
     const int MAX_PROVEEDORES = archivoProveedor.ObtenerProximoID();
-    int unidadesPorProveedor[MAX_PROVEEDORES] = {0};
-    int montoTotalFacturado[MAX_PROVEEDORES] = {0};
+    int * unidadesPorProveedor = new int[MAX_PROVEEDORES]{};
+    int * montoTotalFacturado = new int[MAX_PROVEEDORES]{};
 
     FILE * pArchivo = AbrirArchivo("rb");
     if (pArchivo == nullptr)
@@ -358,6 +358,8 @@ bool ArchivoCompra::ObtenerTotalUnidadesconFacturado()
         }
     }
 
+    delete[] unidadesPorProveedor;
+    delete[] montoTotalFacturado;
     system("Pause");
     return true;
 }
