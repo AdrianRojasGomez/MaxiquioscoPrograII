@@ -303,9 +303,12 @@ bool ArchivoProveedor::ListarProveedor()
         if(proveedor.getEstado())
         {
             proveedor.MostrarProveedor();
+            cout<< proveedor.getNombreProveedor();
         }
         cout << "---------------------------" << endl;
     }
     CerrarArchivo(pArchivo);
     return true;
 }
+
+

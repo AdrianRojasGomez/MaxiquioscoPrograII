@@ -29,6 +29,9 @@ FuncionesReportes::FuncionesReportes()
 
 void FuncionesReportes::MostrarComprasTotalesPorProveedor()
 {
+    ArchivoCompra archivoCompra;
+
+    archivoCompra.ObtenerTotalUnidadesconFacturado();
 }
 
 void FuncionesReportes::MostrarComprasPorTipoDeProducto()
