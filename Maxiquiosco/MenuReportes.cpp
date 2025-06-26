@@ -52,7 +52,7 @@ string input;
         switch(_opcion)
         {
         case 1:
-            //
+            manager.MostrarComprasTotalesPorProveedor();
             break;
         case 2:
             //

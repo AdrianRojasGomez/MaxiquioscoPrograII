@@ -23,7 +23,7 @@ public:
 
     ///Operacion Para Compras
     Compra BuscarRegistroPorID (int ID);
-
+    bool ObtenerTotalUnidadesconFacturado();
     ///Operacion para Registros
     int ObtenerImporteTotalPorMes(int mes, int anio);
 

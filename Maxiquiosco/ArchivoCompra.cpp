@@ -7,6 +7,7 @@
 #include "Producto.h"
 #include "Proveedor.h"
 #include "ValidadorInputs.h"
+#include <iomanip> // <- Necesario para setw
 
 using namespace std;
 
@@ -313,4 +314,48 @@ int ArchivoCompra::ObtenerImporteTotalPorMes(int mes, int anio)
     CerrarArchivo(pArchivo);
     return importePorMes;
 
+}
+
+bool ArchivoCompra::ObtenerTotalUnidadesconFacturado()
+{
+    const int MAX_PROVEEDORES = 100;
+    int unidadesPorProveedor[MAX_PROVEEDORES] = {0};
+    int montoTotalFacturado[MAX_PROVEEDORES] = {0};
+
+    FILE * pArchivo = AbrirArchivo("rb");
+    if (pArchivo == nullptr)
+        return false;
+
+    Compra compra;
+
+    while (fread(&compra, sizeof(Compra), 1, pArchivo) == 1)
+    {
+        if (compra.getEstado())
+        {
+            Proveedor proveedor = compra.getProveedor();
+            int idProveedor = proveedor.getIDProveedor();
+
+            if (idProveedor >= 1 && idProveedor <= MAX_PROVEEDORES)
+            {
+                unidadesPorProveedor[idProveedor - 1] += compra.getCantidadComprada();
+                montoTotalFacturado[idProveedor -1] += compra.getImporte();
+            }
+        }
+    }
+
+    CerrarArchivo(pArchivo);
+
+    ArchivoProveedor archivoProveedor;
+    cout << "\n====== TOTAL DE UNIDADES Y FACTURADO POR PROVEEDOR ======\n";
+    for (int i = 0; i < MAX_PROVEEDORES; ++i)
+    {
+        if (unidadesPorProveedor[i] > 0)
+        {
+            Proveedor proveedor = archivoProveedor.BuscarRegistroPorID(i + 1);
+            cout << "Proveedor ID " << setw(1) << proveedor.getIDProveedor() << " - " << setw(25) << proveedor.getNombreProveedor() << " -> Total unidades: " << setw(5) <<unidadesPorProveedor[i] <<  " -> Total facturado: "<< montoTotalFacturado[i] << endl;
+        }
+    }
+
+    system("Pause");
+    return true;
 }

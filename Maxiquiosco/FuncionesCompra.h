@@ -9,4 +9,5 @@ public:
     void ModificarCompra();
     void ListarCompra();
     void ListarCompraPorID();
+
 };
