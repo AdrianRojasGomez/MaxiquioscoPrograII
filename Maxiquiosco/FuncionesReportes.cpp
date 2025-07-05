@@ -111,7 +111,6 @@ void FuncionesReportes::MostrarComprasPorTipoDeProducto()
 }
 
 
-
 void FuncionesReportes::MostrarDistribucionMensualDeCompras()
 {
     ArchivoCompra archivoCompra;
